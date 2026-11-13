@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiDoc-Kasper — plán realizace k 11. 11. 2026</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #5c5c5c;
+      --line: #e4e4e4;
+      --done: #0f7a45;
+      --done-bg: #e8f6ee;
+      --risk: #b42318;
+      --risk-bg: #fdecec;
+      --risk-line: #e7b4b4;
+      --part: #3b8fd9;
+      --part-bg: #e7f3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.45 "Segoe UI", sans-serif;
+    }
+    main { padding: 28px 32px 64px; max-width: 960px; }
+    h1 { font-size: 32px; line-height: 1.2; margin: 0 0 8px; font-weight: 650; }
+    h2 { font-size: 20px; margin: 0 0 6px; font-weight: 650; }
+    h3 { font-size: 16px; margin: 14px 0 6px; font-weight: 650; }
+    p { margin: 0; }
+    .lead { color: var(--muted); max-width: 70rem; }
+    nav.pages { display: flex; gap: 8px; margin: 0; flex-wrap: wrap; }
+    nav.pages a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid #cfcfcf;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    nav.pages a[aria-current="page"] {
+      background: #1c1c1c;
+      color: #fff;
+      border-color: #1c1c1c;
+    }
+    .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 18px; }
+    .share { display: flex; gap: 8px; flex-wrap: wrap; }
+    button.share-btn {
+      border: 1px solid #1c1c1c;
+      background: #1c1c1c;
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button.share-btn.secondary { background: #fff; color: #1c1c1c; }
+    button.share-btn:disabled { opacity: 0.55; cursor: default; }
+    .share-note { margin: -6px 0 16px; color: var(--muted); font-size: 14px; }
+    .events { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+    .event {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .when { color: var(--muted); font-size: 14px; font-weight: 650; }
+    .tag { display: inline-block; margin-top: 8px; font-size: 14px; font-weight: 650; }
+    .hours { display: inline-block; margin-left: 8px; color: var(--muted); font-size: 13px; font-weight: 400; }
+    .event.done { background: var(--done-bg); border-color: #b7e0c8; }
+    .event.done .tag { color: var(--done); }
+    .event.part { background: var(--part-bg); border-color: #c5dff6; }
+    .event.part .tag { color: var(--part); }
+    .event.risk {
+      background: var(--risk-bg);
+      border-color: var(--risk-line);
+    }
+    .event.risk h2,
+    .event.risk .tag,
+    .event.risk .when { color: var(--risk); }
+    .person {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .person:first-of-type { margin-top: 8px; }
+    .person strong { display: block; font-size: 14px; }
+    .person p { color: var(--muted); font-size: 14px; margin-top: 2px; }
+    .person ol { margin: 6px 0 0; padding-left: 18px; color: var(--ink); font-size: 14px; }
+    .note { margin-top: 8px; color: var(--muted); font-size: 14px; }
+    .stage-axis {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin: 18px 0 0;
+    }
+    .stage {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+      min-height: 88px;
+    }
+    .stage.done { background: var(--done-bg); border-color: #b7e0c8; }
+    .stage.part { background: var(--part-bg); border-color: #c5dff6; }
+    .stage b { display: block; font-size: 13px; }
+    .stage span { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+    @page { size: A4; margin: 12mm; }
+    @media print {
+      .topbar, .share-note { display: none !important; }
+      main { padding: 0; max-width: none; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <nav class="pages">
+        <a href="./">Plán dodávky</a>
+        <a href="./proces.html">Procesní diagram</a>
+        <a href="./realizace.html" aria-current="page">Plán realizace</a>
+      </nav>
+      <div class="share">
+        <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
+        <button type="button" class="share-btn secondary" id="share-pdf">Tisk do PDF</button>
+      </div>
+    </div>
+    <p class="share-note" id="share-note" hidden></p>
+    <h1>DigiDoc-Kasper — plán realizace</h1>
+
+    <div class="stage-axis" aria-label="Časová osa etap">
+      <div class="stage done"><b>KT45</b><span>Analýza a UX/UI · VČ, MP, DS</span></div>
+      <div class="stage part"><b>KT46</b><span>Schválení TN</span></div>
+      <div class="stage"><b>KT47</b><span>Vývoj · 4 dny</span></div>
+      <div class="stage"><b>KT48</b><span>Vývoj · 5 dní</span></div>
+      <div class="stage"><b>KT49</b><span>Vývoj · 5 dní</span></div>
+      <div class="stage"><b>KT50</b><span>Testy 10–16 h</span></div>
+      <div class="stage"><b>KT51</b><span>Nasazení a předání</span></div>
+    </div>
+
+    <div class="events">
+      <article class="event done">
+        <div class="when">KT45</div>
+        <div>
+          <h2>Analýza a UX/UI</h2>
+          <p>Rozsah DigiDoc 2.0 výrobní časy a UX/UI podklady jsou uzavřené. Dělali VČ, MP a DS. BL se neúčastnila — dostává až úkoly a plán vývoje.</p>
+          <span class="tag">Hotovo</span>
+        </div>
+      </article>
+
+      <article class="event part">
+        <div class="when">KT46 · před 16. 11.</div>
+        <div>
+          <h2>Schválení TN</h2>
+          <p>Musí být hotové před startem vývoje v KT47. Bez schválení se nezačíná.</p>
+          <span class="tag">Probíhá / riziko</span>
+        </div>
+      </article>
+
+      <article class="event risk">
+        <div class="when">17. 11. · svátek</div>
+        <div>
+          <h2>Kalendářní výjimka KT47</h2>
+          <p>KT47 má jen 4 pracovní dny. DS max 16 h. Start/Stop se kvůli svátku nedokončí v KT47.</p>
+          <span class="tag">Výjimka</span>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="when">Týden 1 · KT47<br>16.–22. 11.</div>
+        <div>
+          <h2>Základ <span class="hours">4 pracovní dny</span></h2>
+          <div class="person">
+            <strong>DS · 16 h · max po svátku</strong>
+            <ol>
+              <li>Migrace EF 4 h</li>
+              <li>CRUD důvodů 6 h → handoff UI důvodů</li>
+              <li>Start/Pauza/Stop 6 h (zbývá 4 h do KT48)</li>
+            </ol>
+          </div>
+          <div class="person">
+            <strong>BL · 12 h</strong>
+            <ol>
+              <li>Reporty shell 8 h (mock)</li>
+              <li>UI důvodů 4 h (po CRUD od DS)</li>
+            </ol>
+            <p>Ve 4 dnech × 4,5 h = 18 h kapacity, 12 h se vejde.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="when">Týden 2 · KT48<br>23.–29. 11.</div>
+        <div>
+          <h2>Dokončení měření API + tablet + shell <span class="hours">5 dní</span></h2>
+          <div class="person">
+            <strong>DS · 20 h</strong>
+            <ol>
+              <li>Start/Stop zbývá 4 h</li>
+              <li>Převzetí/směny/checklist 8 h</li>
+              <li>FE lišta 6 h (až po Start/Stop)</li>
+              <li>Report BE začátek 2 h</li>
+            </ol>
+          </div>
+          <div class="person">
+            <strong>BL · 13 h</strong>
+            <ol>
+              <li>Reporty UI — filtry a záložky 6 h</li>
+              <li>Detail shell 7 h (mock)</li>
+            </ol>
+            <p>Napojení až po report BE v KT49.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="when">Týden 3 · KT49<br>30. 11.–6. 12.</div>
+        <div>
+          <h2>Napojení, opravy, export <span class="hours">5 dní</span></h2>
+          <div class="person">
+            <strong>DS · 20 h</strong>
+            <ol>
+              <li>Report BE 6 h → handoff BL</li>
+              <li>Opravy API 8 h</li>
+              <li>Export data 4 h</li>
+              <li>FE převzetí 2 h (zbývá 2 h + Live do KT50)</li>
+            </ol>
+            <p>Nejdřív API pro BL; zbývající FE přesahuje do KT50.</p>
+          </div>
+          <div class="person">
+            <strong>BL · 13 h</strong>
+            <ol>
+              <li>Napojení reportů/detailu</li>
+              <li>Úpravy detailu 7 h</li>
+              <li>Právě běží 4 h (shell/mock)</li>
+              <li>Export UI 2 h</li>
+            </ol>
+            <p>Live doladění Právě běží může dokončit na začátku KT50 s Live napojením od DS.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="event risk">
+        <div class="when">9. 12. · DS půl dne mimo</div>
+        <div>
+          <h2>Kalendářní výjimka KT50</h2>
+          <p>KT50 úkoly DS dávat na 7., 8., 10. nebo 11. 12., ne na 9. 12. Live a bugfix nesmí spadnout na 9. 12. odpoledne.</p>
+          <span class="tag">Výjimka</span>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="when">KT50 · 7.–13. 12.</div>
+        <div>
+          <h2>Dokončení přesahu + testy</h2>
+          <div class="person">
+            <strong>DS · 8 h</strong>
+            <ol>
+              <li>FE převzetí část 2 · 2 h</li>
+              <li>Live napojení · 2 h</li>
+              <li>Bugfix z testů · 4 h</li>
+            </ol>
+          </div>
+          <div class="person">
+            <strong>BL · 10 h</strong>
+            <ol>
+              <li>Testování UC / UI · 10 h</li>
+            </ol>
+          </div>
+          <p class="note">BL testuje 10 h; DS současně bugfix 4 h.</p>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="when">KT51</div>
+        <div>
+          <h2>Nasazení a předání</h2>
+          <p>DS podpora nasazení · vzdálené nasazení a předání.</p>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="when">Souhrn podle osoby</div>
+        <div>
+          <h2>Kapacita napříč týdny</h2>
+          <div class="person">
+            <strong>DS · 64 h</strong>
+            <p>KT47 migrace · důvody · Start/Stop (16 h) · KT48 Start/Stop · převzetí · lišta · report (20 h) · KT49 report · opravy · export · FE převzetí (20 h) · KT50 FE převzetí · Live · bugfix (8 h)</p>
+          </div>
+          <div class="person">
+            <strong>BL · 48 h</strong>
+            <p>KT47 report shell · UI důvodů (12 h) · KT48 reporty UI · detail shell (13 h) · KT49 úpravy detailu · Právě běží · export UI (13 h) · KT50 testování UC / UI (10 h)</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="event risk">
+        <div class="when">Rizika</div>
+        <div>
+          <h2>Co hlídat</h2>
+          <div class="person">
+            <ol>
+              <li>KT46 schválení TN před KT47.</li>
+              <li>Svátek 17. 11. + DS 9. 12. půl dne mimo — Live a bugfix nesmí spadnout na 9. 12. odpoledne.</li>
+              <li>BL testuje 10 h v KT50; DS současně bugfix 4 h.</li>
+            </ol>
+          </div>
+          <span class="tag">Rizika</span>
+        </div>
+      </article>
+    </div>
+  </main>
+  <script>
+    function escapeSrcdoc(html) {
+      return html.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    }
+
+    function armPage(html, current) {
+      const nav = '<nav class="pages">' +
+        '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
+        '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a></nav>';
+      const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
+      return html
+        .replace(/<div class="share">[\s\S]*?<\/div>/, "")
+        .replace(/<p class="share-note"[\s\S]*?<\/p>/, "")
+        .replace(/<nav class="pages">[\s\S]*?<\/nav>/, nav)
+        .replace(/<\/body>\s*<\/html>\s*$/i, bridge + "</body></html>");
+    }
+
+    async function downloadSharePack() {
+      const button = document.getElementById("share-html");
+      const note = document.getElementById("share-note");
+      button.disabled = true;
+      try {
+        const [plan, proces, realizace] = await Promise.all([
+          fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+        ]);
+        const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
+          '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
+          '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
+          '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
+          '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
+        link.download = "DigiDoc-Kasper-stav-dodavky.html";
+        link.click();
+        URL.revokeObjectURL(link.href);
+        note.hidden = false;
+        note.textContent = "Soubor DigiDoc-Kasper-stav-dodavky.html je stažený.";
+      } catch (error) {
+        note.hidden = false;
+        note.textContent = "Stažení se nepovedlo. Otevři prezentaci na http://127.0.0.1:8766/ a zkus to znovu.";
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById("share-html").addEventListener("click", downloadSharePack);
+    document.getElementById("share-pdf").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

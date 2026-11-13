@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiDoc-Kasper — stav dodávky k 11. 11. 2026</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #5c5c5c;
+      --line: #e4e4e4;
+      --done: #0f7a45;
+      --done-bg: #e8f6ee;
+      --part: #3b8fd9;
+      --part-bg: #e7f3ff;
+      --wait: #8a4b08;
+      --wait-bg: #fff6ea;
+      --plan: #5c5c5c;
+      --plan-bg: #f6f6f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.45 "Segoe UI", sans-serif;
+    }
+    main { padding: 28px 32px 64px; }
+    h1 { font-size: 32px; line-height: 1.2; margin: 0 0 8px; font-weight: 650; }
+    h2 { font-size: 20px; margin: 28px 0 10px; }
+    p.lead { margin: 0; color: var(--muted); max-width: 70rem; }
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+    .stat {
+      min-width: 120px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+    }
+    .stat b { display: block; font-size: 28px; line-height: 1.1; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .stat.hotovo b { color: var(--done); }
+    .stat.castecne b { color: var(--part); }
+    .stat.nezacato b { color: var(--wait); }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 16px; }
+    button.filter {
+      border: 1px solid #cfcfcf;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+    button.filter[aria-pressed="true"] {
+      background: #1c1c1c;
+      color: #fff;
+      border-color: #1c1c1c;
+    }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    th { font-size: 13px; color: var(--muted); font-weight: 650; }
+    tr.hotovo td:first-child { box-shadow: inset 3px 0 0 var(--done); }
+    .plan { position: relative; }
+    .timeline {
+      position: relative;
+      height: 58px;
+      margin: 0 0 8px 188px;
+    }
+    .timeline-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 26px;
+      height: 2px;
+      background: #d0d0d0;
+    }
+    .tick {
+      position: absolute;
+      top: 0;
+      color: #5c5c5c;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .now-label {
+      position: absolute;
+      top: 0;
+      transform: translateX(-100%);
+      color: #c62828;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    .now-line {
+      position: absolute;
+      top: 22px;
+      bottom: 0;
+      width: 2px;
+      margin-left: -1px;
+      background: #c62828;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: 180px 5fr 7fr 7fr 7fr 6fr;
+      gap: 8px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+    .phase-label { font-weight: 650; }
+    .phase-label small { display: block; font-weight: 400; color: var(--muted); }
+    .phase-label.now small { color: var(--wait); font-weight: 650; }
+    .who { padding-top: 8px; border-top: 1px solid var(--line); }
+    .who strong { display: block; font-size: 14px; }
+    .who span { color: var(--muted); font-size: 13px; }
+    .cell {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    .cell-body {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      min-height: 88px;
+      background: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .item { margin: 0 0 10px; }
+    .item.hotovo {
+      background: var(--done-bg);
+      border-radius: 8px;
+      padding: 8px;
+    }
+    .item.castecne {
+      background: var(--part-bg);
+      border-radius: 8px;
+      padding: 8px;
+    }
+    .item:last-child { margin-bottom: 0; }
+    .item .plan { margin: 0; }
+    .item .state { margin: 2px 0 0; font-weight: 650; font-size: 14px; }
+    .item .note { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+    .state.hotovo { color: var(--done); }
+    .state.castecne { color: var(--part); }
+    .state.nezacato { color: var(--wait); }
+    .state.plan { color: var(--plan); }
+    .empty { color: #9a9a9a; margin: 0; }
+    .milestones td:first-child { white-space: nowrap; font-weight: 650; }
+    .cap {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0 0;
+    }
+    .cap .stat { min-width: 140px; }
+    nav.pages { display: flex; gap: 8px; margin: 0 0 18px; }
+    nav.pages a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid #cfcfcf;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    nav.pages a[aria-current="page"] {
+      background: #1c1c1c;
+      color: #fff;
+      border-color: #1c1c1c;
+    }
+    .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 18px; }
+    nav.pages { margin: 0; }
+    .share { display: flex; gap: 8px; flex-wrap: wrap; }
+    button.share-btn {
+      border: 1px solid #1c1c1c;
+      background: #1c1c1c;
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button.share-btn.secondary { background: #fff; color: #1c1c1c; }
+    button.share-btn:disabled { opacity: 0.55; cursor: default; }
+    .share-note { margin: -6px 0 16px; color: var(--muted); font-size: 14px; }
+    @page { size: A3 landscape; margin: 8mm; }
+    @media print {
+      .topbar, .share-note, .filters { display: none !important; }
+      main { padding: 0; }
+      h1 { font-size: 22px; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <nav class="pages">
+        <a href="./" aria-current="page">Plán dodávky</a>
+        <a href="./proces.html">Procesní diagram</a>
+        <a href="./realizace.html">Plán realizace</a>
+      </nav>
+      <div class="share">
+        <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
+        <button type="button" class="share-btn secondary" id="share-pdf">Tisk do PDF</button>
+      </div>
+    </div>
+    <p class="share-note" id="share-note" hidden></p>
+    <h1>DigiDoc-Kasper — DigiDoc 2.0 výrobní časy</h1>
+    <div class="cap">
+      <div class="stat"><b>100 h</b><span>Vývoj</span></div>
+      <div class="stat"><b>64 h</b><span>DS · vývoj + bugfix</span></div>
+      <div class="stat"><b>48 h</b><span>BL · FE + testy</span></div>
+      <div class="stat"><b>14 h</b><span>Testy celkem</span></div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="filters" id="filters"></div>
+    <div class="plan">
+      <div class="timeline" id="timeline"></div>
+      <div class="now-label" id="now-label">11. 11. · jste tady</div>
+      <div class="now-line" id="now-line"></div>
+      <div class="board" id="board"></div>
+    </div>
+    <h2>Milníky</h2>
+    <table class="milestones">
+      <thead><tr><th>Milník</th><th>Závazek plánu</th><th>Kde jsme</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>KT45</td>
+          <td>Analýza a UX/UI</td>
+          <td>Hotovo · VČ, MP, DS</td>
+        </tr>
+        <tr>
+          <td>KT46</td>
+          <td>Schválení TN před startem vývoje</td>
+          <td>Musí být hotové před KT47 (16. 11.)</td>
+        </tr>
+        <tr>
+          <td>KT47–KT49</td>
+          <td>Vývoj BE + FE ≈100 h</td>
+          <td>Nezačato. Start 16. 11., svátek 17. 11. zkracuje KT47 na 4 dny.</td>
+        </tr>
+        <tr>
+          <td>KT50</td>
+          <td>Interní a zákaznické testy 10–16 h</td>
+          <td>Plán 7.–13. 12. DS: ne 9. 12. půl dne.</td>
+        </tr>
+        <tr>
+          <td>KT51</td>
+          <td>Nasazení a předání</td>
+          <td>DS podpora nasazení · vzdálené nasazení a předání</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Co je hotové</h2>
+    <table id="done"></table>
+  </main>
+  <script>
+    const phases = [
+      { id: "hotovo", label: "KT45–46", when: "analýza, UX/UI, schválení TN" },
+      { id: "kt47", label: "KT47", when: "16.–22. 11. · 4 dny · svátek 17. 11." },
+      { id: "kt48", label: "KT48", when: "23.–29. 11. · 5 dní" },
+      { id: "kt49", label: "KT49", when: "30. 11.–6. 12. · 5 dní" },
+      { id: "kt50", label: "KT50", when: "7.–13. 12. · testy · DS ne 9. 12." }
+    ];
+    const filters = [
+      { id: "all", label: "Celý plán" },
+      { id: "hotovo", label: "Hotovo" },
+      { id: "castecne", label: "Probíhá" },
+      { id: "nezacato", label: "Nezačato" },
+      { id: "plan", label: "Plán" }
+    ];
+    const statusLabel = { hotovo: "Hotovo", castecne: "Probíhá", nezacato: "Nezačato", plan: "Plán" };
+    const lanes = [
+      {
+        person: "DS",
+        scope: "Fullstack · 64 h · 60 h vývoj + 4 h bugfix",
+        cells: [
+          { phase: "hotovo", items: [
+            { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. Rozsah DigiDoc 2.0 výrobní časy je uzavřený v KT45." }
+          ]},
+          { phase: "kt47", items: [
+            { plan: "Migrace EF · 4 h", status: "plan", note: "Základ modelu. Blokuje všechen BE." },
+            { plan: "CRUD důvodů · 6 h", status: "plan", note: "Handoff → BL UI důvodů." },
+            { plan: "Start/Stop — část 1 · 6 h", status: "plan", note: "Kvůli svátku se nedokončí v KT47, zbývá 4 h do KT48." }
+          ]},
+          { phase: "kt48", items: [
+            { plan: "Start/Stop — část 2 · 4 h", status: "plan", note: "Dokončení API měření." },
+            { plan: "Převzetí, směny, checklist · 8 h", status: "plan", note: "BE pro UC-01/04 okraje. FE převzetí dělá DS." },
+            { plan: "Lišta měření (FE) · 6 h", status: "plan", note: "Až po dokončení Start/Stop." },
+            { plan: "Report BE — začátek · 2 h", status: "plan", note: "Pokračuje v KT49." }
+          ]},
+          { phase: "kt49", items: [
+            { plan: "Report BE — dokončení · 6 h", status: "plan", note: "Handoff → BL napojení reportů a detailu." },
+            { plan: "Opravy API · 8 h", status: "plan", note: "Handoff → úpravy v detailu (±, důvod, +, smazání)." },
+            { plan: "Export data · 4 h", status: "plan", note: "Handoff → Export UI." },
+            { plan: "FE převzetí — část 1 · 2 h", status: "plan", note: "Zbývá 2 h + Live do KT50." }
+          ]},
+          { phase: "kt50", items: [
+            { plan: "FE převzetí — část 2 · 2 h", status: "plan", note: "Ne 9. 12. půl dne — dávat na 7., 8., 10. nebo 11. 12." },
+            { plan: "Live napojení · 2 h", status: "plan", note: "Handoff → doladění Právě běží." },
+            { plan: "Bugfix z testů · 4 h", status: "plan", note: "Souběžně s 10 h testů od BL." }
+          ]}
+        ]
+      },
+      {
+        person: "BL",
+        scope: "Junior FE · 48 h · 38 h vývoj + 10 h testy",
+        cells: [
+          { phase: "hotovo", items: []},
+          { phase: "kt47", items: [
+            { plan: "Report shell (UI) · 8 h", status: "plan", note: "Mock data. Bez čekání na BE od DS." },
+            { plan: "UI důvodů · 4 h", status: "plan", note: "Po handoffu CRUD důvodů." }
+          ]},
+          { phase: "kt48", items: [
+            { plan: "Reporty — filtry a záložky · 6 h", status: "plan", note: "UI bez živých dat." },
+            { plan: "Detail shell (UI) · 7 h", status: "plan", note: "Mock. Napojení až po report BE v KT49." }
+          ]},
+          { phase: "kt49", items: [
+            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE a Opravách API." },
+            { plan: "Právě běží · 4 h", status: "plan", note: "Shell/mock. Live doladění na začátku KT50." },
+            { plan: "Export UI · 2 h", status: "plan", note: "Po Export data od DS." }
+          ]},
+          { phase: "kt50", items: [
+            { plan: "Testování UC / UI · 10 h", status: "plan", note: "Testuje UC/UI. DS současně bugfix 4 h." }
+          ]}
+        ]
+      },
+      {
+        person: "Společné",
+        scope: "Schválení, kapacita, nasazení",
+        cells: [
+          { phase: "hotovo", items: [
+            { plan: "Analýza a UX/UI (KT45)", status: "hotovo", note: "VČ, MP, DS. BL se neúčastnila — dostává až úkoly a plán vývoje." },
+            { plan: "Schválení TN (KT46)", status: "castecne", note: "Musí být před KT47. Riziko startu vývoje." }
+          ]},
+          { phase: "kt47", items: [
+            { plan: "Svátek 17. 11.", status: "plan", note: "KT47 jen 4 pracovní dny. DS max 16 h." }
+          ]},
+          { phase: "kt48", items: [
+            { plan: "Handoff Report BE → napojení", status: "plan", note: "Start napojení reportů a detailu v KT49." }
+          ]},
+          { phase: "kt49", items: [
+            { plan: "Handoffy oprav a exportu", status: "plan", note: "Opravy API → detail · Export → Export UI." }
+          ]},
+          { phase: "kt50", items: [
+            { plan: "DS 9. 12. půl dne mimo", status: "plan", note: "Live a bugfix ne na 9. 12. odpoledne." },
+            { plan: "Nasazení a předání (KT51)", status: "plan", note: "DS podpora · vzdálené nasazení." }
+          ]}
+        ]
+      }
+    ];
+
+    let current = "all";
+
+    function allItems() {
+      return lanes.flatMap((lane) => lane.cells.flatMap((cell) => cell.items.map((item) => ({ person: lane.person, item }))));
+    }
+
+    function stateText(item) {
+      return item.hours ? statusLabel[item.status] + " · " + item.hours : statusLabel[item.status];
+    }
+
+    function renderStats() {
+      const items = allItems();
+      const count = (id) => items.filter((row) => row.item.status === id).length;
+      const boxes = [
+        ["hotovo", count("hotovo"), "Hotovo"],
+        ["castecne", count("castecne"), "Probíhá"],
+        ["nezacato", count("nezacato"), "Ještě nezačalo"],
+        ["plan", count("plan"), "Plán"]
+      ];
+      document.getElementById("stats").innerHTML = boxes.map(([id, value, label]) =>
+        `<div class="stat ${id}"><b>${value}</b><span>${label}</span></div>`
+      ).join("");
+    }
+
+    function renderDone() {
+      const rows = allItems().filter((row) => row.item.status === "hotovo");
+      document.getElementById("done").innerHTML =
+        "<thead><tr><th>Kdo</th><th>Rozsah z plánu</th><th>Co to znamená</th></tr></thead><tbody>" +
+        rows.map((row) => `<tr class="hotovo"><td>${row.person}</td><td>${row.item.plan}</td><td>${row.item.note || "Dodáno."}</td></tr>`).join("") +
+        "</tbody>";
+    }
+
+    function renderFilters() {
+      document.getElementById("filters").innerHTML = filters.map((item) =>
+        `<button class="filter" type="button" data-id="${item.id}" aria-pressed="${item.id === current}">${item.label}</button>`
+      ).join("");
+      document.getElementById("filters").onclick = (event) => {
+        const button = event.target.closest("button");
+        if (!button) return;
+        current = button.dataset.id;
+        renderFilters();
+        renderBoard();
+      };
+    }
+
+    function renderTimeline() {
+      const marks = [
+        { label: "KT45 hotovo", at: 0, align: "left" },
+        { label: "16. 11. start vývoje", at: 0.22, align: "center" },
+        { label: "7.–13. 12. testy · KT51 nasazení", at: 1, align: "right", below: true }
+      ];
+      document.getElementById("timeline").innerHTML =
+        `<div class="timeline-track"></div>` +
+        marks.map((mark) => {
+          const shift = mark.align === "right" ? "translateX(-100%)" : mark.align === "center" ? "translateX(-50%)" : "none";
+          const top = mark.below ? "32px" : "0";
+          return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
+        }).join("");
+      const today = 0.12;
+      const left = `calc(188px + (100% - 188px) * ${today})`;
+      document.getElementById("now-label").style.left = left;
+      document.getElementById("now-line").style.left = left;
+    }
+
+    function renderBoard() {
+      const head = `<div></div>` + phases.map((phase) =>
+        `<div class="phase-label${phase.id === "hotovo" ? " now" : ""}">${phase.label}<small>${phase.when}</small></div>`
+      ).join("");
+      const body = lanes.map((lane) => {
+        const who = `<div class="who"><strong>${lane.person}</strong><span>${lane.scope}</span></div>`;
+        const cells = lane.cells.map((cell) => {
+          const visible = cell.items.filter((item) => current === "all" || item.status === current);
+          const inner = visible.length
+            ? visible.map((item) => `<div class="item ${item.status}"><p class="plan">${item.plan}</p><p class="state ${item.status}">${stateText(item)}</p>${item.note ? `<p class="note">${item.note}</p>` : ""}</div>`).join("")
+            : (cell.items.length ? `<p class="empty">V tomto pohledu nic</p>` : "");
+          return `<div class="cell"><div class="cell-body">${inner}</div></div>`;
+        }).join("");
+        return who + cells;
+      }).join("");
+      document.getElementById("board").innerHTML = head + body;
+    }
+
+    renderStats();
+    renderDone();
+    renderFilters();
+    renderTimeline();
+    renderBoard();
+
+    function escapeSrcdoc(html) {
+      return html.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    }
+
+    function armPage(html, current) {
+      const nav = '<nav class="pages">' +
+        '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
+        '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a></nav>';
+      const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
+      return html
+        .replace(/<div class="share">[\s\S]*?<\/div>/, "")
+        .replace(/<p class="share-note"[\s\S]*?<\/p>/, "")
+        .replace(/<nav class="pages">[\s\S]*?<\/nav>/, nav)
+        .replace(/<\/body>\s*<\/html>\s*$/i, bridge + "</body></html>");
+    }
+
+    async function downloadSharePack() {
+      const button = document.getElementById("share-html");
+      const note = document.getElementById("share-note");
+      button.disabled = true;
+      try {
+        const [plan, proces, realizace] = await Promise.all([
+          fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+        ]);
+        const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
+          '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
+          '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
+          '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
+          '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
+        link.download = "DigiDoc-Kasper-stav-dodavky.html";
+        link.click();
+        URL.revokeObjectURL(link.href);
+        note.hidden = false;
+        note.textContent = "Soubor DigiDoc-Kasper-stav-dodavky.html je stažený.";
+      } catch (error) {
+        note.hidden = false;
+        note.textContent = "Stažení se nepovedlo. Otevři prezentaci na http://127.0.0.1:8766/ a zkus to znovu.";
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById("share-html").addEventListener("click", downloadSharePack);
+    document.getElementById("share-pdf").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

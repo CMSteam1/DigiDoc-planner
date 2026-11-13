@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiDoc-Kasper — procesní diagram</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #5c5c5c;
+      --line: #e4e4e4;
+      --done: #0f7a45;
+      --done-bg: #d0f1dc;
+      --done-line: #8ed4ae;
+      --part: #1d6bb5;
+      --part-bg: #d0e8ff;
+      --part-line: #82bdef;
+      --plan: #b86d6a;
+      --plan-bg: #ffe6e2;
+      --plan-line: #f0c4bc;
+      --lane: rgba(240, 206, 48, 0.1);
+      --lane-line: rgba(214, 176, 20, 0.26);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.45 "Segoe UI", sans-serif;
+    }
+    main { padding: 28px 32px 64px; }
+    h1 { font-size: 32px; line-height: 1.2; margin: 0 0 8px; font-weight: 650; }
+    h2 { font-size: 20px; margin: 0 0 4px; font-weight: 650; }
+    h3.section { font-size: 20px; margin: 28px 0 10px; font-weight: 650; }
+    p { margin: 0; }
+    .lead { color: var(--muted); max-width: 70rem; margin-top: 4px; }
+    nav.pages { display: flex; gap: 8px; margin: 0 0 18px; }
+    nav.pages a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid #cfcfcf;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    nav.pages a[aria-current="page"] {
+      background: #1c1c1c;
+      color: #fff;
+      border-color: #1c1c1c;
+    }
+    .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 18px; }
+    nav.pages { margin: 0; }
+    .share { display: flex; gap: 8px; flex-wrap: wrap; }
+    button.share-btn {
+      border: 1px solid #1c1c1c;
+      background: #1c1c1c;
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button.share-btn.secondary { background: #fff; color: #1c1c1c; }
+    button.share-btn:disabled { opacity: 0.55; cursor: default; }
+    .share-note { margin: -6px 0 16px; color: var(--muted); font-size: 14px; }
+    @page { size: A3 landscape; margin: 8mm; }
+    @media print {
+      .topbar, .share-note, .filters { display: none !important; }
+      main { padding: 0; }
+      h1 { font-size: 22px; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    .toolbar { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin: 18px 0 12px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    button.filter {
+      border: 1px solid #cfcfcf;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+    button.filter[aria-pressed="true"] {
+      background: #1c1c1c;
+      color: #fff;
+      border-color: #1c1c1c;
+    }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+    .swatch.hotovo { background: var(--done-bg); border: 1px solid var(--done-line); }
+    .swatch.castecne { background: var(--part-bg); border: 1px solid var(--part-line); }
+    .swatch.plan { background: var(--plan-bg); border: 1px solid var(--plan-line); }
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 0 0 18px; }
+    .stat {
+      min-width: 120px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+    }
+    .stat b { display: block; font-size: 28px; line-height: 1.1; }
+    .stat em { color: var(--muted); font-style: normal; font-size: 13px; }
+    .stat.hotovo b { color: var(--done); }
+    .stat.castecne b { color: var(--part); }
+    .stat.plan b { color: var(--plan); }
+    .uc { margin: 0 0 22px; }
+    .uc-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 8px 8px 0 0;
+      border: 1px solid var(--line);
+    }
+    .uc.castecne .uc-head { background: var(--part-bg); border-color: var(--part-line); }
+    .uc.hotovo .uc-head { background: var(--done-bg); border-color: var(--done-line); }
+    .uc.plan .uc-head { background: var(--plan-bg); border-color: var(--plan-line); }
+    .uc-head p { color: var(--muted); font-size: 14px; margin-top: 2px; }
+    .uc-meta { text-align: right; white-space: nowrap; }
+    .uc-meta b { display: block; font-size: 14px; }
+    .uc-meta span { color: var(--muted); font-size: 13px; }
+    .uc.castecne .uc-meta b { color: var(--part); }
+    .uc.hotovo .uc-meta b { color: var(--done); }
+    .uc.plan .uc-meta b { color: var(--plan); }
+    .board-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      background: #fff;
+    }
+    .board {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      align-items: stretch;
+    }
+    .lane {
+      border-radius: 6px;
+      padding: 8px;
+      min-height: 180px;
+      background: var(--lane);
+      border-top: 3px solid var(--lane-line);
+    }
+    .lane h3 { margin: 0 0 8px; text-align: center; font-size: 13px; font-weight: 650; color: #7a6210; }
+    .arrow, .down {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .down { height: 22px; }
+    .step {
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+    .step.store { border-radius: 16px; }
+    .step.hotovo { background: var(--done-bg); border-color: var(--done-line); }
+    .step.castecne { background: var(--part-bg); border-color: var(--part-line); }
+    .step.plan { background: var(--plan-bg); border-color: var(--plan-line); }
+    .step b { display: block; font-size: 14px; }
+    .step p { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .step .state { display: block; margin-top: 4px; font-size: 13px; font-weight: 650; }
+    .step.hotovo .state { color: var(--done); }
+    .step.castecne .state { color: var(--part); }
+    .step.plan .state { color: var(--plan); }
+    .step.dim { opacity: 0.28; }
+    .decision {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      padding: 4px 0;
+    }
+    .diamond {
+      width: 86px;
+      height: 86px;
+      margin-top: 8px;
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+    }
+    .diamond.hotovo { background: var(--done-bg); border: 1px solid var(--done-line); }
+    .diamond.castecne { background: var(--part-bg); border: 1px solid var(--part-line); }
+    .diamond.plan { background: var(--plan-bg); border: 1px solid var(--plan-line); }
+    .diamond span {
+      transform: rotate(-45deg);
+      width: 72px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .decision p { text-align: center; color: var(--muted); font-size: 13px; }
+    .foot { color: var(--muted); font-size: 14px; margin-top: 8px; }
+    .uc-axis {
+      display: grid;
+      grid-template-columns: 140px repeat(7, 1fr);
+      gap: 6px;
+      margin: 12px 0 24px;
+      overflow-x: auto;
+    }
+    .uc-axis .head, .uc-axis .cell {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      font-size: 13px;
+    }
+    .uc-axis .head { font-weight: 650; text-align: center; color: var(--muted); }
+    .uc-axis .label { font-weight: 650; }
+    .uc-axis .bar {
+      background: var(--plan-bg);
+      border-color: var(--plan-line);
+      min-height: 42px;
+    }
+    .uc-axis .bar.done {
+      background: var(--done-bg);
+      border-color: var(--done-line);
+    }
+    .handoff table { width: 100%; border-collapse: collapse; background: #fff; }
+    .handoff th, .handoff td {
+      text-align: left;
+      vertical-align: top;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .handoff th { font-size: 13px; color: var(--muted); font-weight: 650; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <nav class="pages">
+        <a href="./">Plán dodávky</a>
+        <a href="./proces.html" aria-current="page">Procesní diagram</a>
+        <a href="./realizace.html">Plán realizace</a>
+      </nav>
+      <div class="share">
+        <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
+        <button type="button" class="share-btn secondary" id="share-pdf">Tisk do PDF</button>
+      </div>
+    </div>
+    <p class="share-note" id="share-note" hidden></p>
+    <h1>DigiDoc-Kasper — procesní diagram</h1>
+    <div class="toolbar">
+      <div class="filters" id="filters"></div>
+      <div class="legend">
+        <span><i class="swatch hotovo"></i> Hotovo</span>
+        <span><i class="swatch castecne"></i> Probíhá</span>
+        <span><i class="swatch plan"></i> Plán</span>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+
+    <h3 class="section">Časová osa Use Cases</h3>
+    <div class="uc-axis" aria-label="Časová osa UC">
+      <div class="head">UC / týden</div>
+      <div class="head">KT45</div>
+      <div class="head">KT46</div>
+      <div class="head">KT47</div>
+      <div class="head">KT48</div>
+      <div class="head">KT49</div>
+      <div class="head">KT50</div>
+      <div class="head">KT51</div>
+
+      <div class="label cell">UC-01 Zahájení</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell bar">BE Start</div><div class="cell bar">FE lišta</div><div class="cell bar">FE převzetí</div><div class="cell bar">Testy</div><div class="cell"></div>
+
+      <div class="label cell">UC-02 Přerušení</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell bar">Start/Stop</div><div class="cell bar">Dokončení</div><div class="cell"></div><div class="cell bar">Testy</div><div class="cell"></div>
+
+      <div class="label cell">UC-03 Pokračování</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell bar">Start/Stop</div><div class="cell bar">Dokončení</div><div class="cell"></div><div class="cell bar">Testy</div><div class="cell"></div>
+
+      <div class="label cell">UC-04 Dokončení</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell"></div><div class="cell bar">Převzetí BE</div><div class="cell bar">FE převzetí</div><div class="cell bar">Testy</div><div class="cell"></div>
+
+      <div class="label cell">UC-05 Výpočet</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell"></div><div class="cell bar">Report BE</div><div class="cell bar">Dokončení</div><div class="cell bar">Testy</div><div class="cell"></div>
+
+      <div class="label cell">UC-06 Reporting a opravy</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell bar">Shell + důvody</div><div class="cell bar">Filtry shell</div><div class="cell bar">Napojení</div><div class="cell bar">Testy</div><div class="cell"></div>
+
+      <div class="label cell">UC-07 Historie</div>
+      <div class="cell bar done">UX</div><div class="cell"></div><div class="cell bar">Report shell</div><div class="cell bar">Detail shell</div><div class="cell bar">Export</div><div class="cell bar">Testy</div><div class="cell"></div>
+    </div>
+
+    <div id="cases"></div>
+
+    <h3 class="section">Závislosti (pořadí handoffů)</h3>
+    <div class="handoff">
+      <table>
+        <thead>
+          <tr><th>#</th><th>DS dodá</th><th>Pak BL napojí / dokončí</th><th>Blokuje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Migrace + model (4 h)</td><td>— (BL mezitím report shell)</td><td>všechen BE</td></tr>
+          <tr><td>2</td><td>CRUD důvodů (6 h)</td><td>UI číselník důvodů (4 h)</td><td>správa důvodů</td></tr>
+          <tr><td>3</td><td>Start/Pauza/Stop API (10 h)</td><td>— (lištu dělá DS)</td><td>měření na tabletu</td></tr>
+          <tr><td>4</td><td>Převzetí / směny / checklist BE (8 h)</td><td>— (FE převzetí dělá DS)</td><td>UC-01/04 okraje</td></tr>
+          <tr><td>5</td><td>Report agregace + filtry API (8 h)</td><td>napojení reportů a detailu</td><td>živá data UC-06/07</td></tr>
+          <tr><td>6</td><td>Opravy záznamů API (8 h)</td><td>úpravy v detailu (±, důvod, +, smazání)</td><td>editace</td></tr>
+          <tr><td>7</td><td>Export data (4 h) + Live API (v FE 2 h)</td><td>export UI + Právě běží</td><td>export / live</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">Handoffy: CRUD důvodů → UI důvodů (KT47) · Report BE → napojení (KT48→49) · Opravy API → úpravy detailu (KT49) · Export → Export UI (KT49) · Live (KT50) → doladění Právě běží · BL testuje UC/UI v KT50.</p>
+  </main>
+  <script>
+    const statusLabel = { hotovo: "Hotovo", castecne: "Probíhá", plan: "Plán" };
+    const filters = [
+      { id: "all", label: "Celý průběh" },
+      { id: "hotovo", label: "Hotovo" },
+      { id: "castecne", label: "Probíhá" },
+      { id: "plan", label: "Plán" }
+    ];
+    const cases = [
+      {
+        id: "uc01", code: "UC-01", title: "Zahájení", status: "plan",
+        lead: "Obsluha zahájí měření výrobního času. DS dodá Start API a FE lištu, BL mezitím staví report shell.",
+        lanes: [
+          { title: "Tablet / obsluha", steps: [
+            { n: "1", title: "Zahájení směny", text: "Obsluha spustí měření na tabletu.", status: "plan" }
+          ]},
+          { title: "DS · BE", steps: [
+            { n: "2", title: "Start API", text: "Start/Pauza/Stop část 1–2 · 10 h napříč KT47–48.", status: "plan" },
+            { title: "Model + migrace", text: "EF migrace 4 h blokuje všechen BE.", status: "plan", kind: "store" }
+          ]},
+          { title: "DS · FE", steps: [
+            { n: "3", title: "Lišta měření", text: "6 h v KT48 až po dokončení Start/Stop.", status: "plan" },
+            { n: "4", title: "FE převzetí", text: "Část 1 v KT49, část 2 v KT50.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "5", title: "UC test", text: "BL testuje UC/UI v KT50.", status: "plan" }
+          ]}
+        ]
+      },
+      {
+        id: "uc02", code: "UC-02", title: "Přerušení", status: "plan",
+        lead: "Měření se přeruší s důvodem. CRUD důvodů a UI číselník jsou první handoff v KT47.",
+        lanes: [
+          { title: "Obsluha", steps: [
+            { n: "1", title: "Pauza", text: "Obsluha přeruší běžící měření.", status: "plan" }
+          ]},
+          { title: "DS · BE", steps: [
+            { n: "2", title: "Pauza API", text: "Součást Start/Pauza/Stop.", status: "plan" },
+            { n: "3", title: "CRUD důvodů", text: "6 h v KT47. Handoff pro UI.", status: "plan" }
+          ]},
+          { title: "BL · FE", steps: [
+            { n: "4", title: "UI důvodů", text: "4 h po CRUD od DS v KT47.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "5", title: "Ověření pauzy", text: "KT50 test UC/UI.", status: "plan" }
+          ]}
+        ]
+      },
+      {
+        id: "uc03", code: "UC-03", title: "Pokračování", status: "plan",
+        lead: "Po pauze se měření obnoví. Stejné Start/Stop API a lišta jako u zahájení.",
+        lanes: [
+          { title: "Obsluha", steps: [
+            { n: "1", title: "Pokračovat", text: "Obsluha obnoví přerušené měření.", status: "plan" }
+          ]},
+          { title: "DS · API + lišta", steps: [
+            { n: "2", title: "Resume API", text: "Součást Start/Stop KT47–48.", status: "plan" },
+            { n: "3", title: "Stav na liště", text: "FE lišta ukáže běžící stav.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "4", title: "UC test", text: "KT50.", status: "plan" }
+          ]}
+        ]
+      },
+      {
+        id: "uc04", code: "UC-04", title: "Dokončení", status: "plan",
+        lead: "Ukončení měření včetně převzetí, směn a checklistu. FE převzetí dělá DS.",
+        lanes: [
+          { title: "Obsluha", steps: [
+            { n: "1", title: "Stop / předání", text: "Obsluha dokončí nebo předá směnu.", status: "plan" }
+          ]},
+          { title: "DS · BE", steps: [
+            { n: "2", title: "Stop API", text: "Dokončení Start/Stop.", status: "plan" },
+            { n: "3", title: "Převzetí / směny / checklist", text: "8 h BE v KT48. Blokuje UC-01/04 okraje.", status: "plan" }
+          ]},
+          { title: "DS · FE", steps: [
+            { n: "4", title: "FE převzetí", text: "2 + 2 h v KT49–50.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "5", title: "UC test", text: "KT50.", status: "plan" }
+          ]}
+        ]
+      },
+      {
+        id: "uc05", code: "UC-05", title: "Výpočet", status: "plan",
+        lead: "Agregace výrobních časů na backendu. Report BE začíná koncem KT48 a končí v KT49.",
+        lanes: [
+          { title: "DS · BE", steps: [
+            { n: "1", title: "Agregace", text: "Report BE začátek 2 h (KT48) + dokončení 6 h (KT49).", status: "plan" },
+            { title: "Data", text: "Po migraci a měřicím API.", status: "plan", kind: "store" }
+          ]},
+          { title: "BL · FE", steps: [
+            { n: "2", title: "Zobrazení výsledků", text: "Součást napojení reportů v KT49.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "3", title: "Ověření výpočtů", text: "KT50.", status: "plan" }
+          ]}
+        ]
+      },
+      {
+        id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "plan",
+        lead: "Reporty, filtry, detail a editace záznamů. BL staví shell napřed, živá data až po handoffu.",
+        lanes: [
+          { title: "BL · shell", steps: [
+            { n: "1", title: "Report shell", text: "8 h mock v KT47.", status: "plan" },
+            { n: "2", title: "Filtry a záložky", text: "6 h v KT48.", status: "plan" },
+            { n: "3", title: "Detail shell", text: "7 h mock v KT48.", status: "plan" }
+          ]},
+          { title: "DS · API", steps: [
+            { n: "4", title: "Report + filtry API", text: "8 h napříč KT48–49. Blokuje živá data UC-06/07.", status: "plan" },
+            { n: "5", title: "Opravy API", text: "8 h v KT49. ±, důvod, +, smazání.", status: "plan" }
+          ]},
+          { title: "BL · napojení", steps: [
+            { n: "6", title: "Úpravy v detailu", text: "7 h po Opravách API.", status: "plan" },
+            { n: "7", title: "Právě běží", text: "4 h shell; Live doladění KT50.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "8", title: "UC / UI test", text: "10 h BL v KT50.", status: "plan" }
+          ]}
+        ]
+      },
+      {
+        id: "uc07", code: "UC-07", title: "Historie", status: "plan",
+        lead: "Historie a export. Export data od DS, Export UI od BL ve stejném KT49.",
+        lanes: [
+          { title: "BL · UI", steps: [
+            { n: "1", title: "Historie v reportech", text: "Součást report shell a detailu.", status: "plan" }
+          ]},
+          { title: "DS · BE", steps: [
+            { n: "2", title: "Export data", text: "4 h v KT49.", status: "plan" },
+            { n: "3", title: "Live API", text: "2 h FE napojení v KT50.", status: "plan" }
+          ]},
+          { title: "BL · FE", steps: [
+            { n: "4", title: "Export UI", text: "2 h po Export data.", status: "plan" }
+          ]},
+          { title: "Testy", steps: [
+            { n: "5", title: "Ověření historie", text: "KT50.", status: "plan" }
+          ]}
+        ]
+      }
+    ];
+
+    let filter = "all";
+    const allSteps = cases.flatMap((item) => item.lanes.flatMap((lane) => lane.steps));
+
+    function esc(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function stepHtml(step) {
+      const dim = filter !== "all" && step.status !== filter ? " dim" : "";
+      const name = (step.n ? step.n + ". " : "") + step.title;
+      const state = '<span class="state">' + esc(statusLabel[step.status]) + "</span>";
+      if (step.kind === "decision") {
+        return '<div class="decision step ' + step.status + dim + '">' +
+          '<div class="diamond ' + step.status + '"><span>' + esc(name) + "</span></div>" +
+          "<p>" + esc(step.text) + "</p>" + state + "</div>";
+      }
+      const shape = step.kind === "store" ? " store" : "";
+      return '<div class="step ' + step.status + shape + dim + '"><b>' + esc(name) + "</b><p>" +
+        esc(step.text) + "</p>" + state + "</div>";
+    }
+
+    function render() {
+      document.getElementById("stats").innerHTML = [
+        ["hotovo", allSteps.filter((step) => step.status === "hotovo").length, "Hotové kroky"],
+        ["castecne", allSteps.filter((step) => step.status === "castecne").length, "Probíhá"],
+        ["plan", allSteps.filter((step) => step.status === "plan").length, "Plán"]
+      ].map((row) => '<div class="stat ' + row[0] + '"><b>' + row[1] + "</b><em>" + row[2] + "</em></div>").join("");
+
+      document.getElementById("filters").innerHTML = filters.map((item) =>
+        '<button class="filter" type="button" data-filter="' + item.id + '" aria-pressed="' + (filter === item.id) + '">' + item.label + "</button>"
+      ).join("");
+      document.querySelectorAll(".filter").forEach((button) => {
+        button.addEventListener("click", () => {
+          filter = button.dataset.filter;
+          render();
+        });
+      });
+
+      document.getElementById("cases").innerHTML = cases.map((item) => {
+        const steps = item.lanes.flatMap((lane) => lane.steps);
+        const done = steps.filter((step) => step.status === "hotovo").length;
+        const columns = item.lanes.map((_, index) => index < item.lanes.length - 1 ? "minmax(190px, 1fr) 36px" : "minmax(190px, 1fr)").join(" ");
+        const rightArrow = '<svg width="30" height="18" viewBox="0 0 30 18" aria-hidden="true"><path d="M1 9 H17" stroke="#1c1c1c" stroke-width="2.6" stroke-linecap="round"/><path d="M15 2.5 L28 9 L15 15.5 Z" fill="#1c1c1c"/></svg>';
+        const downArrow = '<svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 1 V11" stroke="#1c1c1c" stroke-width="2.6" stroke-linecap="round"/><path d="M2.5 10 L8 18.5 L13.5 10 Z" fill="#1c1c1c"/></svg>';
+        const cells = item.lanes.map((lane, index) => {
+          const body = lane.steps.map((step, stepIndex) =>
+            (stepIndex > 0 ? '<div class="down" aria-hidden="true">' + downArrow + "</div>" : "") + stepHtml(step)
+          ).join("");
+          const arrow = index < item.lanes.length - 1 ? '<div class="arrow" aria-hidden="true">' + rightArrow + "</div>" : "";
+          return '<section class="lane"><h3>' + esc(lane.title) + "</h3>" + body + "</section>" + arrow;
+        }).join("");
+        return '<article class="uc ' + item.status + '">' +
+          '<header class="uc-head"><div><h2>' + esc(item.code + " — " + item.title) + "</h2><p>" + esc(item.lead) + "</p></div>" +
+          '<div class="uc-meta"><b>' + esc(statusLabel[item.status]) + "</b><span>" + done + " z " + steps.length + " kroků hotovo</span></div></header>" +
+          '<div class="board-wrap"><div class="board" style="grid-template-columns:' + columns + ";min-width:" + (item.lanes.length * 212) + 'px">' + cells + "</div></div></article>";
+      }).join("");
+    }
+
+    render();
+
+    function escapeSrcdoc(html) {
+      return html.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    }
+
+    function armPage(html, current) {
+      const nav = '<nav class="pages">' +
+        '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
+        '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a></nav>';
+      const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
+      return html
+        .replace(/<div class="share">[\s\S]*?<\/div>/, "")
+        .replace(/<p class="share-note"[\s\S]*?<\/p>/, "")
+        .replace(/<nav class="pages">[\s\S]*?<\/nav>/, nav)
+        .replace(/<\/body>\s*<\/html>\s*$/i, bridge + "</body></html>");
+    }
+
+    async function downloadSharePack() {
+      const button = document.getElementById("share-html");
+      const note = document.getElementById("share-note");
+      button.disabled = true;
+      try {
+        const [plan, proces, realizace] = await Promise.all([
+          fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+        ]);
+        const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
+          '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
+          '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
+          '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
+          '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
+        link.download = "DigiDoc-Kasper-stav-dodavky.html";
+        link.click();
+        URL.revokeObjectURL(link.href);
+        note.hidden = false;
+        note.textContent = "Soubor DigiDoc-Kasper-stav-dodavky.html je stažený.";
+      } catch (error) {
+        note.hidden = false;
+        note.textContent = "Stažení se nepovedlo. Otevři prezentaci na http://127.0.0.1:8766/ a zkus to znovu.";
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById("share-html").addEventListener("click", downloadSharePack);
+    document.getElementById("share-pdf").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

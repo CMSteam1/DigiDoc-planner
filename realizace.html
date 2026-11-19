@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — plán realizace k 11. 11. 2026</title>
+  <title>DigiDoc-Kasper — plán realizace k 19. 11. 2026</title>
   <style>
     :root {
       color-scheme: light;
@@ -127,6 +127,7 @@
         <a href="./">Plán dodávky</a>
         <a href="./proces.html">Procesní diagram</a>
         <a href="./realizace.html" aria-current="page">Plán realizace</a>
+        <a href="./klient.html">Pro klienta</a>
       </nav>
       <div class="share">
         <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
@@ -138,8 +139,8 @@
 
     <div class="stage-axis" aria-label="Časová osa etap">
       <div class="stage done"><b>KT45</b><span>Analýza a UX/UI · VČ, MP, DS</span></div>
-      <div class="stage part"><b>KT46</b><span>Schválení TN</span></div>
-      <div class="stage"><b>KT47</b><span>Vývoj · 4 dny</span></div>
+      <div class="stage part"><b>KT46</b><span>TN rev02 · otevřené otázky</span></div>
+      <div class="stage part"><b>KT47</b><span>FE prototyp hotový · BE ne</span></div>
       <div class="stage"><b>KT48</b><span>Vývoj · 5 dní</span></div>
       <div class="stage"><b>KT49</b><span>Vývoj · 5 dní</span></div>
       <div class="stage"><b>KT50</b><span>Testy 10–16 h</span></div>
@@ -157,42 +158,51 @@
       </article>
 
       <article class="event part">
-        <div class="when">KT46 · před 16. 11.</div>
+        <div class="when">KT46</div>
         <div>
           <h2>Schválení TN</h2>
-          <p>Musí být hotové před startem vývoje v KT47. Bez schválení se nezačíná.</p>
-          <span class="tag">Probíhá / riziko</span>
+          <p>TN rev02 návrh je na ft/prototype. U zákazníka zbývají otevřené otázky (O-10 až O-12 a další).</p>
+          <span class="tag">Probíhá</span>
         </div>
       </article>
 
-      <article class="event risk">
+      <article class="event done">
         <div class="when">17. 11. · svátek</div>
         <div>
           <h2>Kalendářní výjimka KT47</h2>
-          <p>KT47 má jen 4 pracovní dny. DS max 16 h. Start/Stop se kvůli svátku nedokončí v KT47.</p>
-          <span class="tag">Výjimka</span>
+          <p>Proběhlo. KT47 má 4 pracovní dny.</p>
+          <span class="tag">Hotovo</span>
         </div>
       </article>
 
-      <article class="event">
-        <div class="when">Týden 1 · KT47<br>16.–22. 11.</div>
+      <article class="event done">
+        <div class="when">do 19. 11. · ft/prototype</div>
         <div>
-          <h2>Základ <span class="hours">4 pracovní dny</span></h2>
+          <h2>FE prototyp výrobních časů</h2>
+          <p>DS dodal na ft/prototype funkční FE prototyp (localStorage): lišta měření, reporty se 7 záložkami, detail s opravami, správa důvodů, Právě běží, export XLSX, převzetí a konec směny. BL shell z KT47–48 je tím pokrytý.</p>
+          <span class="tag">Hotovo</span>
+        </div>
+      </article>
+
+      <article class="event part">
+        <div class="when">Týden 1 · KT47<br>16.–22. 11. · jste tady</div>
+        <div>
+          <h2>Základ · zbývá produkční BE <span class="hours">4 pracovní dny</span></h2>
           <div class="person">
-            <strong>DS · 16 h · max po svátku</strong>
+            <strong>DS · plánovaných 16 h · max po svátku</strong>
             <ol>
-              <li>Migrace EF 4 h</li>
-              <li>CRUD důvodů 6 h → handoff UI důvodů</li>
-              <li>Start/Pauza/Stop 6 h (zbývá 4 h do KT48)</li>
+              <li>Migrace EF 4 h — nezačato</li>
+              <li>CRUD důvodů BE 6 h — nezačato (FE je v prototypu)</li>
+              <li>Start/Pauza/Stop API 6 h — nezačato (FE je v prototypu)</li>
             </ol>
           </div>
           <div class="person">
-            <strong>BL · 12 h</strong>
+            <strong>BL · plánovaných 12 h</strong>
             <ol>
-              <li>Reporty shell 8 h (mock)</li>
-              <li>UI důvodů 4 h (po CRUD od DS)</li>
+              <li>Reporty shell 8 h — hotovo v prototypu (DS)</li>
+              <li>UI důvodů 4 h — hotovo v prototypu (DS)</li>
             </ol>
-            <p>Ve 4 dnech × 4,5 h = 18 h kapacity, 12 h se vejde.</p>
+            <p>Další práce BL: napojení na API až po handoffu BE.</p>
           </div>
         </div>
       </article>
@@ -327,7 +337,8 @@
       const nav = '<nav class="pages">' +
         '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
         '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
-        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a></nav>';
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a>' +
+        '<a href="#" data-go="klient"' + (current === "klient" ? ' aria-current="page"' : "") + '>Pro klienta</a></nav>';
       const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
       return html
         .replace(/<div class="share">[\s\S]*?<\/div>/, "")
@@ -341,17 +352,19 @@
       const note = document.getElementById("share-note");
       button.disabled = true;
       try {
-        const [plan, proces, realizace] = await Promise.all([
+        const [plan, proces, realizace, klient] = await Promise.all([
           fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
           fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
-          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./klient.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
         ]);
         const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
           '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
           '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
           '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
           '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
-          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+          '<iframe id="klient" title="Pro klienta" srcdoc="' + escapeSrcdoc(armPage(klient, "klient")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace','klient'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
         const link = document.createElement("a");
         link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
         link.download = "DigiDoc-Kasper-stav-dodavky.html";

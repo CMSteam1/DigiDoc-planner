@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav dodávky k 11. 11. 2026</title>
+  <title>DigiDoc-Kasper — stav dodávky k 19. 11. 2026</title>
   <style>
     :root {
       color-scheme: light;
@@ -205,6 +205,7 @@
         <a href="./" aria-current="page">Plán dodávky</a>
         <a href="./proces.html">Procesní diagram</a>
         <a href="./realizace.html">Plán realizace</a>
+        <a href="./klient.html">Pro klienta</a>
       </nav>
       <div class="share">
         <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
@@ -223,7 +224,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">11. 11. · jste tady</div>
+      <div class="now-label" id="now-label">19. 11. · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -239,12 +240,12 @@
         <tr>
           <td>KT46</td>
           <td>Schválení TN před startem vývoje</td>
-          <td>Musí být hotové před KT47 (16. 11.)</td>
+          <td>Probíhá · TN rev02 návrh je, u zákazníka zbývají otevřené otázky</td>
         </tr>
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>Nezačato. Start 16. 11., svátek 17. 11. zkracuje KT47 na 4 dny.</td>
+          <td>FE prototyp na ft/prototype hotový (DS). Produkční BE nezačato. Jsme v KT47.</td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -254,7 +255,7 @@
         <tr>
           <td>KT51</td>
           <td>Nasazení a předání</td>
-          <td>DS podpora nasazení · vzdálené nasazení a předání</td>
+          <td>Plán · cíl produkce 14. 12., provoz do 18. 12.</td>
         </tr>
       </tbody>
     </table>
@@ -283,28 +284,29 @@
         scope: "Fullstack · 64 h · 60 h vývoj + 4 h bugfix",
         cells: [
           { phase: "hotovo", items: [
-            { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. Rozsah DigiDoc 2.0 výrobní časy je uzavřený v KT45." }
+            { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. TN rev02 návrh je ve ft/prototype." },
+            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "ft/prototype · localStorage. Lišta, reporty, detail, důvody, Právě běží, export XLSX." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Migrace EF · 4 h", status: "plan", note: "Základ modelu. Blokuje všechen BE." },
-            { plan: "CRUD důvodů · 6 h", status: "plan", note: "Handoff → BL UI důvodů." },
-            { plan: "Start/Stop — část 1 · 6 h", status: "plan", note: "Kvůli svátku se nedokončí v KT47, zbývá 4 h do KT48." }
+            { plan: "Migrace EF · 4 h", status: "nezacato", note: "V BE repu zatím žádná větev. Blokuje produkční API." },
+            { plan: "CRUD důvodů (BE) · 6 h", status: "nezacato", note: "FE stránka důvodů je v prototypu. Chybí API." },
+            { plan: "Start/Stop API — část 1 · 6 h", status: "nezacato", note: "FE ovládání je v prototypu. Chybí smluvní API." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Start/Stop — část 2 · 4 h", status: "plan", note: "Dokončení API měření." },
-            { plan: "Převzetí, směny, checklist · 8 h", status: "plan", note: "BE pro UC-01/04 okraje. FE převzetí dělá DS." },
-            { plan: "Lišta měření (FE) · 6 h", status: "plan", note: "Až po dokončení Start/Stop." },
+            { plan: "Start/Stop API — část 2 · 4 h", status: "plan", note: "Dokončení produkčního API měření." },
+            { plan: "Převzetí, směny, checklist BE · 8 h", status: "plan", note: "FE chování (převzetí, konec směny, checklist) je v prototypu." },
+            { plan: "Lišta měření (FE) · 6 h", status: "hotovo", note: "Hotovo v prototypu · ProductionTimeControl. Zbývá napojení na API." },
             { plan: "Report BE — začátek · 2 h", status: "plan", note: "Pokračuje v KT49." }
           ]},
           { phase: "kt49", items: [
             { plan: "Report BE — dokončení · 6 h", status: "plan", note: "Handoff → BL napojení reportů a detailu." },
-            { plan: "Opravy API · 8 h", status: "plan", note: "Handoff → úpravy v detailu (±, důvod, +, smazání)." },
-            { plan: "Export data · 4 h", status: "plan", note: "Handoff → Export UI." },
-            { plan: "FE převzetí — část 1 · 2 h", status: "plan", note: "Zbývá 2 h + Live do KT50." }
+            { plan: "Opravy API · 8 h", status: "plan", note: "Editace v detailu je v prototypu. Chybí API." },
+            { plan: "Export data · 4 h", status: "plan", note: "XLSX z localStorage je v prototypu. Chybí BE." },
+            { plan: "FE převzetí — část 1 · 2 h", status: "castecne", note: "Převzetí pracoviště je v prototypu. Doladění po BE." }
           ]},
           { phase: "kt50", items: [
             { plan: "FE převzetí — část 2 · 2 h", status: "plan", note: "Ne 9. 12. půl dne — dávat na 7., 8., 10. nebo 11. 12." },
-            { plan: "Live napojení · 2 h", status: "plan", note: "Handoff → doladění Právě běží." },
+            { plan: "Live napojení · 2 h", status: "plan", note: "Záložka Právě běží je v prototypu. Chybí Live API." },
             { plan: "Bugfix z testů · 4 h", status: "plan", note: "Souběžně s 10 h testů od BL." }
           ]}
         ]
@@ -313,19 +315,21 @@
         person: "BL",
         scope: "Junior FE · 48 h · 38 h vývoj + 10 h testy",
         cells: [
-          { phase: "hotovo", items: []},
+          { phase: "hotovo", items: [
+            { plan: "FE shell z prototypu (DS)", status: "hotovo", note: "Reporty, důvody, detail, filtry a Právě běží dodal DS na ft/prototype. BL bere napojení a testy." }
+          ]},
           { phase: "kt47", items: [
-            { plan: "Report shell (UI) · 8 h", status: "plan", note: "Mock data. Bez čekání na BE od DS." },
-            { plan: "UI důvodů · 4 h", status: "plan", note: "Po handoffu CRUD důvodů." }
+            { plan: "Report shell (UI) · 8 h", status: "hotovo", note: "Hotovo v prototypu (DS) · ProductionReportsPage." },
+            { plan: "UI důvodů · 4 h", status: "hotovo", note: "Hotovo v prototypu (DS) · DowntimeReasonsPage." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Reporty — filtry a záložky · 6 h", status: "plan", note: "UI bez živých dat." },
-            { plan: "Detail shell (UI) · 7 h", status: "plan", note: "Mock. Napojení až po report BE v KT49." }
+            { plan: "Reporty — filtry a záložky · 6 h", status: "hotovo", note: "Hotovo v prototypu (DS). Sedm záložek + filtry." },
+            { plan: "Detail shell (UI) · 7 h", status: "hotovo", note: "Hotovo v prototypu (DS) · ProductionRecordsDetail." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE a Opravách API." },
-            { plan: "Právě běží · 4 h", status: "plan", note: "Shell/mock. Live doladění na začátku KT50." },
-            { plan: "Export UI · 2 h", status: "plan", note: "Po Export data od DS." }
+            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE a Opravách API — přepnout z localStorage." },
+            { plan: "Právě běží · 4 h", status: "castecne", note: "Shell/záložka hotová v prototypu. Live API čeká." },
+            { plan: "Export UI · 2 h", status: "castecne", note: "XLSX UI hotové v prototypu. BE export čeká." }
           ]},
           { phase: "kt50", items: [
             { plan: "Testování UC / UI · 10 h", status: "plan", note: "Testuje UC/UI. DS současně bugfix 4 h." }
@@ -337,21 +341,22 @@
         scope: "Schválení, kapacita, nasazení",
         cells: [
           { phase: "hotovo", items: [
-            { plan: "Analýza a UX/UI (KT45)", status: "hotovo", note: "VČ, MP, DS. BL se neúčastnila — dostává až úkoly a plán vývoje." },
-            { plan: "Schválení TN (KT46)", status: "castecne", note: "Musí být před KT47. Riziko startu vývoje." }
+            { plan: "Analýza a UX/UI (KT45)", status: "hotovo", note: "VČ, MP, DS. BL se neúčastnila." },
+            { plan: "Schválení TN (KT46)", status: "castecne", note: "TN rev02 návrh je. U zákazníka zbývají otevřené otázky." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Svátek 17. 11.", status: "plan", note: "KT47 jen 4 pracovní dny. DS max 16 h." }
+            { plan: "Svátek 17. 11.", status: "hotovo", note: "Proběhlo. KT47 má 4 pracovní dny." },
+            { plan: "Větev ft/prototype", status: "hotovo", note: "FE prototyp výrobních časů. ft/timetracking = env proti produkčnímu API." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Handoff Report BE → napojení", status: "plan", note: "Start napojení reportů a detailu v KT49." }
+            { plan: "Start produkčního BE", status: "plan", note: "Migrace + API. FE je napřed v prototypu." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Handoffy oprav a exportu", status: "plan", note: "Opravy API → detail · Export → Export UI." }
+            { plan: "Handoffy API → napojení FE", status: "plan", note: "Report, opravy, export → BL napojí prototyp na živá data." }
           ]},
           { phase: "kt50", items: [
             { plan: "DS 9. 12. půl dne mimo", status: "plan", note: "Live a bugfix ne na 9. 12. odpoledne." },
-            { plan: "Nasazení a předání (KT51)", status: "plan", note: "DS podpora · vzdálené nasazení." }
+            { plan: "Nasazení a předání (KT51)", status: "plan", note: "Cíl produkce 14. 12., provoz do 18. 12." }
           ]}
         ]
       }
@@ -415,7 +420,7 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      const today = 0.12;
+      const today = 0.31;
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;
       document.getElementById("now-line").style.left = left;
@@ -423,7 +428,7 @@
 
     function renderBoard() {
       const head = `<div></div>` + phases.map((phase) =>
-        `<div class="phase-label${phase.id === "hotovo" ? " now" : ""}">${phase.label}<small>${phase.when}</small></div>`
+        `<div class="phase-label${phase.id === "kt47" ? " now" : ""}">${phase.label}<small>${phase.when}</small></div>`
       ).join("");
       const body = lanes.map((lane) => {
         const who = `<div class="who"><strong>${lane.person}</strong><span>${lane.scope}</span></div>`;
@@ -453,7 +458,8 @@
       const nav = '<nav class="pages">' +
         '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
         '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
-        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a></nav>';
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a>' +
+        '<a href="#" data-go="klient"' + (current === "klient" ? ' aria-current="page"' : "") + '>Pro klienta</a></nav>';
       const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
       return html
         .replace(/<div class="share">[\s\S]*?<\/div>/, "")
@@ -467,17 +473,19 @@
       const note = document.getElementById("share-note");
       button.disabled = true;
       try {
-        const [plan, proces, realizace] = await Promise.all([
+        const [plan, proces, realizace, klient] = await Promise.all([
           fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
           fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
-          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./klient.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
         ]);
         const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
           '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
           '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
           '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
           '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
-          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+          '<iframe id="klient" title="Pro klienta" srcdoc="' + escapeSrcdoc(armPage(klient, "klient")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace','klient'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
         const link = document.createElement("a");
         link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
         link.download = "DigiDoc-Kasper-stav-dodavky.html";

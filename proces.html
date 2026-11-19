@@ -246,6 +246,7 @@
         <a href="./">Plán dodávky</a>
         <a href="./proces.html" aria-current="page">Procesní diagram</a>
         <a href="./realizace.html">Plán realizace</a>
+        <a href="./klient.html">Pro klienta</a>
       </nav>
       <div class="share">
         <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
@@ -328,19 +329,19 @@
     ];
     const cases = [
       {
-        id: "uc01", code: "UC-01", title: "Zahájení", status: "plan",
-        lead: "Obsluha zahájí měření výrobního času. DS dodá Start API a FE lištu, BL mezitím staví report shell.",
+        id: "uc01", code: "UC-01", title: "Zahájení", status: "castecne",
+        lead: "FE lišta je v prototypu na ft/prototype. Produkční Start API ještě není.",
         lanes: [
           { title: "Tablet / obsluha", steps: [
             { n: "1", title: "Zahájení směny", text: "Obsluha spustí měření na tabletu.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
-            { n: "2", title: "Start API", text: "Start/Pauza/Stop část 1–2 · 10 h napříč KT47–48.", status: "plan" },
-            { title: "Model + migrace", text: "EF migrace 4 h blokuje všechen BE.", status: "plan", kind: "store" }
+            { n: "2", title: "Start API", text: "Produkční API nezačato. FE ovládání je v prototypu.", status: "plan" },
+            { title: "Model + migrace", text: "EF migrace zatím není. Blokuje produkční BE.", status: "plan", kind: "store" }
           ]},
           { title: "DS · FE", steps: [
-            { n: "3", title: "Lišta měření", text: "6 h v KT48 až po dokončení Start/Stop.", status: "plan" },
-            { n: "4", title: "FE převzetí", text: "Část 1 v KT49, část 2 v KT50.", status: "plan" }
+            { n: "3", title: "Lišta měření", text: "Hotovo v prototypu · ProductionTimeControl (localStorage).", status: "hotovo" },
+            { n: "4", title: "FE převzetí", text: "Převzetí dialog je v prototypu. Doladění po BE.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "UC test", text: "BL testuje UC/UI v KT50.", status: "plan" }
@@ -359,7 +360,7 @@
             { n: "3", title: "CRUD důvodů", text: "6 h v KT47. Handoff pro UI.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "UI důvodů", text: "4 h po CRUD od DS v KT47.", status: "plan" }
+            { n: "4", title: "UI důvodů", text: "Hotovo v prototypu (DS) · DowntimeReasonsPage.", status: "hotovo" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "Ověření pauzy", text: "KT50 test UC/UI.", status: "plan" }
@@ -375,7 +376,7 @@
           ]},
           { title: "DS · API + lišta", steps: [
             { n: "2", title: "Resume API", text: "Součást Start/Stop KT47–48.", status: "plan" },
-            { n: "3", title: "Stav na liště", text: "FE lišta ukáže běžící stav.", status: "plan" }
+            { n: "3", title: "Stav na liště", text: "Hotovo v prototypu · lišta ukáže běžící stav.", status: "hotovo" }
           ]},
           { title: "Testy", steps: [
             { n: "4", title: "UC test", text: "KT50.", status: "plan" }
@@ -418,13 +419,13 @@
         ]
       },
       {
-        id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "plan",
-        lead: "Reporty, filtry, detail a editace záznamů. BL staví shell napřed, živá data až po handoffu.",
+        id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "castecne",
+        lead: "FE shell reportů a detailu je v prototypu (DS). Živá data až po produkčním BE.",
         lanes: [
           { title: "BL · shell", steps: [
-            { n: "1", title: "Report shell", text: "8 h mock v KT47.", status: "plan" },
-            { n: "2", title: "Filtry a záložky", text: "6 h v KT48.", status: "plan" },
-            { n: "3", title: "Detail shell", text: "7 h mock v KT48.", status: "plan" }
+            { n: "1", title: "Report shell", text: "Hotovo v prototypu (DS) · ProductionReportsPage.", status: "hotovo" },
+            { n: "2", title: "Filtry a záložky", text: "Hotovo v prototypu · 7 záložek + filtry.", status: "hotovo" },
+            { n: "3", title: "Detail shell", text: "Hotovo v prototypu · ProductionRecordsDetail.", status: "hotovo" }
           ]},
           { title: "DS · API", steps: [
             { n: "4", title: "Report + filtry API", text: "8 h napříč KT48–49. Blokuje živá data UC-06/07.", status: "plan" },
@@ -432,7 +433,7 @@
           ]},
           { title: "BL · napojení", steps: [
             { n: "6", title: "Úpravy v detailu", text: "7 h po Opravách API.", status: "plan" },
-            { n: "7", title: "Právě běží", text: "4 h shell; Live doladění KT50.", status: "plan" }
+            { n: "7", title: "Právě běží", text: "Shell/záložka hotová v prototypu. Live API čeká.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
             { n: "8", title: "UC / UI test", text: "10 h BL v KT50.", status: "plan" }
@@ -444,14 +445,14 @@
         lead: "Historie a export. Export data od DS, Export UI od BL ve stejném KT49.",
         lanes: [
           { title: "BL · UI", steps: [
-            { n: "1", title: "Historie v reportech", text: "Součást report shell a detailu.", status: "plan" }
+            { n: "1", title: "Historie v reportech", text: "Hotovo v prototypu jako součást detailu reportů.", status: "hotovo" }
           ]},
           { title: "DS · BE", steps: [
             { n: "2", title: "Export data", text: "4 h v KT49.", status: "plan" },
             { n: "3", title: "Live API", text: "2 h FE napojení v KT50.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "Export UI", text: "2 h po Export data.", status: "plan" }
+            { n: "4", title: "Export UI", text: "XLSX UI hotové v prototypu. BE export čeká.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "Ověření historie", text: "KT50.", status: "plan" }
@@ -531,7 +532,8 @@
       const nav = '<nav class="pages">' +
         '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
         '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
-        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a></nav>';
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a>' +
+        '<a href="#" data-go="klient"' + (current === "klient" ? ' aria-current="page"' : "") + '>Pro klienta</a></nav>';
       const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
       return html
         .replace(/<div class="share">[\s\S]*?<\/div>/, "")
@@ -545,17 +547,19 @@
       const note = document.getElementById("share-note");
       button.disabled = true;
       try {
-        const [plan, proces, realizace] = await Promise.all([
+        const [plan, proces, realizace, klient] = await Promise.all([
           fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
           fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
-          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./klient.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
         ]);
         const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
           '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
           '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
           '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
           '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
-          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+          '<iframe id="klient" title="Pro klienta" srcdoc="' + escapeSrcdoc(armPage(klient, "klient")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace','klient'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
         const link = document.createElement("a");
         link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
         link.download = "DigiDoc-Kasper-stav-dodavky.html";

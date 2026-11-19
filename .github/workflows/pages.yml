@@ -30,7 +30,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html proces.html realizace.html _site/
+          cp index.html proces.html realizace.html klient.html _site/
           touch _site/.nojekyll
       - name: Upload site
         uses: actions/upload-pages-artifact@v3

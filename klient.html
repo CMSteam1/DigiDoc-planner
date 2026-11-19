@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiDoc-Kasper — přehled pro klienta</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5f7;
+      --surface: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #5c5c5c;
+      --line: #e4e4e4;
+      --done: #0f7a45;
+      --done-bg: #e8f6ee;
+      --part: #3b8fd9;
+      --part-bg: #e7f3ff;
+      --plan: #5c5c5c;
+      --plan-bg: #ffffff;
+      --now: #c62828;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 480px at 12% -10%, #e8eef4 0%, transparent 55%),
+        radial-gradient(900px 420px at 88% 0%, #eef2f6 0%, transparent 50%),
+        var(--bg);
+      color: var(--ink);
+      font: 16px/1.45 "Segoe UI", sans-serif;
+    }
+    main {
+      min-height: 100vh;
+      padding: 28px 48px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      font-size: clamp(26px, 2.4vw, 34px);
+      line-height: 1.15;
+      margin: 0;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    p { margin: 0; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 0 28px;
+    }
+    nav.pages { display: flex; gap: 8px; margin: 0; flex-wrap: wrap; }
+    nav.pages a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid #d5d5d5;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.85);
+    }
+    nav.pages a[aria-current="page"] {
+      background: #1c1c1c;
+      color: #fff;
+      border-color: #1c1c1c;
+    }
+    .share { display: flex; gap: 8px; flex-wrap: wrap; }
+    button.share-btn {
+      border: 1px solid #1c1c1c;
+      background: #1c1c1c;
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button.share-btn.secondary { background: #fff; color: #1c1c1c; }
+    button.share-btn:disabled { opacity: 0.55; cursor: default; }
+    .share-note { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+    .hero {
+      margin: 0 0 8px;
+      max-width: 52rem;
+    }
+    .hero .sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 8px;
+    }
+    .stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+    }
+    .axis-wrap {
+      position: relative;
+      margin: 0;
+      padding: 34px 2px 0;
+    }
+    .axis-track {
+      position: absolute;
+      left: calc(100% / 14);
+      right: calc(100% / 14);
+      top: 46px;
+      height: 3px;
+      background: #d5dbe1;
+      border-radius: 999px;
+    }
+    .axis-progress {
+      position: absolute;
+      left: calc(100% / 14);
+      top: 46px;
+      height: 3px;
+      background: var(--done);
+      border-radius: 999px;
+    }
+    .now-line {
+      position: absolute;
+      top: 16px;
+      bottom: 0;
+      width: 2px;
+      background: var(--now);
+      z-index: 2;
+      opacity: 0.9;
+    }
+    .now-label {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      color: var(--now);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      z-index: 3;
+      background: #f3f5f7;
+      padding: 0 8px;
+      border-radius: 6px;
+    }
+    .milestones {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+      align-items: stretch;
+    }
+    .ms {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px 16px 16px;
+      background: var(--surface);
+      position: relative;
+      box-shadow: 0 1px 0 rgba(28, 28, 28, 0.03), 0 10px 24px rgba(28, 28, 28, 0.04);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+    }
+    .ms::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -8px;
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid #cfcfcf;
+      z-index: 2;
+      box-shadow: 0 0 0 3px var(--bg);
+    }
+    .ms.done { background: var(--done-bg); border-color: #b7e0c8; }
+    .ms.done::before { border-color: var(--done); background: var(--done); }
+    .ms.part { background: var(--part-bg); border-color: #c5dff6; }
+    .ms.part::before { border-color: var(--part); background: var(--part); }
+    .ms.plan { background: var(--plan-bg); }
+    .ms b {
+      display: block;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .ms .when {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 4px 0 12px;
+    }
+    .ms .title {
+      font-size: 15px;
+      font-weight: 650;
+      margin: 0 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .ms .desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      flex: 1;
+    }
+    .ms .state {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: 14px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+    .ms.done .state { color: var(--done); background: rgba(15, 122, 69, 0.1); }
+    .ms.part .state { color: var(--part); background: rgba(59, 143, 217, 0.12); }
+    .ms.plan .state { color: var(--plan); background: rgba(92, 92, 92, 0.08); }
+    .legend {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legend i {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: 0;
+      border: 2px solid #cfcfcf;
+    }
+    .legend .done i { background: var(--done); border-color: var(--done); }
+    .legend .part i { background: var(--part); border-color: var(--part); }
+    .legend .plan i { background: #fff; }
+    .legend .now i {
+      background: var(--now);
+      border-color: var(--now);
+      border-radius: 0;
+      width: 2px;
+      height: 12px;
+      vertical-align: -1px;
+    }
+    @page { size: A3 landscape; margin: 8mm; }
+    @media print {
+      .topbar, .share-note { display: none !important; }
+      body { background: #fff; }
+      main { padding: 0; min-height: auto; }
+      .stage { justify-content: flex-start; }
+      .ms { box-shadow: none; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @media (max-width: 1200px) {
+      main { padding: 22px 28px 32px; }
+      .milestones { gap: 10px; }
+      .ms { padding: 20px 14px 14px; }
+    }
+    @media (max-width: 900px) {
+      .milestones { grid-template-columns: 1fr; }
+      .axis-track, .axis-progress, .now-line, .now-label, .ms::before { display: none; }
+      .stage { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <nav class="pages">
+        <a href="./">Plán dodávky</a>
+        <a href="./proces.html">Procesní diagram</a>
+        <a href="./realizace.html">Plán realizace</a>
+        <a href="./klient.html" aria-current="page">Pro klienta</a>
+      </nav>
+      <div class="share">
+        <button type="button" class="share-btn" id="share-html">Stáhnout pro sdílení</button>
+        <button type="button" class="share-btn secondary" id="share-pdf">Tisk do PDF</button>
+      </div>
+    </div>
+    <p class="share-note" id="share-note" hidden></p>
+    <div class="hero">
+      <h1>DigiDoc 2.0 — evidence výrobních časů</h1>
+      <p class="sub">Milníky dodávky. Červená čára ukazuje, kde se vývoj právě nachází.</p>
+    </div>
+
+    <div class="stage">
+      <div class="axis-wrap">
+        <div class="axis-track"></div>
+        <div class="axis-progress" id="progress"></div>
+        <div class="now-label" id="now-label">19. 11. · tady jsme</div>
+        <div class="now-line" id="now-line"></div>
+        <div class="milestones">
+          <article class="ms done">
+            <b>KT45</b>
+            <span class="when">do 6. 11.</span>
+            <p class="title">Analýza a návrh</p>
+            <p class="desc">Popis scénářů evidence času, obrazovek a pravidel. Příprava podkladů pro schválení.</p>
+            <span class="state">Hotovo</span>
+          </article>
+          <article class="ms part">
+            <b>KT46</b>
+            <span class="when">do 13. 11.</span>
+            <p class="title">Schválení návrhu</p>
+            <p class="desc">Odsouhlasení technického návrhu, důvodů prostojů a podoby obrazovek se zákazníkem.</p>
+            <span class="state">Probíhá</span>
+          </article>
+          <article class="ms part">
+            <b>KT47</b>
+            <span class="when">16.–22. 11.</span>
+            <p class="title">Start vývoje</p>
+            <p class="desc">Začátek vývoje. Příprava dat a základů měření, první obrazovky pro evidenci času.</p>
+            <span class="state">Probíhá</span>
+          </article>
+          <article class="ms plan">
+            <b>KT48</b>
+            <span class="when">23.–29. 11.</span>
+            <p class="title">Hlavní vývoj</p>
+            <p class="desc">Měření na pracovištích, přerušení s důvodem, reporty a přehledy. Práce na tabletu i v kanceláři.</p>
+            <span class="state">Plán</span>
+          </article>
+          <article class="ms plan">
+            <b>KT49</b>
+            <span class="when">30. 11.–6. 12.</span>
+            <p class="title">Dokončení vývoje</p>
+            <p class="desc">Opravy záznamů, export, napojení živých dat a doladění přehledu právě běžící práce.</p>
+            <span class="state">Plán</span>
+          </article>
+          <article class="ms plan">
+            <b>KT50</b>
+            <span class="when">7.–13. 12.</span>
+            <p class="title">Testování</p>
+            <p class="desc">Interní a zákaznické ověření scénářů na pile, lisu a CNC. Opravy podle výsledků testů.</p>
+            <span class="state">Plán</span>
+          </article>
+          <article class="ms plan">
+            <b>KT51</b>
+            <span class="when">od 14. 12.</span>
+            <p class="title">Nasazení a předání</p>
+            <p class="desc">Vzdálené nasazení do provozu, předání a ověření, že evidence běží spolu s dosavadním DigiDocem.</p>
+            <span class="state">Plán</span>
+          </article>
+        </div>
+      </div>
+
+      <p class="legend">
+        <span class="done"><i></i>Hotovo</span>
+        <span class="part"><i></i>Probíhá</span>
+        <span class="plan"><i></i>Plán</span>
+        <span class="now"><i></i>Kde jsme teď</span>
+      </p>
+    </div>
+  </main>
+  <script>
+    // Pozice „tady jsme“: střed KT47 (3. sloupec ze 7 → ~2.5/7)
+    const NOW_AT = 2.5 / 7;
+    const progress = document.getElementById("progress");
+    const nowLine = document.getElementById("now-line");
+    const nowLabel = document.getElementById("now-label");
+    const left = `calc((100% / 14) + (100% - 100% / 7) * ${NOW_AT})`;
+    progress.style.width = `calc((100% - 100% / 7) * ${NOW_AT})`;
+    nowLine.style.left = left;
+    nowLabel.style.left = left;
+
+    function escapeSrcdoc(html) {
+      return html.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    }
+
+    function armPage(html, current) {
+      const nav = '<nav class="pages">' +
+        '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
+        '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
+        '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a>' +
+        '<a href="#" data-go="klient"' + (current === "klient" ? ' aria-current="page"' : "") + '>Pro klienta</a></nav>';
+      const bridge = "<script>document.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();parent.postMessage(a.getAttribute('data-go'),'*');});});<\/script>";
+      return html
+        .replace(/<div class="share">[\s\S]*?<\/div>/, "")
+        .replace(/<p class="share-note"[\s\S]*?<\/p>/, "")
+        .replace(/<nav class="pages">[\s\S]*?<\/nav>/, nav)
+        .replace(/<\/body>\s*<\/html>\s*$/i, bridge + "</body></html>");
+    }
+
+    async function downloadSharePack() {
+      const button = document.getElementById("share-html");
+      const note = document.getElementById("share-note");
+      button.disabled = true;
+      try {
+        const [plan, proces, realizace, klient] = await Promise.all([
+          fetch("./index.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./proces.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
+          fetch("./klient.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
+        ]);
+        const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
+          '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
+          '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
+          '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
+          '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
+          '<iframe id="klient" title="Pro klienta" srcdoc="' + escapeSrcdoc(armPage(klient, "klient")) + '"></iframe>' +
+          "<script>window.addEventListener('message',function(e){var names=['plan','proces','realizace','klient'];if(names.indexOf(e.data)<0)return;names.forEach(function(name){document.getElementById(name).classList.toggle('on',name===e.data);});});<\/script></body></html>";
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob([file], { type: "text/html;charset=utf-8" }));
+        link.download = "DigiDoc-Kasper-stav-dodavky.html";
+        link.click();
+        URL.revokeObjectURL(link.href);
+        note.hidden = false;
+        note.textContent = "Soubor DigiDoc-Kasper-stav-dodavky.html je stažený.";
+      } catch (error) {
+        note.hidden = false;
+        note.textContent = "Stažení se nepovedlo. Otevři prezentaci na http://127.0.0.1:8766/ a zkus to znovu.";
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById("share-html").addEventListener("click", downloadSharePack);
+    document.getElementById("share-pdf").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

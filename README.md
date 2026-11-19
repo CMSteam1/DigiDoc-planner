@@ -9,6 +9,7 @@ Po úspěšném nasazení na GitHub Pages:
 - [Plán dodávky](https://cmsteam1.github.io/DigiDoc-planner/)
 - [Procesní diagram](https://cmsteam1.github.io/DigiDoc-planner/proces.html)
 - [Plán realizace](https://cmsteam1.github.io/DigiDoc-planner/realizace.html)
+- [Pro klienta](https://cmsteam1.github.io/DigiDoc-planner/klient.html)
 
 Stránky obsahují filtry, možnost stažení prezentace pro offline sdílení a tisk do PDF. Relativní odkazy podporují provoz v podadresáři GitHub Pages.
 
@@ -22,10 +23,10 @@ Stránky obsahují filtry, možnost stažení prezentace pro offline sdílení a
 
 V **Settings → Pages → Build and deployment → Source** musí být zvoleno **GitHub Actions**. Publikování ze soukromého repozitáře vyžaduje podporovaný tarif GitHubu.
 
-Nasazují se pouze tři HTML stránky, nikoli textové podklady, lokální server nebo obsah repozitáře.
+Nasazují se pouze HTML stránky (`index.html`, `proces.html`, `realizace.html`, `klient.html`), nikoli textové podklady, lokální server nebo obsah repozitáře.
 
 ## Lokální náhled
 
-Spusťte `start-prezentace.ps1` v PowerShellu a otevřete <http://127.0.0.1:8766/>. Server ukončíte pomocí Ctrl+C. HTTP server je potřeba také pro tlačítko **Stáhnout pro sdílení**, které načítá všechny tři stránky.
+Spusťte `start-prezentace.ps1` v PowerShellu a otevřete <http://127.0.0.1:8766/>. Server ukončíte pomocí Ctrl+C. HTTP server je potřeba také pro tlačítko **Stáhnout pro sdílení**, které načítá všechny čtyři stránky.
 
 Zobrazené datum stavu a termíny jsou součástí podkladů, neposouvají se automaticky podle aktuálního dne.

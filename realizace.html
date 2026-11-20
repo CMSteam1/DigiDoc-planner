@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — plán realizace k 19. 11. 2026</title>
+  <title>DigiDoc-Kasper — plán realizace k 20. 11. 2026</title>
   <style>
     :root {
       color-scheme: light;
@@ -140,7 +140,7 @@
     <div class="stage-axis" aria-label="Časová osa etap">
       <div class="stage done"><b>KT45</b><span>Analýza a UX/UI · VČ, MP, DS</span></div>
       <div class="stage part"><b>KT46</b><span>TN rev02 · otevřené otázky</span></div>
-      <div class="stage part"><b>KT47</b><span>FE prototyp hotový · BE ne</span></div>
+      <div class="stage part"><b>KT47</b><span>FE stub Časy · BE větev bez kódu</span></div>
       <div class="stage"><b>KT48</b><span>Vývoj · 5 dní</span></div>
       <div class="stage"><b>KT49</b><span>Vývoj · 5 dní</span></div>
       <div class="stage"><b>KT50</b><span>Testy 10–16 h</span></div>
@@ -176,7 +176,7 @@
       </article>
 
       <article class="event done">
-        <div class="when">do 19. 11. · ft/prototype</div>
+        <div class="when">do 18. 11. · ft/prototype</div>
         <div>
           <h2>FE prototyp výrobních časů</h2>
           <p>DS dodal na ft/prototype funkční FE prototyp (localStorage): lišta měření, reporty se 7 záložkami, detail s opravami, správa důvodů, Právě běží, export XLSX, převzetí a konec směny. BL shell z KT47–48 je tím pokrytý.</p>
@@ -185,24 +185,25 @@
       </article>
 
       <article class="event part">
-        <div class="when">Týden 1 · KT47<br>16.–22. 11. · jste tady</div>
+        <div class="when">Týden 1 · KT47<br>16.–22. 11. · jste tady · 20. 11.</div>
         <div>
-          <h2>Základ · zbývá produkční BE <span class="hours">4 pracovní dny</span></h2>
+          <h2>Základ · produkční větve otevřené, BE kód ještě ne <span class="hours">4 pracovní dny</span></h2>
           <div class="person">
             <strong>DS · plánovaných 16 h · max po svátku</strong>
             <ol>
-              <li>Migrace EF 4 h — nezačato</li>
+              <li>Migrace EF 4 h — nezačato (BE ft/timetracking = master)</li>
               <li>CRUD důvodů BE 6 h — nezačato (FE je v prototypu)</li>
               <li>Start/Pauza/Stop API 6 h — nezačato (FE je v prototypu)</li>
             </ol>
           </div>
           <div class="person">
-            <strong>BL · plánovaných 12 h</strong>
+            <strong>BL · plánovaných 12 h + start produkční FE</strong>
             <ol>
               <li>Reporty shell 8 h — hotovo v prototypu (DS)</li>
               <li>UI důvodů 4 h — hotovo v prototypu (DS)</li>
+              <li>20. 11. — menu Časy, /mistr/casy, stub TimeReports + docs na ft/timetracking</li>
             </ol>
-            <p>Další práce BL: napojení na API až po handoffu BE.</p>
+            <p>Další práce BL: naplnit TimeReports a napojit na API až po handoffu BE.</p>
           </div>
         </div>
       </article>

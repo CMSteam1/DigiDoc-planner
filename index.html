@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav dodávky k 19. 11. 2026</title>
+  <title>DigiDoc-Kasper — stav dodávky k 20. 11. 2026</title>
   <style>
     :root {
       color-scheme: light;
@@ -224,7 +224,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">19. 11. · jste tady</div>
+      <div class="now-label" id="now-label">20. 11. · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -245,7 +245,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>FE prototyp na ft/prototype hotový (DS). Produkční BE nezačato. Jsme v KT47.</td>
+          <td>FE prototyp hotový. BL začala produkční FE stubem Časy. BE větev ft/timetracking je, kód ne. Jsme v KT47.</td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -288,7 +288,7 @@
             { plan: "FE prototyp výrobních časů", status: "hotovo", note: "ft/prototype · localStorage. Lišta, reporty, detail, důvody, Právě běží, export XLSX." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Migrace EF · 4 h", status: "nezacato", note: "V BE repu zatím žádná větev. Blokuje produkční API." },
+            { plan: "Migrace EF · 4 h", status: "nezacato", note: "BE větev ft/timetracking existuje, ale = master. Blokuje produkční API." },
             { plan: "CRUD důvodů (BE) · 6 h", status: "nezacato", note: "FE stránka důvodů je v prototypu. Chybí API." },
             { plan: "Start/Stop API — část 1 · 6 h", status: "nezacato", note: "FE ovládání je v prototypu. Chybí smluvní API." }
           ]},
@@ -320,7 +320,8 @@
           ]},
           { phase: "kt47", items: [
             { plan: "Report shell (UI) · 8 h", status: "hotovo", note: "Hotovo v prototypu (DS) · ProductionReportsPage." },
-            { plan: "UI důvodů · 4 h", status: "hotovo", note: "Hotovo v prototypu (DS) · DowntimeReasonsPage." }
+            { plan: "UI důvodů · 4 h", status: "hotovo", note: "Hotovo v prototypu (DS) · DowntimeReasonsPage." },
+            { plan: "Produkční FE větev · Časy", status: "castecne", note: "20. 11. · ft/timetracking: menu Časy, /mistr/casy, stub TimeReports + docs z prototypu." }
           ]},
           { phase: "kt48", items: [
             { plan: "Reporty — filtry a záložky · 6 h", status: "hotovo", note: "Hotovo v prototypu (DS). Sedm záložek + filtry." },
@@ -346,10 +347,11 @@
           ]},
           { phase: "kt47", items: [
             { plan: "Svátek 17. 11.", status: "hotovo", note: "Proběhlo. KT47 má 4 pracovní dny." },
-            { plan: "Větev ft/prototype", status: "hotovo", note: "FE prototyp výrobních časů. ft/timetracking = env proti produkčnímu API." }
+            { plan: "Větev ft/prototype", status: "hotovo", note: "FE prototyp výrobních časů (DS)." },
+            { plan: "Větve ft/timetracking", status: "castecne", note: "FE: env + stub Časy (BL). BE: větev = master, bez kódu časů." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Start produkčního BE", status: "plan", note: "Migrace + API. FE je napřed v prototypu." }
+            { plan: "Start produkčního BE", status: "plan", note: "Migrace + API na BE ft/timetracking. FE je napřed v prototypu." }
           ]},
           { phase: "kt49", items: [
             { plan: "Handoffy API → napojení FE", status: "plan", note: "Report, opravy, export → BL napojí prototyp na živá data." }
@@ -420,7 +422,7 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      const today = 0.31;
+      const today = 0.36;
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;
       document.getElementById("now-line").style.left = left;

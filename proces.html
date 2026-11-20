@@ -330,14 +330,14 @@
     const cases = [
       {
         id: "uc01", code: "UC-01", title: "Zahájení", status: "castecne",
-        lead: "FE lišta je v prototypu na ft/prototype. Produkční Start API ještě není.",
+        lead: "FE lišta je v prototypu na ft/prototype. BE větev ft/timetracking je, kód Start API ještě ne.",
         lanes: [
           { title: "Tablet / obsluha", steps: [
             { n: "1", title: "Zahájení směny", text: "Obsluha spustí měření na tabletu.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
             { n: "2", title: "Start API", text: "Produkční API nezačato. FE ovládání je v prototypu.", status: "plan" },
-            { title: "Model + migrace", text: "EF migrace zatím není. Blokuje produkční BE.", status: "plan", kind: "store" }
+            { title: "Model + migrace", text: "BE ft/timetracking = master. EF migrace chybí.", status: "plan", kind: "store" }
           ]},
           { title: "DS · FE", steps: [
             { n: "3", title: "Lišta měření", text: "Hotovo v prototypu · ProductionTimeControl (localStorage).", status: "hotovo" },
@@ -420,7 +420,7 @@
       },
       {
         id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "castecne",
-        lead: "FE shell reportů a detailu je v prototypu (DS). Živá data až po produkčním BE.",
+        lead: "FE shell reportů je v prototypu (DS). BL má na ft/timetracking stub Časy. Živá data až po produkčním BE.",
         lanes: [
           { title: "BL · shell", steps: [
             { n: "1", title: "Report shell", text: "Hotovo v prototypu (DS) · ProductionReportsPage.", status: "hotovo" },

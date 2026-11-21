@@ -6,7 +6,7 @@ Interaktivní vizualizace plánu projektu DigiDoc-Kasper. Statické HTML stránk
 
 Po úspěšném nasazení na GitHub Pages:
 
-- [Plán dodávky](https://cmsteam1.github.io/DigiDoc-planner/)
+- [Plán vývoje](https://cmsteam1.github.io/DigiDoc-planner/)
 - [Procesní diagram](https://cmsteam1.github.io/DigiDoc-planner/proces.html)
 - [Plán realizace](https://cmsteam1.github.io/DigiDoc-planner/realizace.html)
 - [Pro klienta](https://cmsteam1.github.io/DigiDoc-planner/klient.html)

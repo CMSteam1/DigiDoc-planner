@@ -270,7 +270,7 @@
   <main>
     <div class="topbar">
       <nav class="pages">
-        <a href="./">Plán dodávky</a>
+        <a href="./">Plán vývoje</a>
         <a href="./proces.html">Procesní diagram</a>
         <a href="./realizace.html">Plán realizace</a>
         <a href="./klient.html" aria-current="page">Pro klienta</a>
@@ -283,7 +283,7 @@
     <p class="share-note" id="share-note" hidden></p>
     <div class="hero">
       <h1>DigiDoc 2.0 — evidence výrobních časů</h1>
-      <p class="sub">Milníky dodávky. Červená čára ukazuje, kde se vývoj právě nachází.</p>
+      <p class="sub">Milníky vývoje. Červená čára ukazuje, kde se vývoj právě nachází.</p>
     </div>
 
     <div class="stage">
@@ -370,7 +370,7 @@
 
     function armPage(html, current) {
       const nav = '<nav class="pages">' +
-        '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán dodávky</a>' +
+        '<a href="#" data-go="plan"' + (current === "plan" ? ' aria-current="page"' : "") + '>Plán vývoje</a>' +
         '<a href="#" data-go="proces"' + (current === "proces" ? ' aria-current="page"' : "") + '>Procesní diagram</a>' +
         '<a href="#" data-go="realizace"' + (current === "realizace" ? ' aria-current="page"' : "") + '>Plán realizace</a>' +
         '<a href="#" data-go="klient"' + (current === "klient" ? ' aria-current="page"' : "") + '>Pro klienta</a></nav>';
@@ -393,9 +393,9 @@
           fetch("./realizace.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); }),
           fetch("./klient.html").then((response) => { if (!response.ok) throw new Error(); return response.text(); })
         ]);
-        const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav dodávky</title>' +
+        const file = '<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>DigiDoc-Kasper — stav vývoje</title>' +
           '<style>html,body{margin:0;height:100%;background:#fff}iframe{width:100%;height:100%;border:0;display:none}iframe.on{display:block}</style></head><body>' +
-          '<iframe id="plan" class="on" title="Plán dodávky" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
+          '<iframe id="plan" class="on" title="Plán vývoje" srcdoc="' + escapeSrcdoc(armPage(plan, "plan")) + '"></iframe>' +
           '<iframe id="proces" title="Procesní diagram" srcdoc="' + escapeSrcdoc(armPage(proces, "proces")) + '"></iframe>' +
           '<iframe id="realizace" title="Plán realizace" srcdoc="' + escapeSrcdoc(armPage(realizace, "realizace")) + '"></iframe>' +
           '<iframe id="klient" title="Pro klienta" srcdoc="' + escapeSrcdoc(armPage(klient, "klient")) + '"></iframe>' +

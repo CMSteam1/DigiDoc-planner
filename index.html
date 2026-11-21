@@ -245,7 +245,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>FE prototyp hotový. BL stub Časy (return null). Produkční BE API časů nezačato. Konec KT47 (víkend 21. 11.).</td>
+          <td>Prototyp existuje, ale nepočítá se jako hotová dodávka. BL stub Časy. Produkční BE/FE API časů nezačato. Konec KT47.</td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -285,7 +285,7 @@
         cells: [
           { phase: "hotovo", items: [
             { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. TN rev02 návrh je ve ft/prototype." },
-            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "ft/prototype · localStorage. Lišta, reporty, detail, důvody, Právě běží, export XLSX." }
+            { plan: "FE prototyp výrobních časů", status: "castecne", note: "Existuje na ft/prototype (localStorage). Není produkční dodávka — jen ověření UX." }
           ]},
           { phase: "kt47", items: [
             { plan: "Migrace EF · 4 h", status: "nezacato", note: "BE ft/timetracking bez manufacturing modelu. Blokuje produkční API." },
@@ -295,14 +295,14 @@
           { phase: "kt48", items: [
             { plan: "Start/Stop API — část 2 · 4 h", status: "plan", note: "Dokončení produkčního API měření." },
             { plan: "Převzetí, směny, checklist BE · 8 h", status: "plan", note: "FE chování (převzetí, konec směny, checklist) je v prototypu." },
-            { plan: "Lišta měření (FE) · 6 h", status: "hotovo", note: "Hotovo v prototypu · ProductionTimeControl. Zbývá napojení na API." },
+            { plan: "Lišta měření (FE) · 6 h", status: "castecne", note: "Jen v prototypu · ProductionTimeControl. Produkční FE + API chybí." },
             { plan: "Report BE — začátek · 2 h", status: "plan", note: "Pokračuje v KT49." }
           ]},
           { phase: "kt49", items: [
             { plan: "Report BE — dokončení · 6 h", status: "plan", note: "Handoff → BL napojení reportů a detailu." },
             { plan: "Opravy API · 8 h", status: "plan", note: "Editace v detailu je v prototypu. Chybí API." },
             { plan: "Export data · 4 h", status: "plan", note: "XLSX z localStorage je v prototypu. Chybí BE." },
-            { plan: "FE převzetí — část 1 · 2 h", status: "castecne", note: "Převzetí pracoviště je v prototypu. Doladění po BE." }
+            { plan: "FE převzetí — část 1 · 2 h", status: "nezacato", note: "Jen náhled v prototypu. Produkční FE převzetí nezačato." }
           ]},
           { phase: "kt50", items: [
             { plan: "FE převzetí — část 2 · 2 h", status: "plan", note: "Ne 9. 12. půl dne — dávat na 7., 8., 10. nebo 11. 12." },
@@ -316,21 +316,21 @@
         scope: "Junior FE · 48 h · 38 h vývoj + 10 h testy",
         cells: [
           { phase: "hotovo", items: [
-            { plan: "FE shell z prototypu (DS)", status: "hotovo", note: "Reporty, důvody, detail, filtry a Právě běží dodal DS na ft/prototype. BL bere napojení a testy." }
+            { plan: "FE shell z prototypu (DS)", status: "castecne", note: "Náhled na ft/prototype. Nepočítá se jako hotová dodávka — BL musí dodat produkční FE." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Report shell (UI) · 8 h", status: "hotovo", note: "Hotovo v prototypu (DS) · ProductionReportsPage." },
-            { plan: "UI důvodů · 4 h", status: "hotovo", note: "Hotovo v prototypu (DS) · DowntimeReasonsPage." },
-            { plan: "Produkční FE větev · Časy", status: "castecne", note: "20. 11. · menu Časy, /mistr/casy, stub TimeReports (return null) + docs. Žádné UI reportů." }
+            { plan: "Report shell (UI) · 8 h", status: "nezacato", note: "Jen náhled v prototypu DS. Produkční UI na ft/timetracking chybí." },
+            { plan: "UI důvodů · 4 h", status: "nezacato", note: "Jen náhled v prototypu DS. Produkční UI chybí." },
+            { plan: "Produkční FE větev · Časy", status: "castecne", note: "20. 11. · menu Časy, stub TimeReports (return null) + docs. Žádné UI." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Reporty — filtry a záložky · 6 h", status: "hotovo", note: "Hotovo v prototypu (DS). Sedm záložek + filtry." },
-            { plan: "Detail shell (UI) · 7 h", status: "hotovo", note: "Hotovo v prototypu (DS) · ProductionRecordsDetail." }
+            { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Jen náhled v prototypu DS. Produkční FE nezačato." },
+            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Jen náhled v prototypu DS. Produkční FE nezačato." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE a Opravách API — přepnout z localStorage." },
-            { plan: "Právě běží · 4 h", status: "castecne", note: "Shell/záložka hotová v prototypu. Live API čeká." },
-            { plan: "Export UI · 2 h", status: "castecne", note: "XLSX UI hotové v prototypu. BE export čeká." }
+            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE a Opravách API." },
+            { plan: "Právě běží · 4 h", status: "nezacato", note: "Jen náhled v prototypu. Produkční napojení chybí." },
+            { plan: "Export UI · 2 h", status: "nezacato", note: "Jen náhled v prototypu. Produkční export chybí." }
           ]},
           { phase: "kt50", items: [
             { plan: "Testování UC / UI · 10 h", status: "plan", note: "Testuje UC/UI. DS současně bugfix 4 h." }
@@ -347,7 +347,7 @@
           ]},
           { phase: "kt47", items: [
             { plan: "Svátek 17. 11.", status: "hotovo", note: "Proběhlo. KT47 má 4 pracovní dny." },
-            { plan: "Větev ft/prototype", status: "hotovo", note: "FE prototyp výrobních časů (DS)." },
+            { plan: "Větev ft/prototype", status: "castecne", note: "FE prototyp existuje (DS) · localStorage. Ne produkční dodávka." },
             { plan: "Větve ft/timetracking", status: "castecne", note: "FE: stub Časy (BL) + env. BE tip má deps/basket, ne manufacturing times." },
             { plan: "DS DigiDoc údržba (mimo časy)", status: "castecne", note: "19.–21. 11. · deps Node/MUI/Vite, login/help/users fixy, BE packages." }
           ]},

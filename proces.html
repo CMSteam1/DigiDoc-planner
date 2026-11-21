@@ -330,7 +330,7 @@
     const cases = [
       {
         id: "uc01", code: "UC-01", title: "Zahájení", status: "castecne",
-        lead: "FE lišta je v prototypu na ft/prototype. BE větev ft/timetracking je, kód Start API ještě ne.",
+        lead: "FE lišta je jen v prototypu (ne dodávka). BE Start API ještě nezačato.",
         lanes: [
           { title: "Tablet / obsluha", steps: [
             { n: "1", title: "Zahájení směny", text: "Obsluha spustí měření na tabletu.", status: "plan" }
@@ -340,8 +340,8 @@
             { title: "Model + migrace", text: "BE bez manufacturing modelu. EF migrace chybí.", status: "plan", kind: "store" }
           ]},
           { title: "DS · FE", steps: [
-            { n: "3", title: "Lišta měření", text: "Hotovo v prototypu · ProductionTimeControl (localStorage).", status: "hotovo" },
-            { n: "4", title: "FE převzetí", text: "Převzetí dialog je v prototypu. Doladění po BE.", status: "castecne" }
+            { n: "3", title: "Lišta měření", text: "Jen v prototypu · ProductionTimeControl. Produkční FE nezačato.", status: "castecne" },
+            { n: "4", title: "FE převzetí", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "UC test", text: "BL testuje UC/UI v KT50.", status: "plan" }
@@ -360,7 +360,7 @@
             { n: "3", title: "CRUD důvodů", text: "6 h v KT47. Handoff pro UI.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "UI důvodů", text: "Hotovo v prototypu (DS) · DowntimeReasonsPage.", status: "hotovo" }
+            { n: "4", title: "UI důvodů", text: "Jen náhled v prototypu DS. Produkční UI nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "Ověření pauzy", text: "KT50 test UC/UI.", status: "plan" }
@@ -376,7 +376,7 @@
           ]},
           { title: "DS · API + lišta", steps: [
             { n: "2", title: "Resume API", text: "Součást Start/Stop KT47–48.", status: "plan" },
-            { n: "3", title: "Stav na liště", text: "Hotovo v prototypu · lišta ukáže běžící stav.", status: "hotovo" }
+            { n: "3", title: "Stav na liště", text: "Jen v prototypu. Produkční lišta nezačata.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
             { n: "4", title: "UC test", text: "KT50.", status: "plan" }
@@ -420,12 +420,12 @@
       },
       {
         id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "castecne",
-        lead: "FE shell reportů je v prototypu (DS). BL má na ft/timetracking stub Časy. Živá data až po produkčním BE.",
+        lead: "FE shell reportů je jen v prototypu (ne dodávka). BL má na ft/timetracking stub Časy. Živá data až po produkčním BE.",
         lanes: [
           { title: "BL · shell", steps: [
-            { n: "1", title: "Report shell", text: "Hotovo v prototypu (DS) · ProductionReportsPage.", status: "hotovo" },
-            { n: "2", title: "Filtry a záložky", text: "Hotovo v prototypu · 7 záložek + filtry.", status: "hotovo" },
-            { n: "3", title: "Detail shell", text: "Hotovo v prototypu · ProductionRecordsDetail.", status: "hotovo" }
+            { n: "1", title: "Report shell", text: "Jen náhled v prototypu DS. Produkční UI nezačato.", status: "plan" },
+            { n: "2", title: "Filtry a záložky", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" },
+            { n: "3", title: "Detail shell", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" }
           ]},
           { title: "DS · API", steps: [
             { n: "4", title: "Report + filtry API", text: "8 h napříč KT48–49. Blokuje živá data UC-06/07.", status: "plan" },
@@ -433,7 +433,7 @@
           ]},
           { title: "BL · napojení", steps: [
             { n: "6", title: "Úpravy v detailu", text: "7 h po Opravách API.", status: "plan" },
-            { n: "7", title: "Právě běží", text: "Shell/záložka hotová v prototypu. Live API čeká.", status: "castecne" }
+            { n: "7", title: "Právě běží", text: "Jen náhled v prototypu. Produkční napojení nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
             { n: "8", title: "UC / UI test", text: "10 h BL v KT50.", status: "plan" }
@@ -445,14 +445,14 @@
         lead: "Historie a export. Export data od DS, Export UI od BL ve stejném KT49.",
         lanes: [
           { title: "BL · UI", steps: [
-            { n: "1", title: "Historie v reportech", text: "Hotovo v prototypu jako součást detailu reportů.", status: "hotovo" }
+            { n: "1", title: "Historie v reportech", text: "Jen náhled v prototypu. Produkční historie nezačata.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
             { n: "2", title: "Export data", text: "4 h v KT49.", status: "plan" },
             { n: "3", title: "Live API", text: "2 h FE napojení v KT50.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "Export UI", text: "XLSX UI hotové v prototypu. BE export čeká.", status: "castecne" }
+            { n: "4", title: "Export UI", text: "Jen náhled v prototypu. Produkční export nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "Ověření historie", text: "KT50.", status: "plan" }

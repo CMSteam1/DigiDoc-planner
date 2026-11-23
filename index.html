@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 21. 11. 2026</title>
+  <title>DigiDoc-Kasper — stav vývoje k 23. 11. 2026</title>
   <style>
     :root {
       color-scheme: light;
@@ -224,7 +224,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">21. 11. · jste tady</div>
+      <div class="now-label" id="now-label">23. 11. · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -245,7 +245,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>Prototyp existuje, ale nepočítá se jako hotová dodávka. Produkční vývoj časů teprve startuje. Konec KT47.</td>
+          <td>Start KT48. BL začala produkční FE reportů (hlavička stránky). Produkční BE časů nezačato. Prototyp ≠ dodávka.</td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -319,9 +319,9 @@
             { plan: "FE shell z prototypu (DS)", status: "castecne", note: "Náhled od DS. BL dodá produkční FE." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Report shell (UI) · 8 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." },
+            { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Začátek: hlavička stránky reportů. Tabulky a filtry ještě nejsou." },
             { plan: "UI důvodů · 4 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." },
-            { plan: "Základ stránky Časy", status: "castecne", note: "Menu a prázdná stránka. Hotové UI ještě není." }
+            { plan: "Základ stránky Časy", status: "castecne", note: "Menu a hlavička reportů. Hotové UI reportů ještě není." }
           ]},
           { phase: "kt48", items: [
             { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." },
@@ -348,8 +348,8 @@
           { phase: "kt47", items: [
             { plan: "Svátek 17. 11.", status: "hotovo", note: "Proběhlo. KT47 má 4 pracovní dny." },
             { plan: "UX prototyp obrazovek", status: "castecne", note: "Náhled existuje. Nejde o hotovou dodávku." },
-            { plan: "Start produkčního FE", status: "castecne", note: "Založena stránka Časy bez hotového UI. Backend časů nezačat." },
-            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Souběžné opravy a aktualizace mimo plán výrobních časů." }
+            { plan: "Start produkčního FE", status: "castecne", note: "Stránka Časy s hlavičkou reportů. Backend časů nezačat." },
+            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Souběžné opravy a aktualizace mimo plán výrobních časů (KT47)." }
           ]},
           { phase: "kt48", items: [
             { plan: "Start produkčního BE", status: "plan", note: "Datový model a API výrobních časů. Prototyp se nepočítá jako dodávka." }
@@ -423,7 +423,7 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      const today = 0.38;
+      const today = 0.40;
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;
       document.getElementById("now-line").style.left = left;
@@ -431,7 +431,7 @@
 
     function renderBoard() {
       const head = `<div></div>` + phases.map((phase) =>
-        `<div class="phase-label${phase.id === "kt47" ? " now" : ""}">${phase.label}<small>${phase.when}</small></div>`
+        `<div class="phase-label${phase.id === "kt48" ? " now" : ""}">${phase.label}<small>${phase.when}</small></div>`
       ).join("");
       const body = lanes.map((lane) => {
         const who = `<div class="who"><strong>${lane.person}</strong><span>${lane.scope}</span></div>`;

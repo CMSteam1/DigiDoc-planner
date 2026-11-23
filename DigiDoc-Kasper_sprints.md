@@ -14,12 +14,8 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | MP | Analýza a UX/UI (KT45) | Hotovo |
 | DS | Analýza a UX/UI (KT45) | Hotovo |
 | DS | TN rev02 návrh | Hotovo jako podklad |
-
-## Jen prototyp (ne dodávka)
-
-| Dráha | Co | Poznámka |
-| --- | --- | --- |
-| DS | FE prototyp na `ft/prototype` | Lišta, reporty, detail, důvody, live, export · localStorage · poslední 18. 11. |
+| DS | FE prototyp na `ft/prototype` | Hotovo jako UX náhled · ne produkční dodávka · poslední 18. 11. |
+| BL | FE shell z prototypu (DS) | Hotovo jako podklad · BL dodává produkční FE |
 
 ## Probíhá (produkční)
 
@@ -35,7 +31,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 
 | Plán | Stav | Hodiny |
 | --- | --- | --- |
-| FE prototyp (náhled) | Jen prototyp · ne dodávka | — |
+| FE prototyp (náhled) | Hotovo jako UX náhled · ne produkční dodávka | — |
 | Migrace EF | Nezačato | 4 h |
 | CRUD důvodů (BE) | Nezačato | 6 h |
 | Start/Stop API | Nezačato | 10 h |

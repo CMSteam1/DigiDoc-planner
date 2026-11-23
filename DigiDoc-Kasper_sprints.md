@@ -2,7 +2,7 @@
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11. a DS půl dne mimo 9. 12. Kapacita: vývoj 98 h + testy 14 h · DS 64 · BL 48.
 
-Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, BE `kasper.digitaldocumentationbe` větev `ft/timetracking` (fetch 23. 11.).
+Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, BE `kasper.digitaldocumentationbe` větev `ft/timetracking` (fetch 23. 11. odpoledne).
 
 **Pravidlo:** věci jen na `ft/prototype` (localStorage) **nejsou hotová dodávka**. Počítají se až produkční FE/BE.
 
@@ -25,7 +25,9 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 
 | Dráha | Co | Poznámka |
 | --- | --- | --- |
-| BL | Stránka Časy / reporty | Menu + hlavička `TimeReports` (titulek, tlačítka Důvody/Export) · větev `bl-ft/downtime-reasons` · 23. 11. · bez tabulek/filtrů/API |
+| BL | Stránka Časy / reporty | Menu + hlavička `TimeReports` · `bl-ft/downtime-reasons` · bez tabulek/filtrů/API |
+| BL | UI důvodů prostojů | Modal + editor, mock důvody, přidání lokálně; edit/smazání disabled · bez BE · 23. 11. 11:55 |
+| DS | DigiDoc údržba (mimo časy) | 23. 11. · CSP production build, docs auth (stažení jen po loginu) · `ds/basket` |
 
 ## Plán podle osob
 
@@ -44,17 +46,17 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | Live napojení na API | Nezačato | 2 h |
 | Lišta / FE převzetí (produkční) | Nezačato · jen náhled v prototypu | — |
 | Bugfix z testů | Plán KT50 | 4 h |
-| Mimo plán časů | KT47 · DigiDoc deps/bugfixy (`ds/basket`) · bez nových commitů od 21. 11. | — |
+| Mimo plán časů | Probíhá · CSP + docs auth 23. 11. (`ds/basket`) | — |
 
 ### BL — junior FE · 48 h (38 h vývoj + 10 h testy)
 
 | Plán | Stav | Hodiny |
 | --- | --- | --- |
 | Report shell (UI) | Probíhá · hlavička stránky; bez obsahu reportů | 8 h |
-| UI důvodů | Nezačato · jen náhled v prototypu DS · tlačítko v hlavičce | 4 h |
+| UI důvodů | Probíhá · modal + mock + přidání; edit/smazání a API chybí | 4 h |
 | Reporty — filtry a záložky | Nezačato · jen náhled v prototypu DS | 6 h |
 | Detail shell (UI) | Nezačato · jen náhled v prototypu DS | 7 h |
-| Produkční FE / stránka Časy | Probíhá · menu + hlavička (ne stub null) | — |
+| Produkční FE / stránka Časy | Probíhá · menu + hlavička + modal důvodů | — |
 | Napojení reportů / detailu na API | Plán KT49 | 7 h |
 | Právě běží — napojení | Nezačato | 4 h |
 | Export UI — napojení | Nezačato · tlačítko v hlavičce bez akce | 2 h |
@@ -66,7 +68,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo · VČ, MP, DS |
 | KT46 | Schválení TN | Probíhá · otevřené otázky u zákazníka |
-| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. BL začala produkční FE reportů (hlavička). Produkční BE časů nezačato. |
+| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. BL: hlavička reportů + modal důvodů (mock). Produkční BE časů nezačato. |
 | KT50 | Interní a zákaznické testy 10–16 h | Plán 7.–13. 12. |
 | KT51 | Nasazení a předání | Plán · cíl produkce 14. 12., provoz do 18. 12. |
 
@@ -75,9 +77,10 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | Repo | Větev | Co tam je |
 | --- | --- | --- |
 | `kasperdigitaldocapp` | `ft/prototype` | FE náhled výrobních časů (DS) · ne dodávka |
-| `kasperdigitaldocapp` | `ft/timetracking` | menu Časy + dřívější stub |
-| `kasperdigitaldocapp` | `bl-ft/downtime-reasons` | TimeReports hlavička (BL) · 23. 11. |
-| `kasper.digitaldocumentationbe` | `ft/timetracking` | deps/basket · žádný manufacturing-times kód |
+| `kasperdigitaldocapp` | `ft/timetracking` | menu Časy + dřívější stub (bez modalu) |
+| `kasperdigitaldocapp` | `bl-ft/downtime-reasons` | TimeReports hlavička + DowntimeReasonsModal (mock) · 23. 11. |
+| `kasperdigitaldocapp` | `ds/basket` | DigiDoc údržba (CSP, docs auth) · mimo plán časů |
+| `kasper.digitaldocumentationbe` | `ft/timetracking` / `ds/basket` | docs auth + deps · žádný manufacturing-times kód |
 
 ## Kalendářní výjimky
 
@@ -87,7 +90,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 ## Handoffy (zbývá)
 
 1. Migrace + model BE
-2. CRUD důvodů BE → produkční UI důvodů
+2. CRUD důvodů BE → napojení UI důvodů (edit/smazání + persistence)
 3. Start/Pauza/Stop API → produkční lišta
 4. Report + opravy + export API → produkční reporty/detail (BL)
 5. Live API → Právě běží
@@ -100,4 +103,4 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 
 ## Osa
 
-23. 11. jste tady (start KT48). Prototyp existuje, ale není hotová dodávka. BL má hlavičku reportů na produkční stránce Časy. Produkční BE API časů není.
+23. 11. jste tady (start KT48). Prototyp ≠ hotová dodávka. BL má hlavičku reportů a modal důvodů s mock daty. Produkční BE API časů není. DS dělá DigiDoc údržbu (CSP, auth stažení).

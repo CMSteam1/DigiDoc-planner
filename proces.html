@@ -350,7 +350,7 @@
       },
       {
         id: "uc02", code: "UC-02", title: "Přerušení", status: "castecne",
-        lead: "Měření se přeruší s důvodem. Produkční UI důvodů běží (mock). CRUD BE ještě chybí.",
+        lead: "Měření se přeruší s důvodem. Produkční UI důvodů: přidání a edit (mock). Smazání a CRUD BE chybí.",
         lanes: [
           { title: "Obsluha", steps: [
             { n: "1", title: "Pauza", text: "Obsluha přeruší běžící měření.", status: "plan" }
@@ -360,7 +360,7 @@
             { n: "3", title: "CRUD důvodů", text: "6 h v KT47. Handoff pro UI.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "UI důvodů", text: "Probíhá · modal s mock důvody a přidáním. Edit/smazání a API chybí.", status: "castecne" }
+            { n: "4", title: "UI důvodů", text: "Probíhá · modal s mock, přidáním a inline editací. Smazání a API chybí.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "Ověření pauzy", text: "KT50 test UC/UI.", status: "plan" }
@@ -420,7 +420,7 @@
       },
       {
         id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "castecne",
-        lead: "FE shell reportů: BL má hlavičku a modal důvodů (mock). Obsah reportů a živá data až po BE. Prototyp ≠ dodávka.",
+        lead: "FE shell reportů: BL má hlavičku a modal důvodů (přidání/edit mock). Obsah reportů a živá data až po BE. Prototyp ≠ dodávka.",
         lanes: [
           { title: "BL · shell", steps: [
             { n: "1", title: "Report shell", text: "Probíhá · hlavička TimeReports. Tabulky a filtry ještě nejsou.", status: "castecne" },

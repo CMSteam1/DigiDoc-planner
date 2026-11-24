@@ -64,7 +64,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo · VČ, MP, DS |
 | KT46 | Schválení TN | Probíhá · otevřené otázky u zákazníka |
-| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. BL: hlavička reportů + modal důvodů (přidání/edit mock). Produkční BE časů nezačato. |
+| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. BL: hlavička reportů + modal důvodů (přidání/edit mock). BE API časů na vývoji nezačato. |
 | KT50 | Interní a zákaznické testy 10–16 h | Plán 7.–13. 12. |
 | KT51 | Nasazení a předání | Plán · cíl produkce 14. 12., provoz do 18. 12. |
 

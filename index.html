@@ -412,7 +412,7 @@
     function renderTimeline() {
       const marks = [
         { label: "KT45 hotovo", at: 0, align: "left" },
-        { label: "16. 11. start vývoje", at: 0.22, align: "center" },
+        { label: "16. 11. start vývoje", at: 5 / 32, align: "center" },
         { label: "7.–13. 12. testy · KT51 nasazení", at: 1, align: "right", below: true }
       ];
       document.getElementById("timeline").innerHTML =
@@ -422,7 +422,9 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      const today = 0.44;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 24. 11. = 2. den / 5 ≈ 1/5.
+      const today = (5 + 7 + 7 * (1 / 5)) / 32;
+      // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;
       document.getElementById("now-line").style.left = left;

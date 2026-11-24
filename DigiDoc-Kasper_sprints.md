@@ -1,8 +1,8 @@
-# DigiDoc-Kasper — plán a stav k 23. 11. 2026
+# DigiDoc-Kasper — plán a stav k 24. 11. 2026
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11. a DS půl dne mimo 9. 12. Kapacita: vývoj 98 h + testy 14 h · DS 64 · BL 48.
 
-Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, BE `kasper.digitaldocumentationbe` větev `ft/timetracking` (fetch 23. 11. 14:10).
+Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, BE `kasper.digitaldocumentationbe` větev `ft/timetracking` (fetch 24. 11. · beze změny od 23. 11. 14:10).
 
 **Pravidlo:** věci jen na `ft/prototype` (localStorage) **nejsou hotová dodávka**. Počítají se až produkční FE/BE.
 
@@ -60,7 +60,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 
 ## Milníky
 
-| Milník | Plán | Stav k 23. 11. |
+| Milník | Plán | Stav k 24. 11. |
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo · VČ, MP, DS |
 | KT46 | Schválení TN | Probíhá · otevřené otázky u zákazníka |
@@ -99,4 +99,4 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 
 ## Osa
 
-23. 11. jste tady (start KT48). Prototyp ≠ hotová dodávka. BL má hlavičku reportů a modal důvodů (mock + přidání + inline edit). Smazání a BE API chybí. DS dělá DigiDoc shell/údržbu.
+24. 11. jste tady (2. den KT48). Prototyp ≠ hotová dodávka. BL má hlavičku reportů a modal důvodů (mock + přidání + inline edit). Smazání a BE API chybí. DS dělá DigiDoc shell/údržbu. Od 23. 11. 14:10 bez nových commitů k výrobním časům.

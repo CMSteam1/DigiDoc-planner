@@ -317,7 +317,7 @@
         </tbody>
       </table>
     </div>
-    <p class="foot">Handoffy: CRUD důvodů → UI důvodů (KT47) · Report BE → napojení (KT48→49) · Opravy API → úpravy detailu (KT49) · Export → Export UI (KT49) · Live (KT50) → doladění Právě běží · BL testuje UC/UI v KT50.</p>
+    <p class="foot">Handoffy: CRUD důvodů → UI důvodů (KT47) · Report BE → napojení (KT48→49, BE do 2. 12.) · Opravy API → úpravy detailu (KT49 do 3. 12. dopoledne · TB 3.–4. 12.) · Export BE/UI → začátek KT50 · Live (KT50) → doladění Právě běží · BL testuje UC/UI v KT50 · nasazení 14. 12. držíme.</p>
   </main>
   <script>
     const statusLabel = { hotovo: "Hotovo", castecne: "Probíhá", plan: "Plán" };
@@ -442,13 +442,13 @@
       },
       {
         id: "uc07", code: "UC-07", title: "Historie", status: "plan",
-        lead: "Historie a export. Export data od DS, Export UI od BL ve stejném KT49.",
+        lead: "Historie a export. Po TB přesun: Export data (DS) + Export UI (BL) na začátek KT50.",
         lanes: [
           { title: "BL · UI", steps: [
             { n: "1", title: "Historie v reportech", text: "Jen náhled v prototypu. Produkční historie nezačata.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
-            { n: "2", title: "Export data", text: "4 h v KT49.", status: "plan" },
+            { n: "2", title: "Export data", text: "4 h na začátku KT50 (přesun z KT49 kvůli TB).", status: "plan" },
             { n: "3", title: "Live API", text: "2 h FE napojení v KT50.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [

@@ -245,17 +245,17 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>Start KT48. BL: hlavička reportů + modal důvodů (přidání/edit mock). BE API časů na vývoji nezačato. Prototyp ≠ dodávka.</td>
+          <td>Start KT48. KT49 efektivně 3,5 dne (TB 3. 12. půl + 4. 12. volno). Report BE do 2. 12., BL napojení do 3. 12. dopoledne. Prototyp ≠ dodávka.</td>
         </tr>
         <tr>
           <td>KT50</td>
           <td>Interní a zákaznické testy 10–16 h</td>
-          <td>Plán 7.–13. 12. DS: ne 9. 12. půl dne.</td>
+          <td>Plán 7.–13. 12. (+ Export na začátku). DS: ne 9. 12. půl dne.</td>
         </tr>
         <tr>
           <td>KT51</td>
           <td>Nasazení a předání</td>
-          <td>Plán · cíl produkce 14. 12., provoz do 18. 12.</td>
+          <td>Držíme · cíl produkce 14. 12., provoz do 18. 12.</td>
         </tr>
       </tbody>
     </table>
@@ -267,7 +267,7 @@
       { id: "hotovo", label: "KT45–46", when: "analýza, UX/UI, schválení TN" },
       { id: "kt47", label: "KT47", when: "16.–22. 11. · 4 dny · svátek 17. 11." },
       { id: "kt48", label: "KT48", when: "23.–29. 11. · 5 dní" },
-      { id: "kt49", label: "KT49", when: "30. 11.–6. 12. · 5 dní" },
+      { id: "kt49", label: "KT49", when: "30. 11.–6. 12. · 3,5 dne práce · TB 3.–4. 12." },
       { id: "kt50", label: "KT50", when: "7.–13. 12. · testy · DS ne 9. 12." }
     ];
     const filters = [
@@ -299,15 +299,15 @@
             { plan: "Report BE — začátek · 2 h", status: "plan", note: "Pokračuje v KT49." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Report BE — dokončení · 6 h", status: "plan", note: "Poté BL napojí reporty a detail." },
-            { plan: "Opravy API · 8 h", status: "plan", note: "Produkční API pro editaci záznamů." },
-            { plan: "Export data · 4 h", status: "plan", note: "Produkční export ze serveru." },
-            { plan: "FE převzetí — část 1 · 2 h", status: "nezacato", note: "Zatím jen náhled. Produkční FE nezačato." }
+            { plan: "Report BE — dokončení · 6 h", status: "plan", note: "Kritická cesta · hotovo do 2. 12. Poté BL napojí reporty." },
+            { plan: "Opravy API · 8 h", status: "plan", note: "Do 3. 12. dopoledne. Produkční API pro editaci záznamů." },
+            { plan: "FE převzetí — část 1 · 2 h", status: "nezacato", note: "Do 3. 12. dopoledne. Zatím jen náhled." }
           ]},
           { phase: "kt50", items: [
-            { plan: "FE převzetí — část 2 · 2 h", status: "plan", note: "DS 9. 12. půl dne mimo — plánovat na jiné dny." },
+            { plan: "Export data · 4 h", status: "plan", note: "Přesun z KT49 kvůli TB · začátek týdne (7./8. 12.)." },
+            { plan: "FE převzetí — část 2 · 2 h", status: "plan", note: "Ne 9. 12. odpoledne (DS mimo)." },
             { plan: "Live napojení · 2 h", status: "plan", note: "Živý přehled právě běžící práce." },
-            { plan: "Bugfix z testů · 4 h", status: "plan", note: "Souběžně s testy od BL." }
+            { plan: "Bugfix z testů · 4 h", status: "plan", note: "Souběžně s testy od BL. Ne 9. 12. odpoledne." }
           ]}
         ]
       },
@@ -328,11 +328,11 @@
             { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po dokončení reportů a oprav na backendu." },
-            { plan: "Právě běží · 4 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." },
-            { plan: "Export UI · 2 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." }
+            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE (do 2. 12.) · hotovo do 3. 12. dopoledne." },
+            { plan: "Právě běží · 4 h", status: "nezacato", note: "Do 3. 12. dopoledne. Zatím jen náhled v prototypu." }
           ]},
           { phase: "kt50", items: [
+            { plan: "Export UI · 2 h", status: "plan", note: "Přesun z KT49 kvůli TB · se Export BE na začátku týdne." },
             { plan: "Testování UC / UI · 10 h", status: "plan", note: "Interní testy scénářů. DS současně opravuje chyby." }
           ]}
         ]
@@ -351,14 +351,15 @@
             { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Souběžně pokračuje (bezpečnost, společný top bar)." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Start BE výrobních časů", status: "plan", note: "Datový model a API na vývoji. Test až na testovacím serveru. Prototyp ≠ dodávka." }
+            { plan: "Start BE výrobních časů", status: "plan", note: "Datový model a API na vývoji. Max. využití zbývajícího KT48 před TB." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Napojení FE na živá data", status: "plan", note: "Reporty, opravy a export — BL napojí po hotovém API." }
+            { plan: "Team building 3.–4. 12.", status: "plan", note: "3. 12. půl dne · 4. 12. volno. KT49 = 3,5 dne práce. Termín 14. 12. držíme." },
+            { plan: "Napojení FE na živá data", status: "plan", note: "Reporty a opravy — BL do 3. 12. dopoledne. Export → KT50." }
           ]},
           { phase: "kt50", items: [
             { plan: "DS 9. 12. půl dne mimo", status: "plan", note: "Live a bugfix neplánovat na 9. 12. odpoledne." },
-            { plan: "Nasazení a předání (KT51)", status: "plan", note: "Cíl produkce 14. 12., provoz do 18. 12." }
+            { plan: "Nasazení a předání (KT51)", status: "plan", note: "Držíme cíl produkce 14. 12., provoz do 18. 12." }
           ]}
         ]
       }

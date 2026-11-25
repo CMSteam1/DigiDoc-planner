@@ -1,6 +1,6 @@
 # DigiDoc-Kasper — plán a stav k 24. 11. 2026
 
-DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11. a DS půl dne mimo 9. 12. Kapacita: vývoj 98 h + testy 14 h · DS 64 · BL 48.
+DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl dne + 4. 12. volno; DS půl dne mimo 9. 12. Kapacita: vývoj 98 h + testy 14 h · DS 64 · BL 48. Cíl produkce **14. 12. držíme**.
 
 Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, BE `kasper.digitaldocumentationbe` větev `ft/timetracking` (fetch 24. 11. · beze změny od 23. 11. 14:10).
 
@@ -38,7 +38,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | Převzetí, směny, checklist BE | Nezačato | 8 h |
 | Report BE | Nezačato | 8 h |
 | Opravy API | Nezačato | 8 h |
-| Export data (BE) | Nezačato | 4 h |
+| Export data (BE) | Plán začátek KT50 | 4 h · přesun z KT49 kvůli TB |
 | Live napojení na API | Nezačato | 2 h |
 | Lišta / FE převzetí (produkční) | Nezačato · jen náhled v prototypu | — |
 | Bugfix z testů | Plán KT50 | 4 h |
@@ -53,9 +53,9 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | Reporty — filtry a záložky | Nezačato · jen náhled v prototypu DS | 6 h |
 | Detail shell (UI) | Nezačato · jen náhled v prototypu DS | 7 h |
 | Produkční FE / stránka Časy | Probíhá · menu + hlavička + modal důvodů | — |
-| Napojení reportů / detailu na API | Plán KT49 | 7 h |
-| Právě běží — napojení | Nezačato | 4 h |
-| Export UI — napojení | Nezačato · tlačítko v hlavičce bez akce | 2 h |
+| Napojení reportů / detailu na API | Plán KT49 do 3. 12. dopoledne | 7 h |
+| Právě běží — napojení | Plán KT49 do 3. 12. dopoledne | 4 h |
+| Export UI — napojení | Plán začátek KT50 | 2 h · se Export BE |
 | Testování UC / UI | Plán KT50 | 10 h |
 
 ## Milníky
@@ -64,9 +64,9 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo · VČ, MP, DS |
 | KT46 | Schválení TN | Probíhá · otevřené otázky u zákazníka |
-| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. BL: hlavička reportů + modal důvodů (přidání/edit mock). BE API časů na vývoji nezačato. |
-| KT50 | Interní a zákaznické testy 10–16 h | Plán 7.–13. 12. |
-| KT51 | Nasazení a předání | Plán · cíl produkce 14. 12., provoz do 18. 12. |
+| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. KT49 efektivně **3,5 dne** (TB 3.–4. 12.). Kritická cesta: Report BE do **2. 12.**, BL napojení do **3. 12. dopoledne**. Export BE/UI → začátek KT50. |
+| KT50 | Interní a zákaznické testy 10–16 h | Plán 7.–13. 12. (+ Export 4+2 h na začátku týdne). DS ne 9. 12. půl dne. |
+| KT51 | Nasazení a předání | **Držíme** cíl produkce 14. 12., provoz do 18. 12. |
 
 ## Větve
 
@@ -81,7 +81,21 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 ## Kalendářní výjimky
 
 - 17. 11. svátek → KT47 jen 4 dny · už proběhlo.
+- **3. 12. půl dne + 4. 12. volno · team building** → KT49 efektivně 3,5 dne (30. 11.–3. 12. dopoledne). Výpadek ≈1,5 MD / osoba.
 - 9. 12. DS půl dne mimo → KT50 úkoly ne na 9. 12.
+
+## Přepočet po team buildingu (udržení 14. 12.)
+
+| Co | Dřív | Po TB |
+| --- | --- | --- |
+| KT49 kalendář | 5 pracovních dní | **3,5 dne** práce |
+| DS v KT49 | 20 h (report 6 + opravy 8 + export 4 + FE 2) | **16 h** (report 6 + opravy 8 + FE 2); export 4 h → KT50 |
+| BL v KT49 | 13 h (napojení 7 + Právě běží 4 + export UI 2) | **11 h** do 3. 12. dopoledne; export UI 2 h → KT50 |
+| KT50 DS | 8 h | **12 h** (export 4 + FE 2 + Live 2 + bugfix 4) · 7./8./10./11. 12. |
+| KT50 BL | 10 h testy | **12 h** (export UI 2 na začátku + 10 h testy) |
+| Nasazení | 14. 12. | **beze změny 14. 12.** |
+
+Podmínka: zbývající KT48 (do 28. 11.) maximálně na BE Start/Stop a začátek reportu, ať KT49 stihne kritickou cestu.
 
 ## Handoffy (zbývá)
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 25. 11. 2026</title>
+  <title>DigiDoc-Kasper — stav vývoje k 25. 11. 2026 (odpoledne)</title>
   <style>
     :root {
       color-scheme: light;
@@ -224,7 +224,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">25. 11. · jste tady</div>
+      <div class="now-label" id="now-label">25. 11. odp. · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -245,17 +245,17 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>3. den KT48 (25. 11.). BE API časů nezačato. TB 3.–4. 12. jen BL (3,5 dne); DS pracuje plných 5 dní. Report BE do 2. 12., BL napojení do 3. 12. dopoledne. Prototyp ≠ dodávka.</td>
+          <td>Propad: BE API časů stále nezačato. KT47 BE → KT48/49. DS 25. 11. jen prototyp (≠ dodávka). Zbývají 2 dny KT48. Report BE do 2. 12. na kritické hraně.</td>
         </tr>
         <tr>
           <td>KT50</td>
           <td>Interní a zákaznické testy 10–16 h</td>
-          <td>Plán 7.–13. 12. (+ Export UI na začátku). DS: ne 9. 12. půl dne.</td>
+          <td>Plán 7.–13. 12. · hrozí zkrácení při skluzu napojení. DS: ne 9. 12. půl dne.</td>
         </tr>
         <tr>
           <td>KT51</td>
           <td>Nasazení a předání</td>
-          <td>Držíme · cíl produkce 14. 12., provoz do 18. 12.</td>
+          <td>Upozornění — 14. 12. ohroženo. Drží se jen při okamžitém startu produkčního BE.</td>
         </tr>
       </tbody>
     </table>
@@ -285,29 +285,30 @@
         cells: [
           { phase: "hotovo", items: [
             { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. Technický návrh je připravený." },
-            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "UX náhled hotový. Nejde o produkční dodávku." }
+            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "UX náhled · ne dodávka. 25. 11.: PROTOTYP strip, stavy, checklist, Node 26." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Migrace datového modelu · 4 h", status: "nezacato", note: "Nezačato. Blokuje produkční backend." },
-            { plan: "Správa důvodů (BE) · 6 h", status: "nezacato", note: "Nezačato. Chybí produkční API." },
-            { plan: "Start/Stop API — část 1 · 6 h", status: "nezacato", note: "Nezačato. Chybí produkční API měření." }
+            { plan: "BE úkoly KT47 — propad", status: "nezacato", note: "Migrace, CRUD, Start/Stop nezačato → přesunuto do KT48/49." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Start/Stop API — část 2 · 4 h", status: "plan", note: "Dokončení produkčního API měření." },
-            { plan: "Převzetí, směny, checklist BE · 8 h", status: "plan", note: "Produkční backend ještě nezačat." },
-            { plan: "Lišta měření (FE) · 6 h", status: "castecne", note: "Zatím jen v prototypu. Produkční FE a API chybí." },
-            { plan: "Report BE — začátek · 2 h", status: "plan", note: "Pokračuje v KT49." }
+            { plan: "Migrace datového modelu · 4 h", status: "nezacato", note: "Přesun z KT47. Priorita 26.–27. 11. Blokuje BE." },
+            { plan: "Správa důvodů (BE) · 6 h", status: "nezacato", note: "Přesun z KT47. Hned po migraci." },
+            { plan: "Start/Stop API — start · 6 h", status: "nezacato", note: "Přesun z KT47. Dokončení 4 h v KT49." },
+            { plan: "Prototyp 25. 11. (mimo dodávku)", status: "castecne", note: "ft/prototype update. Nejsou výrobní časy v produkci." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Report BE — dokončení · 6 h", status: "plan", note: "Kritická cesta · hotovo do 2. 12. Poté BL napojí reporty." },
-            { plan: "Opravy API · 8 h", status: "plan", note: "Produkční API pro editaci. DS bez TB — může pokračovat 3.–4. 12." },
-            { plan: "Export data · 4 h", status: "plan", note: "V KT49 — DS pracuje i během TB BL (3.–4. 12.)." },
-            { plan: "FE převzetí — část 1 · 2 h", status: "nezacato", note: "Zatím jen náhled. DS bez výpadku TB." }
+            { plan: "Start/Stop API — dokončení · 4 h", status: "plan", note: "Zbytek z KT48." },
+            { plan: "Převzetí, směny, checklist BE · 8 h", status: "plan", note: "Přesun z KT48 — ustoupilo startu BE." },
+            { plan: "Report BE · 8 h", status: "plan", note: "Kritická cesta do 2. 12. · UPOZORNĚNÍ: ohroženo skluzem BE." },
+            { plan: "Opravy API · 8 h", status: "plan", note: "Po Reportu. Riziko přesahu do KT50." },
+            { plan: "Export data · 4 h", status: "plan", note: "3.–4. 12. · DS bez TB." },
+            { plan: "FE převzetí — část 1 · 2 h", status: "nezacato", note: "Až po Start/Stop. Zatím jen prototyp." }
           ]},
           { phase: "kt50", items: [
+            { plan: "Opravy API — přesah", status: "plan", note: "Pokud nestihne KT49." },
             { plan: "FE převzetí — část 2 · 2 h", status: "plan", note: "Ne 9. 12. odpoledne (DS mimo)." },
             { plan: "Live napojení · 2 h", status: "plan", note: "Živý přehled právě běžící práce." },
-            { plan: "Bugfix z testů · 4 h", status: "plan", note: "Souběžně s testy od BL. Ne 9. 12. odpoledne." }
+            { plan: "Bugfix z testů · 4 h", status: "plan", note: "Souběžně s testy BL. Ne 9. 12. odpoledne." }
           ]}
         ]
       },
@@ -316,24 +317,24 @@
         scope: "Junior FE · 48 h · 38 h vývoj + 10 h testy",
         cells: [
           { phase: "hotovo", items: [
-            { plan: "FE shell z prototypu (DS)", status: "hotovo", note: "Náhled od DS hotový. BL dodává produkční FE." }
+            { plan: "FE shell z prototypu (DS)", status: "hotovo", note: "Náhled od DS. BL dodává produkční FE." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Hlavička stránky reportů. Tabulky a filtry ještě nejsou." },
-            { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal s mock důvody, přidáním a inline editací. Mazání a API chybí." },
-            { plan: "Základ stránky Časy", status: "castecne", note: "Menu, hlavička reportů a modal důvodů. Obsah reportů ještě není." }
+            { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Hlavička hotová. Tabulky/filtry ještě ne." },
+            { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock + add + inline edit. Mazání a API chybí · od 23. 11. 14:10." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." },
-            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Nezačato. Zatím jen náhled v prototypu." }
+            { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." },
+            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE (do 2. 12.) · hotovo do 3. 12. dopoledne (pak TB)." },
-            { plan: "Právě běží · 4 h", status: "nezacato", note: "Do 3. 12. dopoledne. Zatím jen náhled v prototypu." }
+            { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE (2. 12.) · do 3. 12. dopoledne. UPOZORNĚNÍ: závisí na BE." },
+            { plan: "Právě běží · 4 h", status: "nezacato", note: "Do 3. 12. dopoledne · pak TB." },
+            { plan: "Přesah filtrů / detailu", status: "plan", note: "Pokud nestihne KT48." }
           ]},
           { phase: "kt50", items: [
-            { plan: "Export UI · 2 h", status: "plan", note: "Po TB · Export BE od DS už v KT49. Začátek týdne." },
-            { plan: "Testování UC / UI · 10 h", status: "plan", note: "Interní testy scénářů. DS současně opravuje chyby." }
+            { plan: "Export UI · 2 h", status: "plan", note: "Po TB · začátek týdne." },
+            { plan: "Testování UC / UI · 10 h", status: "plan", note: "Hrozí zkrácení při skluzu napojení." }
           ]}
         ]
       },
@@ -342,24 +343,24 @@
         scope: "Schválení, kapacita, nasazení",
         cells: [
           { phase: "hotovo", items: [
-            { plan: "Analýza a UX/UI (KT45)", status: "hotovo", note: "VČ, MP, DS. BL se neúčastnila." },
-            { plan: "Schválení TN (KT46)", status: "castecne", note: "Návrh je připravený. U zákazníka zbývají otevřené otázky." }
+            { plan: "Analýza a UX/UI (KT45)", status: "hotovo", note: "VČ, MP, DS." },
+            { plan: "Schválení TN (KT46)", status: "castecne", note: "U zákazníka zbývají otevřené otázky." }
           ]},
           { phase: "kt47", items: [
-            { plan: "UX prototyp obrazovek", status: "hotovo", note: "Náhled hotový. Nejde o produkční dodávku." },
-            { plan: "Start FE výrobních časů", status: "castecne", note: "Stránka Časy: hlavička reportů + modal důvodů (edit). BE API časů nezačato." },
-            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "24. 11. merge do ds/basket: CSP, docs auth, login, help, logo, deps. Mimo plán časů." }
+            { plan: "UX prototyp obrazovek", status: "hotovo", note: "Náhled. Nejde o produkční dodávku." },
+            { plan: "Start FE výrobních časů", status: "castecne", note: "Hlavička + modal. BE API časů nezačato." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Start BE výrobních časů", status: "plan", note: "Datový model a API na vývoji. Max. využití zbývajícího KT48." }
+            { plan: "Upozornění · termín 14. 12.", status: "nezacato", note: "Ohroženo: produkční BE na nule. Nutný okamžitý start migrace/CRUD/Start-Stop. Prototyp ≠ dodávka." },
+            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "ds/basket 24. 11. Mimo plán časů." }
           ]},
           { phase: "kt49", items: [
-            { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL: 3. 12. půl dne · 4. 12. volno. DS pracuje. Termín 14. 12. držíme." },
-            { plan: "Napojení FE na živá data", status: "plan", note: "BL do 3. 12. dopoledne. DS Export v KT49; BL Export UI → KT50." }
+            { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL. DS pracuje." },
+            { plan: "Napojení FE na živá data", status: "plan", note: "BL do 3. 12. dopoledne · jen pokud Report BE stihne 2. 12." }
           ]},
           { phase: "kt50", items: [
-            { plan: "DS 9. 12. půl dne mimo", status: "plan", note: "Live a bugfix neplánovat na 9. 12. odpoledne." },
-            { plan: "Nasazení a předání (KT51)", status: "plan", note: "Držíme cíl produkce 14. 12., provoz do 18. 12." }
+            { plan: "DS 9. 12. půl dne mimo", status: "plan", note: "Live a bugfix ne na 9. 12. odpoledne." },
+            { plan: "Nasazení a předání (KT51)", status: "plan", note: "Cíl 14. 12. · UPOZORNĚNÍ: ohroženo skluzem BE." }
           ]}
         ]
       }
@@ -423,8 +424,8 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 25. 11. = 3. den / 5 ≈ 2/5.
-      const today = (5 + 7 + 7 * (2 / 5)) / 32;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 25. 11. odpoledne ≈ 2,5/5.
+      const today = (5 + 7 + 7 * (2.5 / 5)) / 32;
       // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;

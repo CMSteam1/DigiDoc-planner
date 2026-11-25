@@ -317,7 +317,7 @@
         </tbody>
       </table>
     </div>
-    <p class="foot">Handoffy: CRUD důvodů → UI důvodů (KT47) · Report BE → napojení (KT48→49, BE do 2. 12.) · Opravy API → úpravy detailu (KT49 · BL do 3. 12. dopoledne, pak TB jen BL; DS pracuje) · Export BE v KT49 (DS) · Export UI začátek KT50 (BL) · Live (KT50) · BL testuje UC/UI v KT50 · nasazení 14. 12. držíme.</p>
+    <p class="foot">Handoffy (po posunu 25. 11.): Migrace+CRUD+Start/Stop (KT48 teď) → Převzetí+Report BE do 2. 12. (KT49, ohroženo) → BL napojení do 3. 12. dopoledne · TB jen BL · Export BE KT49 / Export UI KT50 · testy KT50 · nasazení 14. 12. ohroženo bez okamžitého startu BE. Prototyp ≠ dodávka.</p>
   </main>
   <script>
     const statusLabel = { hotovo: "Hotovo", castecne: "Probíhá", plan: "Plán" };
@@ -392,7 +392,7 @@
           ]},
           { title: "DS · BE", steps: [
             { n: "2", title: "Stop API", text: "Dokončení Start/Stop.", status: "plan" },
-            { n: "3", title: "Převzetí / směny / checklist", text: "8 h BE v KT48. Blokuje UC-01/04 okraje.", status: "plan" }
+            { n: "3", title: "Převzetí / směny / checklist", text: "8 h BE v KT49 (přesun z KT48). Blokuje UC-01/04 okraje.", status: "plan" }
           ]},
           { title: "DS · FE", steps: [
             { n: "4", title: "FE převzetí", text: "2 + 2 h v KT49–50.", status: "plan" }
@@ -404,11 +404,11 @@
       },
       {
         id: "uc05", code: "UC-05", title: "Výpočet", status: "plan",
-        lead: "Agregace výrobních časů na backendu. Report BE začíná koncem KT48 a končí v KT49.",
+        lead: "Agregace výrobních časů na backendu. Report BE celé v KT49 · handoff do 2. 12. ohrožen skluzem BE.",
         lanes: [
           { title: "DS · BE", steps: [
-            { n: "1", title: "Agregace", text: "Report BE začátek 2 h (KT48) + dokončení 6 h (KT49).", status: "plan" },
-            { title: "Data", text: "Po migraci a měřicím API.", status: "plan", kind: "store" }
+            { n: "1", title: "Agregace", text: "Report BE 8 h v KT49 · do 2. 12. · ohroženo.", status: "plan" },
+            { title: "Data", text: "Po migraci a měřicím API (KT48 teď).", status: "plan", kind: "store" }
           ]},
           { title: "BL · FE", steps: [
             { n: "2", title: "Zobrazení výsledků", text: "Součást napojení reportů v KT49.", status: "plan" }
@@ -428,7 +428,7 @@
             { n: "3", title: "Detail shell", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" }
           ]},
           { title: "DS · API", steps: [
-            { n: "4", title: "Report + filtry API", text: "8 h napříč KT48–49. Blokuje živá data UC-06/07.", status: "plan" },
+            { n: "4", title: "Report + filtry API", text: "8 h v KT49 · do 2. 12. · ohroženo. Blokuje živá data UC-06/07.", status: "plan" },
             { n: "5", title: "Opravy API", text: "8 h v KT49. ±, důvod, +, smazání.", status: "plan" }
           ]},
           { title: "BL · napojení", steps: [

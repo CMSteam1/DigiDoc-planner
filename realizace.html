@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — plán realizace k 25. 11. 2026</title>
+  <title>DigiDoc-Kasper — plán realizace k 25. 11. 2026 (odpoledne)</title>
   <style>
     :root {
       color-scheme: light;
@@ -209,29 +209,37 @@
         </div>
       </article>
 
-      <article class="event part">
-        <div class="when">Týden 2 · KT48<br>23.–29. 11. · jste tady · 25. 11.</div>
+      <article class="event risk">
+        <div class="when">25. 11. odpoledne · upozornění</div>
         <div>
-          <h2>Dokončení měření API + tablet + shell <span class="hours">5 dní</span></h2>
+          <h2>Termín 14. 12. ohrožen</h2>
+          <p>Produkční BE (migrace, CRUD, Start/Stop) je stále <strong>nezačaté</strong>. DS 25. 11. pokračoval v <code>ft/prototype</code> (≠ dodávka). Zbývají <strong>2 pracovní dny</strong> KT48 (26.–27. 11.). Report BE do 2. 12. je na kritické hraně. 14. 12. se drží jen při okamžitém startu BE.</p>
+          <span class="tag">Riziko</span>
+        </div>
+      </article>
+
+      <article class="event part">
+        <div class="when">Týden 2 · KT48<br>23.–29. 11. · jste tady · 25. 11. odp.</div>
+        <div>
+          <h2>Start produkčního BE + shell <span class="hours">zbývají 2 dny</span></h2>
           <div class="person">
-            <strong>DS · 20 h</strong>
+            <strong>DS · priorita zbývající KT48</strong>
             <ol>
-              <li>Start/Stop zbývá 4 h — nezačato (KT47 BE také nezačato)</li>
-              <li>Převzetí/směny/checklist 8 h — nezačato</li>
-              <li>FE lišta 6 h (až po Start/Stop) — nezačato</li>
-              <li>Report BE začátek 2 h — nezačato</li>
-              <li>24. 11. — DigiDoc údržba do ds/basket (CSP, docs auth, login, help, logo, deps) · mimo plán časů</li>
+              <li>Migrace EF 4 h — přesun z KT47 · nezačato</li>
+              <li>CRUD důvodů BE 6 h — přesun z KT47 · nezačato</li>
+              <li>Start/Stop API start 6 h — přesun z KT47 · nezačato</li>
+              <li>25. 11. — prototyp update (PROTOTYP strip, stavy, checklist) · mimo dodávku</li>
+              <li>24. 11. — DigiDoc údržba ds/basket · mimo plán časů</li>
             </ol>
           </div>
           <div class="person">
-            <strong>BL · 13 h</strong>
+            <strong>BL · 13 h · zbývá 26.–27. 11.</strong>
             <ol>
-              <li>23. 11. — hlavička TimeReports + modal důvodů (mock, přidání, inline edit)</li>
-              <li>UI důvodů — smazání a napojení na API ještě chybí · beze změny od 23. 11. 14:10</li>
-              <li>Reporty UI — filtry a záložky 6 h — nezačato</li>
-              <li>Detail shell 7 h (mock) — nezačato</li>
+              <li>23. 11. — hlavička TimeReports + modal důvodů (beze změny od 14:10)</li>
+              <li>Reporty UI — filtry 6 h — nezačato · jinak přesah KT49</li>
+              <li>Detail shell 7 h — nezačato · jinak přesah KT49</li>
             </ol>
-            <p>Napojení až po report BE v KT49. BE manufacturing-times stále bez kódu.</p>
+            <p>BE manufacturing-times stále bez kódu.</p>
           </div>
         </div>
       </article>
@@ -240,7 +248,7 @@
         <div class="when">3. 12. půl dne · 4. 12. volno</div>
         <div>
           <h2>Team building · výpadek jen BL</h2>
-          <p><strong>DS pracuje</strong> i 3.–4. 12. (bez výpadku). BL: 3. 12. půl dne + 4. 12. volno → efektivně <strong>3,5 dne</strong>. Termín <strong>14. 12. držíme</strong>: Report BE do 2. 12., BL napojení do 3. 12. dopoledne. DS Export v KT49; BL Export UI na začátek KT50.</p>
+          <p><strong>DS pracuje</strong> i 3.–4. 12. BL: 3,5 dne v KT49. Report BE do 2. 12. a BL napojení do 3. 12. dopoledne jsou <strong>ohrožené</strong> skluzem BE.</p>
           <span class="tag">Výjimka</span>
         </div>
       </article>
@@ -248,23 +256,25 @@
       <article class="event">
         <div class="when">Týden 3 · KT49<br>30. 11.–6. 12.</div>
         <div>
-          <h2>Napojení a opravy <span class="hours">DS 5 dní · BL 3,5 dne</span></h2>
+          <h2>Dokončení BE + napojení <span class="hours">DS 5 dní · BL 3,5 dne</span></h2>
           <div class="person">
-            <strong>DS · 20 h</strong>
+            <strong>DS</strong>
             <ol>
-              <li>Report BE 6 h → handoff BL do <strong>2. 12.</strong></li>
-              <li>Opravy API 8 h</li>
+              <li>Start/Stop dokončení 4 h</li>
+              <li>Převzetí/směny/checklist 8 h — přesun z KT48</li>
+              <li>Report BE 8 h → handoff do <strong>2. 12.</strong> · ohroženo</li>
+              <li>Opravy API 8 h · riziko přesahu KT50</li>
               <li>Export data 4 h · 3.–4. 12. (DS bez TB)</li>
-              <li>FE převzetí 2 h (zbývá 2 h + Live do KT50)</li>
+              <li>FE převzetí 2 h</li>
             </ol>
           </div>
           <div class="person">
-            <strong>BL · 11 h</strong>
+            <strong>BL · 11 h (+ případný přesah z KT48)</strong>
             <ol>
-              <li>Napojení reportů/detailu · 7 h · do <strong>3. 12. dopoledne</strong></li>
+              <li>Napojení reportů/detailu · 7 h · do <strong>3. 12. dopoledne</strong> · závisí na BE</li>
               <li>Právě běží 4 h</li>
             </ol>
-            <p>Export UI 2 h → začátek KT50 (po TB; Export BE od DS už hotový).</p>
+            <p>Export UI 2 h → začátek KT50 po TB.</p>
           </div>
         </div>
       </article>
@@ -297,7 +307,7 @@
               <li>Testování UC / UI · 10 h</li>
             </ol>
           </div>
-          <p class="note">BL testuje 10 h; DS současně bugfix 4 h. Nasazení 14. 12. držíme.</p>
+          <p class="note">BL testuje 10 h; DS současně bugfix 4 h. Nasazení 14. 12. ohroženo při skluzu napojení.</p>
         </div>
       </article>
 
@@ -331,9 +341,10 @@
           <div class="person">
             <ol>
               <li>KT46 schválení TN před KT47.</li>
-              <li>Team building 3. 12. půl + 4. 12. volno — jen BL; DS pracuje. Kritická cesta do 2./3. 12.</li>
-              <li>Svátek 17. 11. + DS 9. 12. půl dne mimo — Live a bugfix nesmí spadnout na 9. 12. odpoledne.</li>
-              <li>BL testuje 10 h v KT50; DS současně bugfix 4 h. Termín 14. 12. držíme.</li>
+              <li><strong>Upozornění:</strong> 14. 12. ohroženo — produkční BE stále nezačaté; DS 25. 11. na prototypu.</li>
+              <li>Team building 3.–4. 12. — jen BL; DS pracuje. Kritická cesta Report BE 2. 12.</li>
+              <li>Svátek 17. 11. + DS 9. 12. půl dne mimo.</li>
+              <li>BL testuje 10 h v KT50 — hrozí zkrácení při skluzu napojení.</li>
             </ol>
           </div>
           <span class="tag">Rizika</span>

@@ -1,10 +1,10 @@
-# DigiDoc-Kasper — plán a stav k 25. 11. 2026 (odpoledne)
+# DigiDoc-Kasper — plán a stav k 25. 11. 2026 (podvečer)
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl + 4. 12. volno (**jen BL**; DS pracuje); DS půl dne mimo 9. 12.
 
-**Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS 25. 11. pokračoval v `ft/prototype` (kontrast stavů, checklist součty, paged contract list, červený pruh PROTOTYP) — to **není dodávka**. Zbývají 2 pracovní dny KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
+**Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS 25. 11. jen `ft/prototype` (≠ dodávka). Zbývají 2 pracovní dny KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
 
-Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fetch **25. 11. odpoledne**). Produkční větve časů beze změny od **23. 11. 14:10**. BE manufacturing-times: **žádný kód**.
+Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fetch **25. 11. ~16:00**). Nové od posledního refresh: BL `bl-ft/downtime-reasons` — oprava importu ikony DeleteOutlined (14:43). Funkčně beze změny (mock add/edit; mazání a API chybí). BE manufacturing-times: **žádný kód**.
 
 **Pravidlo:** `ft/prototype` ≠ hotová dodávka.
 
@@ -22,9 +22,9 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 
 | Dráha | Co | Poznámka |
 | --- | --- | --- |
-| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) · `bl-ft/downtime-reasons` · **beze změny od 23. 11. 14:10** |
+| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) · `bl-ft/downtime-reasons` · 25. 11. 14:43 fix importu ikony |
 | DS | DigiDoc údržba | `ds/basket` 24. 11. · mimo plán časů |
-| DS | Prototyp (mimo dodávku) | 25. 11. dopoledne/odpoledne na `ft/prototype` |
+| DS | Prototyp (mimo dodávku) | 25. 11. na `ft/prototype` · beze změny od 13:33 |
 
 ## Posun nezačatých (25. 11.)
 
@@ -62,7 +62,7 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| Report shell + UI důvodů | Probíhá (hlavička + modal) | beze změny od 23. 11. |
+| Report shell + UI důvodů | Probíhá (hlavička + modal) | 25. 11. 14:43 fix importu; mazání/API chybí |
 | Filtry a záložky · 6 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Detail shell · 7 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Napojení reportů/detailu · 7 h | Plán | KT49 do 3. 12. dopoledne · závisí na BE |
@@ -72,7 +72,7 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 
 ## Milníky
 
-| Milník | Závazek | Stav k 25. 11. odpoledne |
+| Milník | Závazek | Stav k 25. 11. podvečer |
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo |
 | KT46 | Schválení TN | Hotovo · návrh schválen |
@@ -111,4 +111,4 @@ Kritická cesta: **Migrace → CRUD → Start/Stop → Report BE (2. 12.) → BL
 
 ## Osa
 
-25. 11. odpoledne jste tady (3. den KT48). Produkční časy: BL beze změny od 23. 11. 14:10. BE manufacturing-times bez kódu. DS dnes prototyp (`ft/prototype`) + dříve `ds/basket`. Nezačaté BE přesunuto do zbývajícího KT48 a KT49. **14. 12. ohroženo**, pokud BE nezačne hned.
+25. 11. podvečer jste tady (3. den KT48). BL: drobná oprava importu v modalu důvodů (14:43). BE manufacturing-times bez kódu. DS dnes jen prototyp (`ft/prototype`) + dříve `ds/basket`. Nezačaté BE přesunuto do zbývajícího KT48 a KT49. **14. 12. ohroženo**, pokud BE nezačne hned.

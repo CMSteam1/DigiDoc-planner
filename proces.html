@@ -22,6 +22,7 @@
       --plan-line: #f0c4bc;
       --lane: rgba(240, 206, 48, 0.1);
       --lane-line: rgba(214, 176, 20, 0.26);
+      --warn: #c45c12;
     }
     * { box-sizing: border-box; }
     body {
@@ -203,6 +204,8 @@
     }
     .decision p { text-align: center; color: var(--muted); font-size: 13px; }
     .foot { color: var(--muted); font-size: 14px; margin-top: 8px; }
+    .warn { color: var(--warn); font-weight: 650; }
+    .step .warn, .uc-head .warn { color: var(--warn); font-weight: 650; }
     .uc-axis {
       display: grid;
       grid-template-columns: 140px repeat(7, 1fr);
@@ -317,7 +320,7 @@
         </tbody>
       </table>
     </div>
-    <p class="foot">Handoffy (po posunu 25. 11.): Migrace+CRUD+Start/Stop (KT48 teď) → Převzetí+Report BE do 2. 12. (KT49, ohroženo) → BL napojení do 3. 12. dopoledne · TB jen BL · Export BE KT49 / Export UI KT50 · testy KT50 · nasazení 14. 12. ohroženo bez okamžitého startu BE. Prototyp ≠ dodávka.</p>
+    <p class="foot">Handoffy (po posunu 25. 11.): Migrace+CRUD+Start/Stop (KT48 teď) → Převzetí+Report BE do 2. 12. (KT49, <span class="warn">ohroženo</span>) → BL napojení do 3. 12. dopoledne · TB jen BL · Export BE KT49 / Export UI KT50 · testy KT50 · <span class="warn">nasazení 14. 12. ohroženo bez okamžitého startu BE</span>. Prototyp ≠ dodávka.</p>
   </main>
   <script>
     const statusLabel = { hotovo: "Hotovo", castecne: "Probíhá", plan: "Plán" };
@@ -471,6 +474,13 @@
         .replace(/>/g, "&gt;");
     }
 
+    function warnHtml(text) {
+      const escaped = esc(text);
+      return /ohrožen|UPOZORNĚNÍ|hrozí zkrácení|kritické hraně/i.test(text)
+        ? '<span class="warn">' + escaped + "</span>"
+        : escaped;
+    }
+
     function stepHtml(step) {
       const dim = filter !== "all" && step.status !== filter ? " dim" : "";
       const name = (step.n ? step.n + ". " : "") + step.title;
@@ -478,11 +488,11 @@
       if (step.kind === "decision") {
         return '<div class="decision step ' + step.status + dim + '">' +
           '<div class="diamond ' + step.status + '"><span>' + esc(name) + "</span></div>" +
-          "<p>" + esc(step.text) + "</p>" + state + "</div>";
+          "<p>" + warnHtml(step.text) + "</p>" + state + "</div>";
       }
       const shape = step.kind === "store" ? " store" : "";
       return '<div class="step ' + step.status + shape + dim + '"><b>' + esc(name) + "</b><p>" +
-        esc(step.text) + "</p>" + state + "</div>";
+        warnHtml(step.text) + "</p>" + state + "</div>";
     }
 
     function render() {
@@ -516,7 +526,7 @@
           return '<section class="lane"><h3>' + esc(lane.title) + "</h3>" + body + "</section>" + arrow;
         }).join("");
         return '<article class="uc ' + item.status + '">' +
-          '<header class="uc-head"><div><h2>' + esc(item.code + " — " + item.title) + "</h2><p>" + esc(item.lead) + "</p></div>" +
+          '<header class="uc-head"><div><h2>' + esc(item.code + " — " + item.title) + "</h2><p>" + warnHtml(item.lead) + "</p></div>" +
           '<div class="uc-meta"><b>' + esc(statusLabel[item.status]) + "</b><span>" + done + " z " + steps.length + " kroků hotovo</span></div></header>" +
           '<div class="board-wrap"><div class="board" style="grid-template-columns:' + columns + ";min-width:" + (item.lanes.length * 212) + 'px">' + cells + "</div></div></article>";
       }).join("");

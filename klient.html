@@ -19,6 +19,7 @@
       --plan: #5c5c5c;
       --plan-bg: #ffffff;
       --now: #c62828;
+      --warn: #c45c12;
     }
     * { box-sizing: border-box; }
     html, body { min-height: 100%; }
@@ -91,6 +92,11 @@
       font-size: 15px;
       margin-top: 8px;
     }
+    .warn { color: var(--warn); font-weight: 650; }
+    .ms.warn { border-color: #f0c89a; background: #fff4e8; }
+    .ms.warn::before { border-color: var(--warn); background: var(--warn); }
+    .ms.warn .state { color: var(--warn); background: rgba(196, 92, 18, 0.12); }
+    .ms.warn .desc { color: var(--warn); }
     .stage {
       flex: 1;
       display: flex;
@@ -284,7 +290,7 @@
     <p class="share-note" id="share-note" hidden></p>
     <div class="hero">
       <h1>DigiDoc 2.0 — evidence výrobních časů</h1>
-      <p class="sub">Milníky vývoje · stav k 25. 11. 2026 odpoledne. Červená čára = aktuální pozice. Upozornění: termín nasazení 14. 12. je ohrožen.</p>
+      <p class="sub">Milníky vývoje · stav k 25. 11. 2026 odpoledne. Červená čára = aktuální pozice. <span class="warn">Upozornění: termín nasazení 14. 12. je ohrožen.</span></p>
     </div>
 
     <div class="stage">
@@ -336,7 +342,7 @@
             <p class="desc">Interní a zákaznické ověření scénářů na pile, lisu a CNC. Při skluzu napojení hrozí zkrácení testů.</p>
             <span class="state">Plán</span>
           </article>
-          <article class="ms plan">
+          <article class="ms warn">
             <b>KT51</b>
             <span class="when">od 14. 12.</span>
             <p class="title">Nasazení a předání</p>

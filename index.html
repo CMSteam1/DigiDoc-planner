@@ -17,6 +17,7 @@
       --part-bg: #e7f3ff;
       --wait: #8a4b08;
       --wait-bg: #fff6ea;
+      --warn: #c45c12;
       --plan: #5c5c5c;
       --plan-bg: #f6f6f6;
     }
@@ -146,12 +147,15 @@
     .item .plan { margin: 0; }
     .item .state { margin: 2px 0 0; font-weight: 650; font-size: 14px; }
     .item .note { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+    .item .note.warn,
+    .warn { color: var(--warn); font-weight: 650; }
     .state.hotovo { color: var(--done); }
     .state.castecne { color: var(--part); }
     .state.nezacato { color: var(--wait); }
     .state.plan { color: var(--plan); }
     .empty { color: #9a9a9a; margin: 0; }
     .milestones td:first-child { white-space: nowrap; font-weight: 650; }
+    .milestones .warn { color: var(--warn); font-weight: 650; }
     .cap {
       display: flex;
       gap: 12px;
@@ -245,17 +249,17 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>Propad: BE API časů stále nezačato. KT47 BE → KT48/49. DS 25. 11. jen prototyp (≠ dodávka). Zbývají 2 dny KT48. Report BE do 2. 12. na kritické hraně.</td>
+          <td><span class="warn">Propad: BE API časů stále nezačato. KT47 BE → KT48/49. DS 25. 11. jen prototyp (≠ dodávka). Zbývají 2 dny KT48. Report BE do 2. 12. na kritické hraně.</span></td>
         </tr>
         <tr>
           <td>KT50</td>
           <td>Interní a zákaznické testy 10–16 h</td>
-          <td>Plán 7.–13. 12. · hrozí zkrácení při skluzu napojení. DS: ne 9. 12. půl dne.</td>
+          <td>Plán 7.–13. 12. · <span class="warn">hrozí zkrácení při skluzu napojení</span>. DS: ne 9. 12. půl dne.</td>
         </tr>
         <tr>
           <td>KT51</td>
           <td>Nasazení a předání</td>
-          <td>Upozornění — 14. 12. ohroženo. Drží se jen při okamžitém startu produkčního BE.</td>
+          <td><span class="warn">Upozornění — 14. 12. ohroženo. Drží se jen při okamžitém startu produkčního BE.</span></td>
         </tr>
       </tbody>
     </table>
@@ -441,7 +445,10 @@
         const cells = lane.cells.map((cell) => {
           const visible = cell.items.filter((item) => current === "all" || item.status === current);
           const inner = visible.length
-            ? visible.map((item) => `<div class="item ${item.status}"><p class="plan">${item.plan}</p><p class="state ${item.status}">${stateText(item)}</p>${item.note ? `<p class="note">${item.note}</p>` : ""}</div>`).join("")
+            ? visible.map((item) => {
+                const warn = /UPOZORNĚNÍ|ohrožen|Ohrožen|hrozí zkrácení|kritické hraně|Riziko přesahu/i.test(item.note || "") || /Upozornění/i.test(item.plan || "");
+                return `<div class="item ${item.status}"><p class="plan">${item.plan}</p><p class="state ${item.status}">${stateText(item)}</p>${item.note ? `<p class="note${warn ? " warn" : ""}">${item.note}</p>` : ""}</div>`;
+              }).join("")
             : (cell.items.length ? `<p class="empty">V tomto pohledu nic</p>` : "");
           return `<div class="cell"><div class="cell-body">${inner}</div></div>`;
         }).join("");

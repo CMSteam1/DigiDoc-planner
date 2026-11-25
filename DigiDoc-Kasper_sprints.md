@@ -13,6 +13,7 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 | Dráha | Bod | Stav |
 | --- | --- | --- |
 | VČ / MP / DS | Analýza a UX/UI (KT45) | Hotovo |
+| DS / zákazník | Schválení TN (KT46) | Hotovo · návrh schválen |
 | DS | TN rev02 návrh | Hotovo jako podklad |
 | DS | FE prototyp `ft/prototype` | Hotovo jako UX náhled · **ne dodávka** · update 25. 11. (PROTOTYP strip, stavy, checklist, Node 26) |
 | BL | FE shell z prototypu | Hotovo jako podklad |
@@ -74,7 +75,7 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 | Milník | Závazek | Stav k 25. 11. odpoledne |
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo |
-| KT46 | Schválení TN | Probíhá · otevřené otázky |
+| KT46 | Schválení TN | Hotovo · návrh schválen |
 | KT47–KT49 | Vývoj ≈100 h | **Propad:** BE API časů nezačato. KT47 BE → KT48/49. Zbývají 2 dny KT48. Prototyp 25. 11. ≠ dodávka. |
 | KT50 | Testy 10–16 h | Plán 7.–13. 12. · hrozí zkrácení, pokud sklouzne napojení |
 | KT51 | Nasazení 14. 12. | **Upozornění — ohroženo** · drží se jen při okamžitém startu produkčního BE |
@@ -106,7 +107,6 @@ Kritická cesta: **Migrace → CRUD → Start/Stop → Report BE (2. 12.) → BL
 
 - **Termín 14. 12. ohrožen** — produkční BE stále na nule; DS kapacita šla do prototypu a DigiDoc údržby.
 - Report BE do 2. 12. na kritické hraně → skluz zkrátí testy KT50.
-- TN bez všech zákaznických rozhodnutí.
 - Prototyp (včetně 25. 11.) vytváří dojem hotového FE.
 
 ## Osa

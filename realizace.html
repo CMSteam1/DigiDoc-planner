@@ -142,7 +142,7 @@
       <div class="stage part"><b>KT46</b><span>TN rev02 · otevřené otázky</span></div>
       <div class="stage part"><b>KT47</b><span>FE stub Časy · BE API časů ne</span></div>
       <div class="stage part"><b>KT48</b><span>BL reporty + důvody · BE ne</span></div>
-      <div class="stage"><b>KT49</b><span>Vývoj · 3,5 dne · TB</span></div>
+      <div class="stage"><b>KT49</b><span>BL TB · DS pracuje</span></div>
       <div class="stage"><b>KT50</b><span>Testy 10–16 h</span></div>
       <div class="stage"><b>KT51</b><span>Nasazení a předání</span></div>
     </div>
@@ -239,24 +239,24 @@
       <article class="event risk">
         <div class="when">3. 12. půl dne · 4. 12. volno</div>
         <div>
-          <h2>Team building · výpadek KT49</h2>
-          <p>KT49 efektivně <strong>3,5 dne</strong> (30. 11.–3. 12. dopoledne). Výpadek ≈1,5 MD / osoba. Termín produkce <strong>14. 12. držíme</strong>: Report BE do 2. 12., BL napojení do 3. 12. dopoledne; Export BE/UI na začátek KT50.</p>
+          <h2>Team building · výpadek jen BL</h2>
+          <p><strong>DS pracuje</strong> i 3.–4. 12. (bez výpadku). BL: 3. 12. půl dne + 4. 12. volno → efektivně <strong>3,5 dne</strong>. Termín <strong>14. 12. držíme</strong>: Report BE do 2. 12., BL napojení do 3. 12. dopoledne. DS Export v KT49; BL Export UI na začátek KT50.</p>
           <span class="tag">Výjimka</span>
         </div>
       </article>
 
       <article class="event">
-        <div class="when">Týden 3 · KT49<br>30. 11.–3. 12. dopoledne</div>
+        <div class="when">Týden 3 · KT49<br>30. 11.–6. 12.</div>
         <div>
-          <h2>Napojení a opravy <span class="hours">3,5 dne · 16+11 h</span></h2>
+          <h2>Napojení a opravy <span class="hours">DS 5 dní · BL 3,5 dne</span></h2>
           <div class="person">
-            <strong>DS · 16 h</strong>
+            <strong>DS · 20 h</strong>
             <ol>
               <li>Report BE 6 h → handoff BL do <strong>2. 12.</strong></li>
               <li>Opravy API 8 h</li>
-              <li>FE převzetí 2 h (zbývá 2 h + Live + Export do KT50)</li>
+              <li>Export data 4 h · 3.–4. 12. (DS bez TB)</li>
+              <li>FE převzetí 2 h (zbývá 2 h + Live do KT50)</li>
             </ol>
-            <p>Export data 4 h přesunuto na začátek KT50 kvůli TB.</p>
           </div>
           <div class="person">
             <strong>BL · 11 h</strong>
@@ -264,7 +264,7 @@
               <li>Napojení reportů/detailu · 7 h · do <strong>3. 12. dopoledne</strong></li>
               <li>Právě běží 4 h</li>
             </ol>
-            <p>Export UI 2 h → začátek KT50 s Export BE.</p>
+            <p>Export UI 2 h → začátek KT50 (po TB; Export BE od DS už hotový).</p>
           </div>
         </div>
       </article>
@@ -281,11 +281,10 @@
       <article class="event">
         <div class="when">KT50 · 7.–13. 12.</div>
         <div>
-          <h2>Export přesun + testy</h2>
+          <h2>Export UI + testy</h2>
           <div class="person">
-            <strong>DS · 12 h</strong>
+            <strong>DS · 8 h</strong>
             <ol>
-              <li>Export data · 4 h (přesun z KT49 · 7./8. 12.)</li>
               <li>FE převzetí část 2 · 2 h</li>
               <li>Live napojení · 2 h</li>
               <li>Bugfix z testů · 4 h</li>
@@ -294,7 +293,7 @@
           <div class="person">
             <strong>BL · 12 h</strong>
             <ol>
-              <li>Export UI · 2 h (začátek týdne)</li>
+              <li>Export UI · 2 h (začátek týdne · po TB)</li>
               <li>Testování UC / UI · 10 h</li>
             </ol>
           </div>
@@ -316,11 +315,11 @@
           <h2>Kapacita napříč týdny</h2>
           <div class="person">
             <strong>DS · 64 h</strong>
-            <p>KT47 migrace · důvody · Start/Stop (16 h) · KT48 Start/Stop · převzetí · lišta · report (20 h) · KT49 report · opravy · FE (16 h · po TB) · KT50 export · FE · Live · bugfix (12 h)</p>
+            <p>KT47 migrace · důvody · Start/Stop (16 h) · KT48 Start/Stop · převzetí · lišta · report (20 h) · KT49 report · opravy · export · FE (20 h · DS bez TB) · KT50 FE · Live · bugfix (8 h)</p>
           </div>
           <div class="person">
             <strong>BL · 48 h</strong>
-            <p>KT47 report shell · UI důvodů (12 h) · KT48 reporty UI · detail shell (13 h) · KT49 napojení · Právě běží (11 h · po TB) · KT50 export UI · testování UC / UI (12 h)</p>
+            <p>KT47 report shell · UI důvodů (12 h) · KT48 reporty UI · detail shell (13 h) · KT49 napojení · Právě běží (11 h · TB) · KT50 export UI · testování UC / UI (12 h)</p>
           </div>
         </div>
       </article>
@@ -332,7 +331,7 @@
           <div class="person">
             <ol>
               <li>KT46 schválení TN před KT47.</li>
-              <li>Team building 3. 12. půl + 4. 12. volno — KT49 = 3,5 dne; kritická cesta do 2./3. 12.</li>
+              <li>Team building 3. 12. půl + 4. 12. volno — jen BL; DS pracuje. Kritická cesta do 2./3. 12.</li>
               <li>Svátek 17. 11. + DS 9. 12. půl dne mimo — Live a bugfix nesmí spadnout na 9. 12. odpoledne.</li>
               <li>BL testuje 10 h v KT50; DS současně bugfix 4 h. Termín 14. 12. držíme.</li>
             </ol>

@@ -1,8 +1,8 @@
-# DigiDoc-Kasper — plán a stav k 24. 11. 2026
+# DigiDoc-Kasper — plán a stav k 25. 11. 2026
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl dne + 4. 12. volno; DS půl dne mimo 9. 12. Kapacita: vývoj 98 h + testy 14 h · DS 64 · BL 48. Cíl produkce **14. 12. držíme**.
 
-Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, BE `kasper.digitaldocumentationbe` větev `ft/timetracking` (fetch 24. 11. · beze změny od 23. 11. 14:10).
+Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/timetracking`, `bl-ft/downtime-reasons`, `ds/basket`; BE `kasper.digitaldocumentationbe` `ft/timetracking` / `ds/basket` (fetch **25. 11.**). Výrobní časy: beze změny od **23. 11. 14:10**. 24. 11. DS sloučil DigiDoc údržbu do `ds/basket` (CSP, docs auth, login, help, logo, deps).
 
 **Pravidlo:** věci jen na `ft/prototype` (localStorage) **nejsou hotová dodávka**. Počítají se až produkční FE/BE.
 
@@ -23,7 +23,7 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | --- | --- | --- |
 | BL | Stránka Časy / reporty | Menu + hlavička `TimeReports` · `bl-ft/downtime-reasons` · bez tabulek/filtrů/API |
 | BL | UI důvodů prostojů | Modal: mock + přidání + inline edit s validací · smazání a BE ještě ne · 23. 11. 14:10 |
-| DS | DigiDoc údržba / shell | 23. 11. · CSP, docs auth (`ds/basket`); společný top bar office/pracoviště (`ft/timetracking` 13:53) |
+| DS | DigiDoc údržba / shell | 24. 11. merge do `ds/basket` (CSP, docs auth, login length, help back, users redirect, logo, deps, Node 26). Top bar office/pracoviště na `ft/timetracking` 23. 11. 13:53. Mimo plán výrobních časů. |
 
 ## Plán podle osob
 
@@ -60,11 +60,11 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 
 ## Milníky
 
-| Milník | Plán | Stav k 24. 11. |
+| Milník | Plán | Stav k 25. 11. |
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo · VČ, MP, DS |
 | KT46 | Schválení TN | Probíhá · otevřené otázky u zákazníka |
-| KT47–KT49 | Vývoj BE + FE ≈100 h | Start KT48. KT49 efektivně **3,5 dne** (TB 3.–4. 12.). Kritická cesta: Report BE do **2. 12.**, BL napojení do **3. 12. dopoledne**. Export BE/UI → začátek KT50. |
+| KT47–KT49 | Vývoj BE + FE ≈100 h | 3. den KT48 (25. 11.). BL: hlavička + modal důvodů (mock). BE API časů stále nezačato. KT49 efektivně **3,5 dne** (TB). Report BE do **2. 12.**, BL napojení do **3. 12. dopoledne**. |
 | KT50 | Interní a zákaznické testy 10–16 h | Plán 7.–13. 12. (+ Export 4+2 h na začátku týdne). DS ne 9. 12. půl dne. |
 | KT51 | Nasazení a předání | **Držíme** cíl produkce 14. 12., provoz do 18. 12. |
 
@@ -75,8 +75,8 @@ Zdroj stavu: GitLab `kasper/kasperdigitaldocapp` větve `ft/prototype`, `ft/time
 | `kasperdigitaldocapp` | `ft/prototype` | FE náhled výrobních časů (DS) · ne dodávka |
 | `kasperdigitaldocapp` | `ft/timetracking` | menu Časy + dřívější stub (bez modalu) |
 | `kasperdigitaldocapp` | `bl-ft/downtime-reasons` | TimeReports hlavička + modal důvodů (add/edit mock) · 23. 11. 14:10 |
-| `kasperdigitaldocapp` | `ds/basket` | DigiDoc údržba (CSP, docs auth) · mimo plán časů |
-| `kasper.digitaldocumentationbe` | `ft/timetracking` / `ds/basket` | docs auth + deps · žádný manufacturing-times kód |
+| `kasperdigitaldocapp` | `ds/basket` | DigiDoc údržba · merge 24. 11. (CSP, docs auth, login, help, logo, deps) · mimo plán časů |
+| `kasper.digitaldocumentationbe` | `ft/timetracking` / `ds/basket` | docs auth + deps · **žádný** manufacturing-times kód |
 
 ## Kalendářní výjimky
 
@@ -113,4 +113,4 @@ Podmínka: zbývající KT48 (do 28. 11.) maximálně na BE Start/Stop a začát
 
 ## Osa
 
-24. 11. jste tady (2. den KT48). Prototyp ≠ hotová dodávka. BL má hlavičku reportů a modal důvodů (mock + přidání + inline edit). Smazání a BE API chybí. DS dělá DigiDoc shell/údržbu. Od 23. 11. 14:10 bez nových commitů k výrobním časům.
+25. 11. jste tady (3. den KT48). Prototyp ≠ hotová dodávka. BL: hlavička reportů + modal důvodů (mock + přidání + inline edit) · bez změny od 23. 11. 14:10. BE API časů nezačato. DS 24. 11. DigiDoc údržba do `ds/basket` (mimo plán časů). TB 3.–4. 12. · termín 14. 12. držíme.

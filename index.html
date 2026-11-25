@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 24. 11. 2026</title>
+  <title>DigiDoc-Kasper — stav vývoje k 25. 11. 2026</title>
   <style>
     :root {
       color-scheme: light;
@@ -224,7 +224,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">24. 11. · jste tady</div>
+      <div class="now-label" id="now-label">25. 11. · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -245,7 +245,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td>Start KT48. KT49 efektivně 3,5 dne (TB 3. 12. půl + 4. 12. volno). Report BE do 2. 12., BL napojení do 3. 12. dopoledne. Prototyp ≠ dodávka.</td>
+          <td>3. den KT48 (25. 11.). BL: hlavička + modal důvodů (mock) · beze změny od 23. 11. 14:10. BE API časů nezačato. DS 24. 11. DigiDoc údržba (`ds/basket`). KT49 = 3,5 dne (TB). Prototyp ≠ dodávka.</td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -348,7 +348,7 @@
           { phase: "kt47", items: [
             { plan: "UX prototyp obrazovek", status: "hotovo", note: "Náhled hotový. Nejde o produkční dodávku." },
             { plan: "Start FE výrobních časů", status: "castecne", note: "Stránka Časy: hlavička reportů + modal důvodů (edit). BE API časů nezačato." },
-            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Souběžně pokračuje (bezpečnost, společný top bar)." }
+            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "24. 11. merge do ds/basket: CSP, docs auth, login, help, logo, deps. Mimo plán časů." }
           ]},
           { phase: "kt48", items: [
             { plan: "Start BE výrobních časů", status: "plan", note: "Datový model a API na vývoji. Max. využití zbývajícího KT48 před TB." }
@@ -423,8 +423,8 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 24. 11. = 2. den / 5 ≈ 1/5.
-      const today = (5 + 7 + 7 * (1 / 5)) / 32;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 25. 11. = 3. den / 5 ≈ 2/5.
+      const today = (5 + 7 + 7 * (2 / 5)) / 32;
       // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;

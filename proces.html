@@ -333,132 +333,132 @@
     const cases = [
       {
         id: "uc01", code: "UC-01", title: "Zahájení", status: "castecne",
-        lead: "FE lišta je jen v prototypu (ne dodávka). BE Start API ještě nezačato.",
+        lead: "Obsluha spustí měření na tabletu. Potřeba: migrace + Start API + produkční lišta. Prototyp lišty ≠ dodávka; BE zatím nezačato.",
         lanes: [
           { title: "Tablet / obsluha", steps: [
-            { n: "1", title: "Zahájení směny", text: "Obsluha spustí měření na tabletu.", status: "plan" }
+            { n: "1", title: "Zahájení směny", text: "Na tabletu zvolí zakázku/pracoviště a spustí měření času.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
-            { n: "2", title: "Start API", text: "Produkční API nezačato. FE ovládání je v prototypu.", status: "plan" },
-            { title: "Model + migrace", text: "BE bez manufacturing modelu. EF migrace chybí.", status: "plan", kind: "store" }
+            { n: "2", title: "Start API", text: "Endpoint startu měření: založí záznam, vrátí stav „běží“, naváže na model časů. Součást Start/Stop API. Nezačato.", status: "plan" },
+            { title: "Model + migrace", text: "Tabulky pro výrobní časy, důvody, směny/převzetí + EF migrace. Bez toho nejde žádné měřicí API. Nezačato.", status: "plan", kind: "store" }
           ]},
           { title: "DS · FE", steps: [
-            { n: "3", title: "Lišta měření", text: "Jen v prototypu · ProductionTimeControl. Produkční FE nezačato.", status: "castecne" },
-            { n: "4", title: "FE převzetí", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" }
+            { n: "3", title: "Lišta měření", text: "Horní/ovládací lišta na tabletu: start, pauza, stop, stav běhu, důvod. Prototyp existuje · produkční FE nezačato.", status: "castecne" },
+            { n: "4", title: "FE převzetí", text: "UI předání práce jiné osobě/směně (kdo přebírá, potvrzení). Prototyp náhled · produkce nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
-            { n: "5", title: "UC test", text: "BL testuje UC/UI v KT50.", status: "plan" }
+            { n: "5", title: "UC test", text: "Průchod zahájení na pile/lisu/CNC · hlášky · zápis chyb.", status: "plan" }
           ]}
         ]
       },
       {
         id: "uc02", code: "UC-02", title: "Přerušení", status: "castecne",
-        lead: "Měření se přeruší s důvodem. Produkční UI důvodů: přidání a edit (mock). Smazání a CRUD BE chybí.",
+        lead: "Obsluha přeruší měření a vybere důvod prostoje. UI důvodů částečně (mock); CRUD BE a smazání chybí.",
         lanes: [
           { title: "Obsluha", steps: [
-            { n: "1", title: "Pauza", text: "Obsluha přeruší běžící měření.", status: "plan" }
+            { n: "1", title: "Pauza", text: "Na liště dá pauzu a vybere důvod, proč se nestojí u výroby.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
-            { n: "2", title: "Pauza API", text: "Součást Start/Pauza/Stop.", status: "plan" },
-            { n: "3", title: "CRUD důvodů", text: "6 h v KT47. Handoff pro UI.", status: "plan" }
+            { n: "2", title: "Pauza API", text: "Uloží pauzu + důvod, zastaví běžící interval, vrátí stav „pauza“. Součást Start/Stop. Nezačato.", status: "plan" },
+            { n: "3", title: "CRUD důvodů", text: "API číselníku důvodů: seznam, přidat, upravit, smazat, validace. Handoff pro UI. Nezačato.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "UI důvodů", text: "Probíhá · modal mock + add + inline edit. Smazání a API chybí.", status: "castecne" }
+            { n: "4", title: "UI důvodů", text: "Dialog číselníku: seznam, přidání, inline edit. Mazání a napojení na API ještě chybí (zatím mock). Probíhá.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
-            { n: "5", title: "Ověření pauzy", text: "KT50 test UC/UI.", status: "plan" }
+            { n: "5", title: "Ověření pauzy", text: "Pauza s důvodem · správný stav na liště · zápis v datech.", status: "plan" }
           ]}
         ]
       },
       {
         id: "uc03", code: "UC-03", title: "Pokračování", status: "plan",
-        lead: "Po pauze se měření obnoví. Stejné Start/Stop API a lišta jako u zahájení.",
+        lead: "Po pauze obsluha obnoví měření. Stejné Start/Stop API a lišta jako u zahájení.",
         lanes: [
           { title: "Obsluha", steps: [
-            { n: "1", title: "Pokračovat", text: "Obsluha obnoví přerušené měření.", status: "plan" }
+            { n: "1", title: "Pokračovat", text: "Na liště obnoví přerušené měření a pokračuje ve výrobě.", status: "plan" }
           ]},
           { title: "DS · API + lišta", steps: [
-            { n: "2", title: "Resume API", text: "Součást Start/Stop KT47–48.", status: "plan" },
-            { n: "3", title: "Stav na liště", text: "Jen v prototypu. Produkční lišta nezačata.", status: "castecne" }
+            { n: "2", title: "Resume API", text: "Endpoint pokračování: nový běžící interval po pauze, stav „běží“. Součást Start/Stop. Nezačato.", status: "plan" },
+            { n: "3", title: "Stav na liště", text: "Lišta ukáže běží vs pauza, aktuální důvod, ovládání pokračovat. Prototyp ano · produkce ne.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
-            { n: "4", title: "UC test", text: "KT50.", status: "plan" }
+            { n: "4", title: "UC test", text: "Pauza → pokračovat → správné součty času.", status: "plan" }
           ]}
         ]
       },
       {
         id: "uc04", code: "UC-04", title: "Dokončení", status: "plan",
-        lead: "Ukončení měření včetně převzetí, směn a checklistu. FE převzetí dělá DS.",
+        lead: "Ukončení měření, případně předání směny a checklist. FE převzetí dělá DS.",
         lanes: [
           { title: "Obsluha", steps: [
-            { n: "1", title: "Stop / předání", text: "Obsluha dokončí nebo předá směnu.", status: "plan" }
+            { n: "1", title: "Stop / předání", text: "Dokončí zakázku/směnu, nebo předá rozpracované jiné osobě.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
-            { n: "2", title: "Stop API", text: "Dokončení Start/Stop.", status: "plan" },
-            { n: "3", title: "Převzetí / směny / checklist", text: "8 h BE v KT49 (přesun z KT48). Blokuje UC-01/04 okraje.", status: "plan" }
+            { n: "2", title: "Stop API", text: "Ukončí měření, uzavře intervaly, finální stav. Dokončení Start/Stop. Nezačato.", status: "plan" },
+            { n: "3", title: "Převzetí / směny / checklist", text: "BE: kdo předává/přebírá, evidence směny, checklist při dokončení + validace položek. Nezačato (KT49).", status: "plan" }
           ]},
           { title: "DS · FE", steps: [
-            { n: "4", title: "FE převzetí", text: "2 + 2 h v KT49–50.", status: "plan" }
+            { n: "4", title: "FE převzetí", text: "Obrazovky předání: výběr osoby, potvrzení, návaznost na checklist. Napojení na BE převzetí. Nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
-            { n: "5", title: "UC test", text: "KT50.", status: "plan" }
+            { n: "5", title: "UC test", text: "Stop · předání · checklist · správné uzavření záznamu.", status: "plan" }
           ]}
         ]
       },
       {
         id: "uc05", code: "UC-05", title: "Výpočet", status: "plan",
-        lead: "Agregace výrobních časů na backendu. Report BE celé v KT49 · handoff do 2. 12. ohrožen skluzem BE.",
+        lead: "Backend spočítá výrobní časy (běh, pauzy, součty). Report BE je na kritické cestě · handoff ohrožen.",
         lanes: [
           { title: "DS · BE", steps: [
-            { n: "1", title: "Agregace", text: "Report BE 8 h v KT49 · do 2. 12. · ohroženo.", status: "plan" },
-            { title: "Data", text: "Po migraci a měřicím API (KT48 teď).", status: "plan", kind: "store" }
+            { n: "1", title: "Agregace", text: "Report BE: součty výrobních časů, pauz, důvodů; data pro tabulky a filtry. Nezačato · ohroženo.", status: "plan" },
+            { title: "Data", text: "Vstup: migrace + uložená měření ze Start/Stop. Bez toho není co agregovat.", status: "plan", kind: "store" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "2", title: "Zobrazení výsledků", text: "Součást napojení reportů v KT49.", status: "plan" }
+            { n: "2", title: "Zobrazení výsledků", text: "V reportech a detailu ukázat spočtené časy (ne jen mock). Součást napojení reportů.", status: "plan" }
           ]},
           { title: "Testy", steps: [
-            { n: "3", title: "Ověření výpočtů", text: "KT50.", status: "plan" }
+            { n: "3", title: "Ověření výpočtů", text: "Součty sedí s naměřenými intervaly a důvody.", status: "plan" }
           ]}
         ]
       },
       {
         id: "uc06", code: "UC-06", title: "Reporting a opravy", status: "castecne",
-        lead: "FE shell reportů: BL má hlavičku a modal důvodů (přidání/edit mock). Obsah reportů a živá data až po BE. Prototyp ≠ dodávka.",
+        lead: "Kancelářské reporty: shell (hlavička) probíhá; filtry, detail, živá data a opravy až po BE. Prototyp ≠ dodávka.",
         lanes: [
           { title: "BL · shell", steps: [
-            { n: "1", title: "Report shell", text: "Probíhá · hlavička TimeReports. Tabulky a filtry ještě nejsou.", status: "castecne" },
-            { n: "2", title: "Filtry a záložky", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" },
-            { n: "3", title: "Detail shell", text: "Jen náhled v prototypu. Produkční FE nezačato.", status: "plan" }
+            { n: "1", title: "Report shell", text: "Kostra stránky Reporty: nadpis, navigace, tlačítka. Bez tabulek a dat. Hlavička hotová · probíhá.", status: "castecne" },
+            { n: "2", title: "Filtry a záložky", text: "Filtry období/pracoviště/…, záložky pohledů, layout tabulky přehledu (i mock). Produkční FE nezačato.", status: "plan" },
+            { n: "3", title: "Detail shell", text: "Stránka jednoho záznamu: layout, tlačítka ± / důvod / smazat — zatím bez živých dat. Nezačato.", status: "plan" }
           ]},
           { title: "DS · API", steps: [
-            { n: "4", title: "Report + filtry API", text: "8 h v KT49 · do 2. 12. · ohroženo. Blokuje živá data UC-06/07.", status: "plan" },
-            { n: "5", title: "Opravy API", text: "8 h v KT49. ±, důvod, +, smazání.", status: "plan" }
+            { n: "4", title: "Report + filtry API", text: "Endpointy přehledů: stránkování, filtry, data do tabulek. Blokuje živé UC-06/07. Nezačato · ohroženo.", status: "plan" },
+            { n: "5", title: "Opravy API", text: "Úpravy uložených záznamů: ± čas, změna důvodu, přidání, smazání, oprávnění. Nezačato.", status: "plan" }
           ]},
           { title: "BL · napojení", steps: [
-            { n: "6", title: "Úpravy v detailu", text: "7 h po Opravách API.", status: "plan" },
-            { n: "7", title: "Právě běží", text: "Jen náhled v prototypu. Produkční napojení nezačato.", status: "plan" }
+            { n: "6", title: "Úpravy v detailu", text: "Napojit detail shell na Opravy API: formuláře, validace, refresh po uložení. Po BE.", status: "plan" },
+            { n: "7", title: "Právě běží", text: "Obrazovka živých měření (běží/pauza), napojení na live data. Prototyp náhled · produkce ne.", status: "plan" }
           ]},
           { title: "Testy", steps: [
-            { n: "8", title: "UC / UI test", text: "10 h BL v KT50.", status: "plan" }
+            { n: "8", title: "UC / UI test", text: "Reporty, filtry, detail, opravy, Právě běží · zápis chyb.", status: "plan" }
           ]}
         ]
       },
       {
         id: "uc07", code: "UC-07", title: "Historie", status: "plan",
-        lead: "Historie a export. Export data (DS) v KT49 — DS bez TB. Export UI (BL) na začátek KT50 po TB.",
+        lead: "Prohlížení minulých záznamů a export. Export data (DS) pak Export UI (BL).",
         lanes: [
           { title: "BL · UI", steps: [
-            { n: "1", title: "Historie v reportech", text: "Jen náhled v prototypu. Produkční historie nezačata.", status: "plan" }
+            { n: "1", title: "Historie v reportech", text: "Pohled na minulé dny/zakázky v reportech (ne jen právě běžící). Layout + napojení na report data.", status: "plan" }
           ]},
           { title: "DS · BE", steps: [
-            { n: "2", title: "Export data", text: "4 h v KT49 — DS pracuje i 3.–4. 12.", status: "plan" },
-            { n: "3", title: "Live API", text: "2 h FE napojení v KT50.", status: "plan" }
+            { n: "2", title: "Export data", text: "Backend připraví soubor (Excel/CSV) se stejnými filtry jako reporty. Nezačato.", status: "plan" },
+            { n: "3", title: "Live API", text: "API/stream pro živý přehled běžící práce (podklad Právě běží). Nezačato.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "Export UI", text: "Jen náhled v prototypu. Produkční export nezačato.", status: "plan" }
+            { n: "4", title: "Export UI", text: "Tlačítko export, dialog/potvrzení, stažení souboru z Export data API. Nezačato.", status: "plan" }
           ]},
           { title: "Testy", steps: [
-            { n: "5", title: "Ověření historie", text: "KT50.", status: "plan" }
+            { n: "5", title: "Ověření historie", text: "Historie sedí s uloženými časy · export otevřený a úplný.", status: "plan" }
           ]}
         ]
       }

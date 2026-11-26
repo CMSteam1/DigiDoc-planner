@@ -232,27 +232,28 @@
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
-    <h2>Co znamenají úkoly</h2>
-    <p class="lead" style="margin:0 0 10px">Jednoduchý slovníček — co pod názvem spadá.</p>
+    <h2>Co se pod úkoly očekává</h2>
+    <p class="lead" style="margin:0 0 10px">Jednoduché body — co vše pod názvem spadá.</p>
     <table class="milestones" id="glossary">
-      <thead><tr><th>Úkol</th><th>Jednoduše</th></tr></thead>
+      <thead><tr><th>Úkol</th><th>Očekává se</th></tr></thead>
       <tbody>
-        <tr><td>Migrace datového modelu</td><td>Založit v databázi tabulky pro časy, důvody, směny.</td></tr>
-        <tr><td>Správa důvodů (BE)</td><td>API: seznam / přidat / upravit / smazat důvody prostojů.</td></tr>
-        <tr><td>Start/Stop API</td><td>Backend: spustit měření, pauza s důvodem, pokračovat, ukončit.</td></tr>
-        <tr><td>Převzetí, směny, checklist (BE)</td><td>Předání práce mezi směnami + checklist při dokončení.</td></tr>
-        <tr><td>Report BE</td><td>API pro přehledy: součty časů, filtry, data do tabulek.</td></tr>
-        <tr><td>Opravy API</td><td>Úpravy už uložených záznamů (± čas, důvod, smazání).</td></tr>
-        <tr><td>Export data</td><td>Backend připraví data ke stažení (Excel/CSV).</td></tr>
-        <tr><td>FE převzetí / lišta</td><td>Obrazovka na tabletu: lišta měření a předání směny.</td></tr>
-        <tr><td>Live napojení</td><td>Živý přehled „co právě běží“.</td></tr>
-        <tr><td>Report shell</td><td>Kostra stránky Reporty: nadpis, tlačítka — zatím bez dat.</td></tr>
-        <tr><td>UI důvodů</td><td>Dialog se seznamem důvodů prostojů (zatím mock).</td></tr>
-        <tr><td>Reporty — filtry a záložky</td><td>Filtry (období, pracoviště…) + záložky v reportech.</td></tr>
-        <tr><td>Detail shell</td><td>Stránka jednoho záznamu: layout a tlačítka — zatím bez živých dat.</td></tr>
-        <tr><td>Napojení reportů / detailu</td><td>Napojit stránky na API a umožnit úpravy v detailu.</td></tr>
-        <tr><td>Právě běží</td><td>Obrazovka živě běžících měření.</td></tr>
-        <tr><td>Export UI</td><td>Tlačítko / dialog pro export z reportů.</td></tr>
+        <tr><td>Migrace datového modelu</td><td>tabulky časů · důvody · směny/převzetí · EF migrace</td></tr>
+        <tr><td>Správa důvodů (BE)</td><td>seznam · přidat · upravit · smazat · validace</td></tr>
+        <tr><td>Start/Stop API</td><td>start · pauza s důvodem · pokračovat · stop · stav běhu</td></tr>
+        <tr><td>Převzetí, směny, checklist (BE)</td><td>předání směny · evidence směny · checklist dokončení</td></tr>
+        <tr><td>Report BE</td><td>agregace časů · data do tabulek · filtry · záložky</td></tr>
+        <tr><td>Opravy API</td><td>± čas · změna důvodu · přidání/smazání záznamu</td></tr>
+        <tr><td>Export data</td><td>data ke stažení · Excel/CSV · stejné filtry jako reporty</td></tr>
+        <tr><td>FE převzetí / lišta</td><td>lišta na tabletu · start/pauza/stop · předání směny · napojení API</td></tr>
+        <tr><td>Live napojení</td><td>živý přehled · aktualizace z API · Právě běží</td></tr>
+        <tr><td>Report shell</td><td>stránka Reporty · hlavička · tlačítka · bez živých dat</td></tr>
+        <tr><td>UI důvodů</td><td>dialog · přidání · úprava · smazání (s BE) · napojení API</td></tr>
+        <tr><td>Reporty — filtry a záložky</td><td>filtry · záložky · tabulka layout · mock OK do API</td></tr>
+        <tr><td>Detail shell</td><td>stránka jednoho záznamu · layout · tlačítka akcí · bez živých dat</td></tr>
+        <tr><td>Napojení reportů / detailu</td><td>reálná data · úpravy přes API · prázdná/chybová data</td></tr>
+        <tr><td>Právě běží</td><td>živá měření · stavy běží/pauza · napojení live API</td></tr>
+        <tr><td>Export UI</td><td>tlačítko · dialog · stažení souboru</td></tr>
+        <tr><td>Testování UC / UI</td><td>průchod UC · obrazovky/hlášky · zápis chyb</td></tr>
       </tbody>
     </table>
 
@@ -273,7 +274,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 26.–27. 11. KT48. DS přes noc údržba DigiDocu + prototyp ≠ dodávka. Report BE do 2. 12. na kritické hraně.</span></td>
+          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 26.–27. 11. KT48. DS: DigiDoc údržba + prototyp ≠ dodávka. Report BE do 2. 12. na kritické hraně.</span></td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -313,7 +314,7 @@
         cells: [
           { phase: "hotovo", items: [
             { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. Technický návrh je připravený." },
-            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "UX náhled · ne dodávka. 25. 11. večer: checklist hide-done, check-all, no-time warning." }
+            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "UX náhled · ne dodávka." }
           ]},
           { phase: "kt47", items: [
             { plan: "BE úkoly KT47 — propad", status: "nezacato", note: "Migrace, CRUD, Start/Stop nezačato → přesunuto do KT48/49." }
@@ -322,7 +323,7 @@
             { plan: "Migrace datového modelu · 4 h", status: "nezacato", note: "Přesun z KT47. Priorita 26.–27. 11. Blokuje BE." },
             { plan: "Správa důvodů (BE) · 6 h", status: "nezacato", note: "Přesun z KT47. Hned po migraci." },
             { plan: "Start/Stop API — start · 6 h", status: "nezacato", note: "Přesun z KT47. Dokončení 4 h v KT49." },
-            { plan: "Prototyp + DigiDoc údržba (mimo dodávku)", status: "castecne", note: "Večer prototyp + přes noc DigiDoc údržba. Nejsou výrobní časy v produkci." }
+            { plan: "Prototyp + DigiDoc údržba (mimo dodávku)", status: "castecne", note: "Prototyp UX + DigiDoc údržba. Nejsou výrobní časy v produkci." }
           ]},
           { phase: "kt49", items: [
             { plan: "Start/Stop API — dokončení · 4 h", status: "plan", note: "Zbytek z KT48." },
@@ -349,11 +350,11 @@
           ]},
           { phase: "kt47", items: [
             { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Hlavička hotová. Tabulky/filtry ještě ne." },
-            { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock + add + inline edit. Od 25. 11. drobná oprava; mazání a API chybí." }
+            { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock + add + inline edit. Mazání a API chybí." }
           ]},
           { phase: "kt48", items: [
             { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." },
-            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Stránka jednoho záznamu (layout). Zbývá 26.–27. 11. Jinak přesah KT49." }
+            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Stránka jednoho záznamu: layout + tlačítka. Jinak přesah KT49." }
           ]},
           { phase: "kt49", items: [
             { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE (2. 12.) · do 3. 12. dopoledne. UPOZORNĚNÍ: závisí na BE." },
@@ -380,7 +381,7 @@
           ]},
           { phase: "kt48", items: [
             { plan: "Upozornění · termín 14. 12.", status: "nezacato", note: "Ohroženo: produkční BE na nule. Nutný okamžitý start migrace/CRUD/Start-Stop. Prototyp ≠ dodávka." },
-            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "25. 11. večer / noc. Mimo plán časů." }
+            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Mimo plán časů." }
           ]},
           { phase: "kt49", items: [
             { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL. DS pracuje." },

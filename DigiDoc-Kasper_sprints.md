@@ -1,17 +1,14 @@
-# DigiDoc-Kasper — plán a stav k 26. 11. 2026 (ráno)
+# DigiDoc-Kasper — plán a stav k 26. 11. 2026
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl + 4. 12. volno (**jen BL**; DS pracuje); DS půl dne mimo 9. 12.
 
-**Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS večer 25. 11. dál DigiDoc údržba + prototyp (≠ dodávka). Zbývá **dnes + zítra** KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
+**Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS kapacita jde do DigiDoc údržby a prototypu (≠ dodávka). Zbývá **dnes + zítra** KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
 
-Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
-
-**Nové od 25. 11.:**
-- BL — produkční FE časů **beze změny** (hlavička + modal důvodů).
-- DS — prototyp: checklist (skrýt hotové, check-all, upozornění bez času) · **≠ dodávka**.
-- DS — produkční FE: jen drobnosti top baru · **ne reporty časů**.
-- DS — DigiDoc údržba přes noc (přístupnost, auth, hub, logout, upload) · **mimo plán časů**.
-- BE výrobních časů: **stále žádný kód**.
+**Aktuální stav:**
+- BL — produkční FE: hlavička reportů + modal důvodů (mock, add, inline edit); mazání a API chybí; filtry/detail nezačaté.
+- DS — prototyp UX hotový jako náhled · **≠ dodávka**.
+- DS — DigiDoc údržba · **mimo plán časů**.
+- BE výrobních časů: **žádný kód**.
 
 **Pravidlo:** prototyp ≠ hotová dodávka.
 
@@ -22,18 +19,18 @@ Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 | VČ / MP / DS | Analýza a UX/UI (KT45) | Hotovo |
 | DS / zákazník | Schválení TN (KT46) | Hotovo · návrh schválen |
 | DS | TN rev02 návrh | Hotovo jako podklad |
-| DS | FE prototyp | Hotovo jako UX náhled · **ne dodávka** · update 25. 11. (checklist) |
+| DS | FE prototyp | Hotovo jako UX náhled · **ne dodávka** |
 | BL | FE shell z prototypu | Hotovo jako podklad |
 
 ## Probíhá (produkční)
 
 | Dráha | Co | Poznámka |
 | --- | --- | --- |
-| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) · beze změny od 25. 11. |
-| DS | DigiDoc údržba | 25. 11. večer / noc · mimo plán časů |
-| DS | Prototyp (mimo dodávku) | 25. 11. večer checklist UX |
+| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) |
+| DS | DigiDoc údržba | Mimo plán časů |
+| DS | Prototyp | UX náhled · ≠ dodávka |
 
-## Posun nezačatých (25. 11. · drží se)
+## Posun nezačatých (drží se)
 
 | Úkol | Bylo | Nově | Proč |
 | --- | --- | --- | --- |
@@ -45,29 +42,110 @@ Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 | Opravy API · 8 h | KT49 | **KT49 / přesah KT50** | Po Reportu · riziko přesahu |
 | Export data · 4 h | KT49 | **KT49** (3.–4. 12., DS bez TB) | Po opravách / souběžně |
 | Lišta / FE převzetí | KT48–49 | **KT49–50** | Až po Start/Stop API |
-| BL filtry + detail shell · 13 h | KT48 | **KT48 zbývá / přesah KT49 ráno** | Dnes + zítra · mock bez BE možné |
+| BL filtry + detail shell · 13 h | KT48 | **KT48 zbývá / přesah KT49** | Mock bez BE možné |
 | BL napojení + Právě běží · 11 h | KT49 | **KT49 do 3. 12. dopoledne** | Závisí na Report BE · **ohroženo** |
 
-## Co znamenají úkoly
+## Co se pod úkoly očekává
 
-| Úkol | Jednoduše |
-| --- | --- |
-| Migrace datového modelu | Založit v databázi tabulky pro časy, důvody, směny. |
-| Správa důvodů (BE) | API: seznam / přidat / upravit / smazat důvody prostojů. |
-| Start/Stop API | Backend: spustit měření, pauza s důvodem, pokračovat, ukončit. |
-| Převzetí, směny, checklist (BE) | Předání práce mezi směnami + checklist při dokončení. |
-| Report BE | API pro přehledy: součty časů, filtry, data do tabulek. |
-| Opravy API | Úpravy už uložených záznamů (± čas, důvod, smazání). |
-| Export data | Backend připraví data ke stažení (Excel/CSV). |
-| FE převzetí / lišta | Obrazovka na tabletu: lišta měření a předání směny. |
-| Live napojení | Živý přehled „co právě běží“. |
-| Report shell | Kostra stránky Reporty: nadpis, tlačítka — zatím bez dat. |
-| UI důvodů | Dialog se seznamem důvodů prostojů (zatím mock). |
-| Reporty — filtry a záložky | Filtry (období, pracoviště…) + záložky v reportech. |
-| Detail shell | Stránka jednoho záznamu: layout a tlačítka — zatím bez živých dat. |
-| Napojení reportů / detailu | Napojit stránky na API a umožnit úpravy v detailu. |
-| Právě běží | Obrazovka živě běžících měření. |
-| Export UI | Tlačítko / dialog pro export z reportů. |
+### Migrace datového modelu
+- tabulky pro výrobní časy
+- tabulky / vazby pro důvody prostojů
+- směny / převzetí (základ modelu)
+- EF migrace připravená k nasazení
+
+### Správa důvodů (BE)
+- seznam důvodů
+- přidání důvodu
+- úprava důvodu
+- smazání důvodu
+- validace (povinné pole, duplicity dle TN)
+
+### Start/Stop API
+- spuštění měření
+- pauza s důvodem
+- pokračování
+- ukončení (stop)
+- stav právě běžícího měření
+
+### Převzetí, směny, checklist (BE)
+- předání práce mezi směnami / osobami
+- evidence směny
+- checklist při dokončení
+- součty / validace checklistu dle TN
+
+### Report BE
+- agregace výrobních časů
+- data pro tabulky reportů
+- filtry na BE (období, pracoviště, …)
+- podklady pro záložky přehledů
+
+### Opravy API
+- úprava délky času (±)
+- změna důvodu
+- přidání / smazání záznamu
+- oprávnění dle rolí
+
+### Export data
+- příprava dat ke stažení
+- formát dle TN (Excel/CSV)
+- stejné filtry jako u reportů
+
+### FE převzetí / lišta
+- lišta měření na tabletu
+- start / pauza / stop v UI
+- předání směny v UI
+- napojení na Start/Stop API (produkčně)
+
+### Live napojení
+- živý přehled běžící práce
+- aktualizace stavu z API
+- obrazovka „Právě běží“ napojená na data
+
+### Report shell
+- stránka Reporty (kostra)
+- nadpis / hlavička
+- základní tlačítka
+- zatím bez živých dat / tabulek
+
+### UI důvodů
+- dialog seznam důvodů
+- přidání
+- úprava (inline)
+- smazání (až s BE)
+- napojení na API (až bude)
+
+### Reporty — filtry a záložky
+- filtry (období, pracoviště, …)
+- záložky / pohledy v reportech
+- tabulka přehledu (layout)
+- zatím může být mock / bez API
+
+### Detail shell
+- stránka jednoho záznamu / dne / zakázky (dle UX)
+- layout detailu
+- tlačítka akcí (upravit, ±, důvod…)
+- zatím bez živých dat
+
+### Napojení reportů / detailu
+- napojení shellu na Report BE
+- zobrazení reálných dat v tabulkách
+- úpravy v detailu přes Opravy API
+- chybové stavy / prázdná data
+
+### Právě běží
+- seznam / dlaždice živých měření
+- stavy běží / pauza
+- napojení na live API
+
+### Export UI
+- tlačítko export
+- dialog / potvrzení
+- stažení souboru z Export data API
+
+### Testování UC / UI
+- průchod UC na pile / lisu / CNC
+- kontrola obrazovek a hlášek
+- zápis chyb pro bugfix
 
 ## Plán podle osob (po posunu)
 
@@ -75,7 +153,7 @@ Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| FE prototyp | UX hotovo · ne dodávka · 25. 11. checklist | prototyp |
+| FE prototyp | UX hotovo · ne dodávka | prototyp |
 | Migrace EF · 4 h | Nezačato | **KT48 teď** |
 | CRUD důvodů BE · 6 h | Nezačato | **KT48 teď** |
 | Start/Stop API · 10 h | Nezačato | KT48 část + KT49 zbytek |
@@ -90,7 +168,7 @@ Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| Report shell + UI důvodů | Probíhá (hlavička + modal) | beze změny od 25. 11. |
+| Report shell + UI důvodů | Probíhá (hlavička + modal) | mazání/API chybí |
 | Filtry a záložky · 6 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Detail shell · 7 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Napojení reportů/detailu · 7 h | Plán | KT49 do 3. 12. dopoledne · závisí na BE |
@@ -100,11 +178,11 @@ Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 
 ## Milníky
 
-| Milník | Závazek | Stav k 26. 11. ráno |
+| Milník | Závazek | Stav |
 | --- | --- | --- |
 | KT45 | Analýza a UX/UI | Hotovo |
 | KT46 | Schválení TN | Hotovo · návrh schválen |
-| KT47–KT49 | Vývoj ≈100 h | **Propad:** BE API časů nezačato. Zbývá 26.–27. 11. KT48. DS přes noc údržba DigiDocu + prototyp ≠ dodávka. |
+| KT47–KT49 | Vývoj ≈100 h | **Propad:** BE API časů nezačato. Zbývá 26.–27. 11. KT48. Prototyp ≠ dodávka. |
 | KT50 | Testy 10–16 h | Plán 7.–13. 12. · hrozí zkrácení, pokud sklouzne napojení |
 | KT51 | Nasazení 14. 12. | **Upozornění — ohroženo** · drží se jen při okamžitém startu produkčního BE |
 
@@ -133,10 +211,10 @@ Kritická cesta: **Migrace → CRUD → Start/Stop → Report BE (2. 12.) → BL
 
 ## Rizika
 
-- **Termín 14. 12. ohrožen** — produkční BE stále na nule; DS kapacita šla do prototypu a DigiDoc údržby (včetně noci 25./26. 11.).
+- **Termín 14. 12. ohrožen** — produkční BE stále na nule; DS kapacita šla do prototypu a DigiDoc údržby.
 - Report BE do 2. 12. na kritické hraně → skluz zkrátí testy KT50.
-- Prototyp (včetně 25. 11.) vytváří dojem hotového FE.
+- Prototyp vytváří dojem hotového FE.
 
 ## Osa
 
-26. 11. ráno jste tady (4. den KT48). BL beze změny od 25. 11. BE výrobních časů bez kódu. DS přes noc DigiDoc údržba + večer prototyp. **14. 12. ohroženo**, pokud BE nezačne hned.
+26. 11. jste tady (4. den KT48). BL: hlavička + modal. BE výrobních časů bez kódu. DS: prototyp + DigiDoc údržba mimo plán. **14. 12. ohroženo**, pokud BE nezačne hned.

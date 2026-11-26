@@ -1,14 +1,15 @@
-# DigiDoc-Kasper — plán a stav k 26. 11. 2026
+# DigiDoc-Kasper — plán a stav k 26. 11. 2026 (poledne)
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl + 4. 12. volno (**jen BL**; DS pracuje); DS půl dne mimo 9. 12.
 
 **Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS kapacita jde do DigiDoc údržby a prototypu (≠ dodávka). Zbývá **dnes + zítra** KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
 
 **Aktuální stav:**
-- BL — produkční FE: hlavička reportů + modal důvodů (mock, add, inline edit); mazání a API chybí; filtry/detail nezačaté.
+- BL — produkční FE: hlavička reportů + modal důvodů (mock: add, inline edit, smazání v UI); napojení na API chybí; filtry/detail nezačaté.
 - DS — prototyp UX hotový jako náhled · **≠ dodávka**.
 - DS — DigiDoc údržba · **mimo plán časů**.
 - BE výrobních časů: **žádný kód**.
+- **ŠJ** — přidává se jako **výpomoc pro BE** (info; bez změny hodinového plánu DS/BL).
 
 **Pravidlo:** prototyp ≠ hotová dodávka.
 
@@ -26,9 +27,10 @@ DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100
 
 | Dráha | Co | Poznámka |
 | --- | --- | --- |
-| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) |
+| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock: add, edit, smazání UI) |
 | DS | DigiDoc údržba | Mimo plán časů |
 | DS | Prototyp | UX náhled · ≠ dodávka |
+| ŠJ | Výpomoc BE | Info · bez pevné kapacity v plánu |
 
 ## Posun nezačatých (drží se)
 
@@ -111,7 +113,7 @@ DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100
 - dialog seznam důvodů
 - přidání
 - úprava (inline)
-- smazání (až s BE)
+- smazání v UI (potvrzení; persistence až s BE)
 - napojení na API (až bude)
 
 ### Reporty — filtry a záložky
@@ -168,7 +170,7 @@ DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| Report shell + UI důvodů | Probíhá (hlavička + modal) | mazání/API chybí |
+| Report shell + UI důvodů | Probíhá (hlavička + modal) | smazání UI ano · API chybí |
 | Filtry a záložky · 6 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Detail shell · 7 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Napojení reportů/detailu · 7 h | Plán | KT49 do 3. 12. dopoledne · závisí na BE |
@@ -217,4 +219,4 @@ Kritická cesta: **Migrace → CRUD → Start/Stop → Report BE (2. 12.) → BL
 
 ## Osa
 
-26. 11. jste tady (4. den KT48). BL: hlavička + modal. BE výrobních časů bez kódu. DS: prototyp + DigiDoc údržba mimo plán. **14. 12. ohroženo**, pokud BE nezačne hned.
+26. 11. poledne · jste tady (4. den KT48). BL: hlavička + modal (včetně smazání v UI). BE výrobních časů bez kódu. DS: prototyp + DigiDoc údržba mimo plán. ŠJ: výpomoc BE (info). **14. 12. ohroženo**, pokud BE nezačne hned.

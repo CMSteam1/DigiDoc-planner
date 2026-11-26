@@ -353,7 +353,7 @@
       },
       {
         id: "uc02", code: "UC-02", title: "Přerušení", status: "castecne",
-        lead: "Obsluha přeruší měření a vybere důvod prostoje. UI důvodů částečně (mock); CRUD BE a smazání chybí.",
+        lead: "Obsluha přeruší měření a vybere důvod prostoje. UI důvodů částečně (mock včetně smazání v UI); CRUD BE a napojení API chybí.",
         lanes: [
           { title: "Obsluha", steps: [
             { n: "1", title: "Pauza", text: "Na liště dá pauzu a vybere důvod, proč se nestojí u výroby.", status: "plan" }
@@ -363,7 +363,7 @@
             { n: "3", title: "CRUD důvodů", text: "API číselníku důvodů: seznam, přidat, upravit, smazat, validace. Handoff pro UI. Nezačato.", status: "plan" }
           ]},
           { title: "BL · FE", steps: [
-            { n: "4", title: "UI důvodů", text: "Dialog číselníku: seznam, přidání, inline edit. Mazání a napojení na API ještě chybí (zatím mock). Probíhá.", status: "castecne" }
+            { n: "4", title: "UI důvodů", text: "Dialog číselníku: seznam, přidání, inline edit, smazání v UI. Napojení na API chybí (zatím mock). Probíhá.", status: "castecne" }
           ]},
           { title: "Testy", steps: [
             { n: "5", title: "Ověření pauzy", text: "Pauza s důvodem · správný stav na liště · zápis v datech.", status: "plan" }

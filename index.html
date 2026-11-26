@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 26. 11. 2026 (ráno)</title>
+  <title>DigiDoc-Kasper — stav vývoje k 26. 11. 2026 (poledne)</title>
   <style>
     :root {
       color-scheme: light;
@@ -223,12 +223,13 @@
       <div class="stat"><b>64 h</b><span>DS · vývoj + bugfix</span></div>
       <div class="stat"><b>48 h</b><span>BL · FE + testy</span></div>
       <div class="stat"><b>14 h</b><span>Testy celkem</span></div>
+      <div class="stat"><b>ŠJ</b><span>výpomoc BE · info</span></div>
     </div>
     <div class="stats" id="stats"></div>
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">26. 11. ráno · jste tady</div>
+      <div class="now-label" id="now-label">26. 11. poledne · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -274,7 +275,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 26.–27. 11. KT48. DS: DigiDoc údržba + prototyp ≠ dodávka. Report BE do 2. 12. na kritické hraně.</span></td>
+          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 26.–27. 11. KT48. DS: DigiDoc údržba + prototyp ≠ dodávka. ŠJ výpomoc BE (info). Report BE do 2. 12. na kritické hraně.</span></td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -350,7 +351,7 @@
           ]},
           { phase: "kt47", items: [
             { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Hlavička hotová. Tabulky/filtry ještě ne." },
-            { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock + add + inline edit. Mazání a API chybí." }
+            { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock: add, inline edit, smazání v UI. Napojení na API chybí." }
           ]},
           { phase: "kt48", items: [
             { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." },
@@ -377,11 +378,12 @@
           ]},
           { phase: "kt47", items: [
             { plan: "UX prototyp obrazovek", status: "hotovo", note: "Náhled. Nejde o produkční dodávku." },
-            { plan: "Start FE výrobních časů", status: "castecne", note: "Hlavička + modal. BE API časů nezačato." }
+            { plan: "Start FE výrobních časů", status: "castecne", note: "Hlavička + modal (včetně smazání v UI). BE API časů nezačato." }
           ]},
           { phase: "kt48", items: [
             { plan: "Upozornění · termín 14. 12.", status: "nezacato", note: "Ohroženo: produkční BE na nule. Nutný okamžitý start migrace/CRUD/Start-Stop. Prototyp ≠ dodávka." },
-            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Mimo plán časů." }
+            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Mimo plán časů." },
+            { plan: "ŠJ · výpomoc BE", status: "plan", note: "Přidává se jako výpomoc pro BE (info · bez změny hodinového plánu)." }
           ]},
           { phase: "kt49", items: [
             { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL. DS pracuje." },
@@ -453,8 +455,8 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 26. 11. ráno ≈ 3,1/5.
-      const today = (5 + 7 + 7 * (3.1 / 5)) / 32;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 26. 11. poledne ≈ 3,5/5.
+      const today = (5 + 7 + 7 * (3.5 / 5)) / 32;
       // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;

@@ -232,6 +232,30 @@
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
+    <h2>Co znamenají úkoly</h2>
+    <p class="lead" style="margin:0 0 10px">Jednoduchý slovníček — co pod názvem spadá.</p>
+    <table class="milestones" id="glossary">
+      <thead><tr><th>Úkol</th><th>Jednoduše</th></tr></thead>
+      <tbody>
+        <tr><td>Migrace datového modelu</td><td>Založit v databázi tabulky pro časy, důvody, směny.</td></tr>
+        <tr><td>Správa důvodů (BE)</td><td>API: seznam / přidat / upravit / smazat důvody prostojů.</td></tr>
+        <tr><td>Start/Stop API</td><td>Backend: spustit měření, pauza s důvodem, pokračovat, ukončit.</td></tr>
+        <tr><td>Převzetí, směny, checklist (BE)</td><td>Předání práce mezi směnami + checklist při dokončení.</td></tr>
+        <tr><td>Report BE</td><td>API pro přehledy: součty časů, filtry, data do tabulek.</td></tr>
+        <tr><td>Opravy API</td><td>Úpravy už uložených záznamů (± čas, důvod, smazání).</td></tr>
+        <tr><td>Export data</td><td>Backend připraví data ke stažení (Excel/CSV).</td></tr>
+        <tr><td>FE převzetí / lišta</td><td>Obrazovka na tabletu: lišta měření a předání směny.</td></tr>
+        <tr><td>Live napojení</td><td>Živý přehled „co právě běží“.</td></tr>
+        <tr><td>Report shell</td><td>Kostra stránky Reporty: nadpis, tlačítka — zatím bez dat.</td></tr>
+        <tr><td>UI důvodů</td><td>Dialog se seznamem důvodů prostojů (zatím mock).</td></tr>
+        <tr><td>Reporty — filtry a záložky</td><td>Filtry (období, pracoviště…) + záložky v reportech.</td></tr>
+        <tr><td>Detail shell</td><td>Stránka jednoho záznamu: layout a tlačítka — zatím bez živých dat.</td></tr>
+        <tr><td>Napojení reportů / detailu</td><td>Napojit stránky na API a umožnit úpravy v detailu.</td></tr>
+        <tr><td>Právě běží</td><td>Obrazovka živě běžících měření.</td></tr>
+        <tr><td>Export UI</td><td>Tlačítko / dialog pro export z reportů.</td></tr>
+      </tbody>
+    </table>
+
     <h2>Milníky</h2>
     <table class="milestones">
       <thead><tr><th>Milník</th><th>Závazek plánu</th><th>Kde jsme</th></tr></thead>
@@ -329,7 +353,7 @@
           ]},
           { phase: "kt48", items: [
             { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." },
-            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." }
+            { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Stránka jednoho záznamu (layout). Zbývá 26.–27. 11. Jinak přesah KT49." }
           ]},
           { phase: "kt49", items: [
             { plan: "Napojení reportů / úpravy detailu · 7 h", status: "plan", note: "Po Report BE (2. 12.) · do 3. 12. dopoledne. UPOZORNĚNÍ: závisí na BE." },

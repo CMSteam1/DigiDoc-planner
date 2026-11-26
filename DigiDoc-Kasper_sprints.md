@@ -48,6 +48,27 @@ Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 | BL filtry + detail shell · 13 h | KT48 | **KT48 zbývá / přesah KT49 ráno** | Dnes + zítra · mock bez BE možné |
 | BL napojení + Právě běží · 11 h | KT49 | **KT49 do 3. 12. dopoledne** | Závisí na Report BE · **ohroženo** |
 
+## Co znamenají úkoly
+
+| Úkol | Jednoduše |
+| --- | --- |
+| Migrace datového modelu | Založit v databázi tabulky pro časy, důvody, směny. |
+| Správa důvodů (BE) | API: seznam / přidat / upravit / smazat důvody prostojů. |
+| Start/Stop API | Backend: spustit měření, pauza s důvodem, pokračovat, ukončit. |
+| Převzetí, směny, checklist (BE) | Předání práce mezi směnami + checklist při dokončení. |
+| Report BE | API pro přehledy: součty časů, filtry, data do tabulek. |
+| Opravy API | Úpravy už uložených záznamů (± čas, důvod, smazání). |
+| Export data | Backend připraví data ke stažení (Excel/CSV). |
+| FE převzetí / lišta | Obrazovka na tabletu: lišta měření a předání směny. |
+| Live napojení | Živý přehled „co právě běží“. |
+| Report shell | Kostra stránky Reporty: nadpis, tlačítka — zatím bez dat. |
+| UI důvodů | Dialog se seznamem důvodů prostojů (zatím mock). |
+| Reporty — filtry a záložky | Filtry (období, pracoviště…) + záložky v reportech. |
+| Detail shell | Stránka jednoho záznamu: layout a tlačítka — zatím bez živých dat. |
+| Napojení reportů / detailu | Napojit stránky na API a umožnit úpravy v detailu. |
+| Právě běží | Obrazovka živě běžících měření. |
+| Export UI | Tlačítko / dialog pro export z reportů. |
+
 ## Plán podle osob (po posunu)
 
 ### DS — 64 h (60 vývoj + 4 bugfix)

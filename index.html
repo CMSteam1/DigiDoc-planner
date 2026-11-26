@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 25. 11. 2026 (podvečer)</title>
+  <title>DigiDoc-Kasper — stav vývoje k 26. 11. 2026 (ráno)</title>
   <style>
     :root {
       color-scheme: light;
@@ -228,7 +228,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">25. 11. podvečer · jste tady</div>
+      <div class="now-label" id="now-label">26. 11. ráno · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -249,7 +249,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td><span class="warn">Propad: BE API časů stále nezačato. KT47 BE → KT48/49. DS 25. 11. jen prototyp (≠ dodávka). Zbývají 2 dny KT48. Report BE do 2. 12. na kritické hraně.</span></td>
+          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 26.–27. 11. KT48. DS přes noc údržba DigiDocu + prototyp ≠ dodávka. Report BE do 2. 12. na kritické hraně.</span></td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -289,7 +289,7 @@
         cells: [
           { phase: "hotovo", items: [
             { plan: "Analýza a návrh", status: "hotovo", note: "S VČ a MP. Technický návrh je připravený." },
-            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "UX náhled · ne dodávka. 25. 11.: PROTOTYP strip, stavy, checklist, Node 26." }
+            { plan: "FE prototyp výrobních časů", status: "hotovo", note: "UX náhled · ne dodávka. 25. 11. večer: checklist hide-done, check-all, no-time warning." }
           ]},
           { phase: "kt47", items: [
             { plan: "BE úkoly KT47 — propad", status: "nezacato", note: "Migrace, CRUD, Start/Stop nezačato → přesunuto do KT48/49." }
@@ -298,7 +298,7 @@
             { plan: "Migrace datového modelu · 4 h", status: "nezacato", note: "Přesun z KT47. Priorita 26.–27. 11. Blokuje BE." },
             { plan: "Správa důvodů (BE) · 6 h", status: "nezacato", note: "Přesun z KT47. Hned po migraci." },
             { plan: "Start/Stop API — start · 6 h", status: "nezacato", note: "Přesun z KT47. Dokončení 4 h v KT49." },
-            { plan: "Prototyp 25. 11. (mimo dodávku)", status: "castecne", note: "ft/prototype update. Nejsou výrobní časy v produkci." }
+            { plan: "Prototyp + DigiDoc údržba (mimo dodávku)", status: "castecne", note: "ft/prototype večer + ds/basket přes noc (a11y/auth/hub). Nejsou výrobní časy v produkci." }
           ]},
           { phase: "kt49", items: [
             { plan: "Start/Stop API — dokončení · 4 h", status: "plan", note: "Zbytek z KT48." },
@@ -356,7 +356,7 @@
           ]},
           { phase: "kt48", items: [
             { plan: "Upozornění · termín 14. 12.", status: "nezacato", note: "Ohroženo: produkční BE na nule. Nutný okamžitý start migrace/CRUD/Start-Stop. Prototyp ≠ dodávka." },
-            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "ds/basket 24. 11. Mimo plán časů." }
+            { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "ds/basket 25. 11. večer / 26. 11. 00:23. Mimo plán časů." }
           ]},
           { phase: "kt49", items: [
             { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL. DS pracuje." },
@@ -428,8 +428,8 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 25. 11. odpoledne ≈ 2,5/5.
-      const today = (5 + 7 + 7 * (2.5 / 5)) / 32;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 26. 11. ráno ≈ 3,1/5.
+      const today = (5 + 7 + 7 * (3.1 / 5)) / 32;
       // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;

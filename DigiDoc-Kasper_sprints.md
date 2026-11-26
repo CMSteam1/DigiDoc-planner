@@ -2,18 +2,18 @@
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl + 4. 12. volno (**jen BL**; DS pracuje); DS půl dne mimo 9. 12.
 
-**Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS 25. 11. večer / noc dál DigiDoc údržba (`ds/basket`) + večer ještě `ft/prototype` (≠ dodávka). Zbývá **dnes + zítra** KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
+**Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS večer 25. 11. dál DigiDoc údržba + prototyp (≠ dodávka). Zbývá **dnes + zítra** KT48 (26.–27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
 
-Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fetch **26. 11. ráno**).
+Zdroj: GitLab FE + BE (stav k **26. 11. ráno**).
 
-**Nové od 25. 11. podvečer:**
-- BL `bl-ft/downtime-reasons` — **beze změny** (poslední 14:43 fix importu).
-- DS `ft/prototype` — checklist (skrýt hotové, check-all, no-time warning) · **≠ dodávka**.
-- DS `ft/timetracking` — jen úpravy top baru (gap, truncate, diakritika) · **ne TimeReports**.
-- DS `ds/basket` (+ BE) — vlna a11y/auth/hub/logout/upload fixů přes noc · **mimo plán časů**.
-- BE manufacturing-times: **stále žádný kód**.
+**Nové od 25. 11.:**
+- BL — produkční FE časů **beze změny** (hlavička + modal důvodů).
+- DS — prototyp: checklist (skrýt hotové, check-all, upozornění bez času) · **≠ dodávka**.
+- DS — produkční FE: jen drobnosti top baru · **ne reporty časů**.
+- DS — DigiDoc údržba přes noc (přístupnost, auth, hub, logout, upload) · **mimo plán časů**.
+- BE výrobních časů: **stále žádný kód**.
 
-**Pravidlo:** `ft/prototype` ≠ hotová dodávka.
+**Pravidlo:** prototyp ≠ hotová dodávka.
 
 ## Hotovo (dodávka / podklad)
 
@@ -22,16 +22,16 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 | VČ / MP / DS | Analýza a UX/UI (KT45) | Hotovo |
 | DS / zákazník | Schválení TN (KT46) | Hotovo · návrh schválen |
 | DS | TN rev02 návrh | Hotovo jako podklad |
-| DS | FE prototyp `ft/prototype` | Hotovo jako UX náhled · **ne dodávka** · update 25. 11. večer (checklist) |
+| DS | FE prototyp | Hotovo jako UX náhled · **ne dodávka** · update 25. 11. (checklist) |
 | BL | FE shell z prototypu | Hotovo jako podklad |
 
 ## Probíhá (produkční)
 
 | Dráha | Co | Poznámka |
 | --- | --- | --- |
-| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) · beze změny od 25. 11. 14:43 |
-| DS | DigiDoc údržba | `ds/basket` 25. 11. večer / 26. 11. 00:23 · mimo plán časů |
-| DS | Prototyp (mimo dodávku) | 25. 11. večer checklist UX na `ft/prototype` |
+| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock, add, inline edit) · beze změny od 25. 11. |
+| DS | DigiDoc údržba | 25. 11. večer / noc · mimo plán časů |
+| DS | Prototyp (mimo dodávku) | 25. 11. večer checklist UX |
 
 ## Posun nezačatých (25. 11. · drží se)
 
@@ -54,7 +54,7 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| FE prototyp | UX hotovo · ne dodávka · 25. 11. večer checklist | `ft/prototype` |
+| FE prototyp | UX hotovo · ne dodávka · 25. 11. checklist | prototyp |
 | Migrace EF · 4 h | Nezačato | **KT48 teď** |
 | CRUD důvodů BE · 6 h | Nezačato | **KT48 teď** |
 | Start/Stop API · 10 h | Nezačato | KT48 část + KT49 zbytek |
@@ -69,7 +69,7 @@ Zdroj: GitLab FE `kasperdigitaldocapp` + BE `kasper.digitaldocumentationbe` (fet
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| Report shell + UI důvodů | Probíhá (hlavička + modal) | beze změny od 25. 11. 14:43 |
+| Report shell + UI důvodů | Probíhá (hlavička + modal) | beze změny od 25. 11. |
 | Filtry a záložky · 6 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Detail shell · 7 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Napojení reportů/detailu · 7 h | Plán | KT49 do 3. 12. dopoledne · závisí na BE |
@@ -114,8 +114,8 @@ Kritická cesta: **Migrace → CRUD → Start/Stop → Report BE (2. 12.) → BL
 
 - **Termín 14. 12. ohrožen** — produkční BE stále na nule; DS kapacita šla do prototypu a DigiDoc údržby (včetně noci 25./26. 11.).
 - Report BE do 2. 12. na kritické hraně → skluz zkrátí testy KT50.
-- Prototyp (včetně 25. 11. večer) vytváří dojem hotového FE.
+- Prototyp (včetně 25. 11.) vytváří dojem hotového FE.
 
 ## Osa
 
-26. 11. ráno jste tady (4. den KT48). BL beze změny od 25. 11. 14:43. BE manufacturing-times bez kódu. DS přes noc `ds/basket` (a11y, auth, hub, logout, upload) + večer prototyp checklist. **14. 12. ohroženo**, pokud BE nezačne hned.
+26. 11. ráno jste tady (4. den KT48). BL beze změny od 25. 11. BE výrobních časů bez kódu. DS přes noc DigiDoc údržba + večer prototyp. **14. 12. ohroženo**, pokud BE nezačne hned.

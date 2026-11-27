@@ -1,15 +1,15 @@
-# DigiDoc-Kasper — plán a stav k 27. 11. 2026 (ráno)
+# DigiDoc-Kasper — plán a stav k 27. 11. 2026 (poledne)
 
 DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100 h, testy 14 h (BL 10 + DS bugfix 4). Výjimky: svátek 17. 11.; team building 3. 12. půl + 4. 12. volno (**jen BL**; DS pracuje); DS půl dne mimo 9. 12.
 
 **Upozornění — termín 14. 12. je ohrožený.** Produkční BE (migrace, CRUD, Start/Stop) je stále **nezačaté**. DS kapacita jde do DigiDoc údržby a prototypu (≠ dodávka). Zbývá **dnes** KT48 (27. 11.). Handoff Report BE do **2. 12.** je na kritické hraně.
 
 **Aktuální stav:**
-- BL — produkční FE: hlavička reportů + modal důvodů (mock: add, inline edit, smazání v UI); napojení na API chybí; filtry/detail nezačaté.
+- BL — produkční FE: hlavička reportů + záložky (mock počty) + modal důvodů (add/edit/smazání UI); filtry/tabulky/detail a API chybí.
 - DS — prototyp UX hotový jako náhled · **≠ dodávka**.
 - DS — DigiDoc údržba · **mimo plán časů**.
 - BE výrobních časů: **žádný kód**.
-- **ŠJ** — výpomoc BE: merguje DigiDoc údržbu (testy, build, závislosti) · **mimo plán výrobních časů**.
+- **ŠJ** — výpomoc BE: merguje DigiDoc údržbu (auth, upload, hub, login…) · **mimo plán výrobních časů**.
 
 **Pravidlo:** prototyp ≠ hotová dodávka.
 
@@ -27,7 +27,7 @@ DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100
 
 | Dráha | Co | Poznámka |
 | --- | --- | --- |
-| BL | Stránka Časy / reporty | Hlavička + modal důvodů (mock: add, edit, smazání UI) |
+| BL | Stránka Časy / reporty | Hlavička + záložky (mock) + modal důvodů |
 | DS | DigiDoc údržba | Mimo plán časů |
 | DS | Prototyp | UX náhled · ≠ dodávka |
 | ŠJ | Výpomoc BE | DigiDoc údržba (mergy) · mimo plán časů |
@@ -44,7 +44,7 @@ DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100
 | Opravy API · 8 h | KT49 | **KT49 / přesah KT50** | Po Reportu · riziko přesahu |
 | Export data · 4 h | KT49 | **KT49** (3.–4. 12., DS bez TB) | Po opravách / souběžně |
 | Lišta / FE převzetí | KT48–49 | **KT49–50** | Až po Start/Stop API |
-| BL filtry + detail shell · 13 h | KT48 | **KT48 zbývá / přesah KT49** | Mock bez BE možné |
+| BL filtry + detail shell · 13 h | KT48 | **KT48 zbývá / přesah KT49** | Záložky mock · filtry/detail ještě ne |
 | BL napojení + Právě běží · 11 h | KT49 | **KT49 do 3. 12. dopoledne** | Závisí na Report BE · **ohroženo** |
 
 ## Co se pod úkoly očekává
@@ -170,8 +170,8 @@ DigiDoc 2.0 — výrobní časy. Chronologický plán pro DS a BL. Vývoj ≈100
 
 | Plán | Stav | Kde teď |
 | --- | --- | --- |
-| Report shell + UI důvodů | Probíhá (hlavička + modal) | smazání UI ano · API chybí |
-| Filtry a záložky · 6 h | Nezačato | KT48 zbývá / přesah KT49 |
+| Report shell + UI důvodů | Probíhá (hlavička + záložky + modal) | smazání UI ano · API chybí |
+| Filtry a záložky · 6 h | Probíhá (záložky mock) | filtry/tabulky ještě ne · přesah KT49 |
 | Detail shell · 7 h | Nezačato | KT48 zbývá / přesah KT49 |
 | Napojení reportů/detailu · 7 h | Plán | KT49 do 3. 12. dopoledne · závisí na BE |
 | Právě běží · 4 h | Nezačato | KT49 do 3. 12. dopoledne |
@@ -219,4 +219,4 @@ Kritická cesta: **Migrace → CRUD → Start/Stop → Report BE (2. 12.) → BL
 
 ## Osa
 
-27. 11. ráno · jste tady (5. den KT48 · poslední). BL: hlavička + modal (včetně smazání v UI). BE výrobních časů bez kódu. DS: prototyp + DigiDoc údržba mimo plán. ŠJ: merguje DigiDoc údržbu (ne výrobní časy). **14. 12. ohroženo**, pokud BE nezačne hned.
+27. 11. poledne · jste tady (5. den KT48 · poslední). BL: hlavička + záložky (mock) + modal. BE výrobních časů bez kódu. DS: prototyp + DigiDoc údržba mimo plán. ŠJ: merguje DigiDoc údržbu (ne výrobní časy). **14. 12. ohroženo**, pokud BE nezačne hned.

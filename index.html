@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 27. 11. 2026 (ráno)</title>
+  <title>DigiDoc-Kasper — stav vývoje k 27. 11. 2026 (poledne)</title>
   <style>
     :root {
       color-scheme: light;
@@ -229,7 +229,7 @@
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">27. 11. ráno · jste tady</div>
+      <div class="now-label" id="now-label">27. 11. poledne · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -275,7 +275,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 27. 11. KT48. DS: DigiDoc údržba + prototyp ≠ dodávka. ŠJ merguje DigiDoc údržbu (ne výrobní časy). Report BE do 2. 12. na kritické hraně.</span></td>
+          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 27. 11. KT48. BL: záložky reportů (mock). DS/ŠJ: DigiDoc údržba · prototyp ≠ dodávka. Report BE do 2. 12. na kritické hraně.</span></td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -350,11 +350,11 @@
             { plan: "FE shell z prototypu (DS)", status: "hotovo", note: "Náhled od DS. BL dodává produkční FE." }
           ]},
           { phase: "kt47", items: [
-            { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Hlavička hotová. Tabulky/filtry ještě ne." },
+            { plan: "Report shell (UI) · 8 h", status: "castecne", note: "Hlavička + záložky (mock počty). Tabulky/filtry ještě ne." },
             { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock: add, inline edit, smazání v UI. Napojení na API chybí." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá dnes 27. 11. Jinak přesah na KT49." },
+            { plan: "Reporty — filtry a záložky · 6 h", status: "castecne", note: "Záložky s mock počty. Filtry a tabulky ještě ne · přesah KT49." },
             { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Stránka jednoho záznamu: layout + tlačítka. Jinak přesah KT49." }
           ]},
           { phase: "kt49", items: [
@@ -378,12 +378,12 @@
           ]},
           { phase: "kt47", items: [
             { plan: "UX prototyp obrazovek", status: "hotovo", note: "Náhled. Nejde o produkční dodávku." },
-            { plan: "Start FE výrobních časů", status: "castecne", note: "Hlavička + modal (včetně smazání v UI). BE API časů nezačato." }
+            { plan: "Start FE výrobních časů", status: "castecne", note: "Hlavička + záložky (mock) + modal. BE API časů nezačato." }
           ]},
           { phase: "kt48", items: [
             { plan: "Upozornění · termín 14. 12.", status: "nezacato", note: "Ohroženo: produkční BE na nule. Nutný okamžitý start migrace/CRUD/Start-Stop. Prototyp ≠ dodávka." },
             { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Mimo plán časů." },
-            { plan: "ŠJ · výpomoc BE", status: "castecne", note: "Merguje DigiDoc údržbu (testy, build, závislosti) · mimo plán výrobních časů." }
+            { plan: "ŠJ · výpomoc BE", status: "castecne", note: "Merguje DigiDoc údržbu (auth, upload, hub, login…) · mimo plán výrobních časů." }
           ]},
           { phase: "kt49", items: [
             { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL. DS pracuje." },
@@ -455,8 +455,8 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 27. 11. ráno ≈ 4,2/5.
-      const today = (5 + 7 + 7 * (4.2 / 5)) / 32;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 27. 11. poledne ≈ 4,5/5.
+      const today = (5 + 7 + 7 * (4.5 / 5)) / 32;
       // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;

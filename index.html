@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigiDoc-Kasper — stav vývoje k 26. 11. 2026 (poledne)</title>
+  <title>DigiDoc-Kasper — stav vývoje k 27. 11. 2026 (ráno)</title>
   <style>
     :root {
       color-scheme: light;
@@ -223,13 +223,13 @@
       <div class="stat"><b>64 h</b><span>DS · vývoj + bugfix</span></div>
       <div class="stat"><b>48 h</b><span>BL · FE + testy</span></div>
       <div class="stat"><b>14 h</b><span>Testy celkem</span></div>
-      <div class="stat"><b>ŠJ</b><span>výpomoc BE · info</span></div>
+      <div class="stat"><b>ŠJ</b><span>výpomoc BE · DigiDoc údržba</span></div>
     </div>
     <div class="stats" id="stats"></div>
     <div class="filters" id="filters"></div>
     <div class="plan">
       <div class="timeline" id="timeline"></div>
-      <div class="now-label" id="now-label">26. 11. poledne · jste tady</div>
+      <div class="now-label" id="now-label">27. 11. ráno · jste tady</div>
       <div class="now-line" id="now-line"></div>
       <div class="board" id="board"></div>
     </div>
@@ -275,7 +275,7 @@
         <tr>
           <td>KT47–KT49</td>
           <td>Vývoj BE + FE ≈100 h</td>
-          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 26.–27. 11. KT48. DS: DigiDoc údržba + prototyp ≠ dodávka. ŠJ výpomoc BE (info). Report BE do 2. 12. na kritické hraně.</span></td>
+          <td><span class="warn">Propad: BE API časů stále nezačato. Zbývá 27. 11. KT48. DS: DigiDoc údržba + prototyp ≠ dodávka. ŠJ merguje DigiDoc údržbu (ne výrobní časy). Report BE do 2. 12. na kritické hraně.</span></td>
         </tr>
         <tr>
           <td>KT50</td>
@@ -321,7 +321,7 @@
             { plan: "BE úkoly KT47 — propad", status: "nezacato", note: "Migrace, CRUD, Start/Stop nezačato → přesunuto do KT48/49." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Migrace datového modelu · 4 h", status: "nezacato", note: "Přesun z KT47. Priorita 26.–27. 11. Blokuje BE." },
+            { plan: "Migrace datového modelu · 4 h", status: "nezacato", note: "Přesun z KT47. Priorita dnes 27. 11. Blokuje BE." },
             { plan: "Správa důvodů (BE) · 6 h", status: "nezacato", note: "Přesun z KT47. Hned po migraci." },
             { plan: "Start/Stop API — start · 6 h", status: "nezacato", note: "Přesun z KT47. Dokončení 4 h v KT49." },
             { plan: "Prototyp + DigiDoc údržba (mimo dodávku)", status: "castecne", note: "Prototyp UX + DigiDoc údržba. Nejsou výrobní časy v produkci." }
@@ -354,7 +354,7 @@
             { plan: "UI důvodů · 4 h", status: "castecne", note: "Modal mock: add, inline edit, smazání v UI. Napojení na API chybí." }
           ]},
           { phase: "kt48", items: [
-            { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá 26.–27. 11. Jinak přesah na KT49 ráno." },
+            { plan: "Reporty — filtry a záložky · 6 h", status: "nezacato", note: "Zbývá dnes 27. 11. Jinak přesah na KT49." },
             { plan: "Detail shell (UI) · 7 h", status: "nezacato", note: "Stránka jednoho záznamu: layout + tlačítka. Jinak přesah KT49." }
           ]},
           { phase: "kt49", items: [
@@ -383,7 +383,7 @@
           { phase: "kt48", items: [
             { plan: "Upozornění · termín 14. 12.", status: "nezacato", note: "Ohroženo: produkční BE na nule. Nutný okamžitý start migrace/CRUD/Start-Stop. Prototyp ≠ dodávka." },
             { plan: "Údržba DigiDocu (mimo časy)", status: "castecne", note: "Mimo plán časů." },
-            { plan: "ŠJ · výpomoc BE", status: "plan", note: "Přidává se jako výpomoc pro BE (info · bez změny hodinového plánu)." }
+            { plan: "ŠJ · výpomoc BE", status: "castecne", note: "Merguje DigiDoc údržbu (testy, build, závislosti) · mimo plán výrobních časů." }
           ]},
           { phase: "kt49", items: [
             { plan: "Team building 3.–4. 12.", status: "plan", note: "Jen BL. DS pracuje." },
@@ -455,8 +455,8 @@
           const top = mark.below ? "32px" : "0";
           return `<div class="tick" style="left:${mark.at * 100}%;top:${top};transform:${shift}">${mark.label}</div>`;
         }).join("");
-      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 26. 11. poledne ≈ 3,5/5.
-      const today = (5 + 7 + 7 * (3.5 / 5)) / 32;
+      // Sloupce 5+7+7+7+6=32. KT48 = 3. fáze (index 2). 27. 11. ráno ≈ 4,2/5.
+      const today = (5 + 7 + 7 * (4.2 / 5)) / 32;
       // 180px osoba + 8px gap
       const left = `calc(188px + (100% - 188px) * ${today})`;
       document.getElementById("now-label").style.left = left;
